@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -78,6 +77,58 @@ public class AdminDAO {
             }
         }
         return list;
+    }
+
+    public Admin findByUserPass(String username, String pwdCrypted) {
+
+        PreparedStatement sentence = null;
+        ResultSet result = null;
+
+        Admin reg = null;
+
+        try {
+            String sql = "select * from admin where username = ? or email = ? and password = ?";
+
+            sentence = conexion.prepareStatement(sql);
+
+            sentence.setString(1, username);
+            sentence.setString(2, username);
+            sentence.setString(3, pwdCrypted);
+
+            result = sentence.executeQuery();
+
+            while (result.next()) {
+                /* instanciar objeto */
+                reg = new Admin();
+                /* obtener resultset */
+                reg.setIdAdmin(result.getInt("id_admin"));
+                reg.setUsername(result.getString("username"));
+                reg.setEmail(result.getString("email"));
+                reg.setCreateTime(result.getString("create_time"));
+                reg.setTypeAdmin(result.getInt("type_admin"));
+            }
+
+        } catch (MySQLSyntaxErrorException ex) {
+            System.out.println("Error de sintaxis en AdminDAO, findByUserPass() : " + ex);
+            throw new RuntimeException("MySQL Syntax Exception en AdminDAO, findByUserPass() : " + ex);
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            System.out.println("MySQL Excepción de integridad en AdminDAO, findByUserPass() : " + ex);
+            throw new RuntimeException("MySQL Excepción de integridad en AdminDAO, findByUserPass() : " + ex);
+        } catch (SQLException ex) {
+            System.out.println("MySQL Excepción inesperada en AdminDAO, findByUserPass() : " + ex);
+            throw new RuntimeException("MySQL Excepción inesperada en AdminDAO, findByUserPass() : " + ex);
+        } finally {
+            /* liberar recursos */
+            try {
+                result.close();
+            } catch (Exception noGestionar) {
+            }
+            try {
+                sentence.close();
+            } catch (Exception noGestionar) {
+            }
+        }
+        return reg;
     }
 
     public Admin findById(int id) {
@@ -224,7 +275,7 @@ public class AdminDAO {
         PreparedStatement sentence = null;
 
         try {
-            String sql = "delete from admin where id_admin = ? and username <> 'patricio.castro' ";
+            String sql = "delete from admin where id_admin = ?";
 
             sentence = conexion.prepareStatement(sql);
 
@@ -348,56 +399,5 @@ public class AdminDAO {
             } catch (Exception noGestionar) {
             }
         }
-    }
-
-    public Admin findByUserPass(String username, String pwdCrypted) {
-
-        PreparedStatement sentence = null;
-        ResultSet result = null;
-
-        Admin reg = null;
-
-        try {
-            String sql = "select * from admin where username = ? and password = ?";
-
-            sentence = conexion.prepareStatement(sql);
-
-            sentence.setString(1, username);
-            sentence.setString(2, pwdCrypted);
-
-            result = sentence.executeQuery();
-
-            while (result.next()) {
-                /* instanciar objeto */
-                reg = new Admin();
-                /* obtener resultset */
-                reg.setIdAdmin(result.getInt("id_admin"));
-                reg.setUsername(result.getString("username"));
-                reg.setEmail(result.getString("email"));
-                reg.setCreateTime(result.getString("create_time"));
-                reg.setTypeAdmin(result.getInt("type_admin"));
-            }
-
-        } catch (MySQLSyntaxErrorException ex) {
-            System.out.println("Error de sintaxis en AdminDAO, findByUserPass() : " + ex);
-            throw new RuntimeException("MySQL Syntax Exception en AdminDAO, findByUserPass() : " + ex);
-        } catch (MySQLIntegrityConstraintViolationException ex) {
-            System.out.println("MySQL Excepción de integridad en AdminDAO, findByUserPass() : " + ex);
-            throw new RuntimeException("MySQL Excepción de integridad en AdminDAO, findByUserPass() : " + ex);
-        } catch (SQLException ex) {
-            System.out.println("MySQL Excepción inesperada en AdminDAO, findByUserPass() : " + ex);
-            throw new RuntimeException("MySQL Excepción inesperada en AdminDAO, findByUserPass() : " + ex);
-        } finally {
-            /* liberar recursos */
-            try {
-                result.close();
-            } catch (Exception noGestionar) {
-            }
-            try {
-                sentence.close();
-            } catch (Exception noGestionar) {
-            }
-        }
-        return reg;
     }
 }

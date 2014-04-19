@@ -1,8 +1,6 @@
 package Login;
 
 import Helpers.StringMD;
-import admin.Admin;
-import admin.AdminDAO;
 import java.io.IOException;
 import java.sql.Connection;
 import javax.annotation.Resource;
@@ -13,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+import user.UserBean;
+import user.UserDAO;
 
 /**
  *
@@ -47,8 +47,8 @@ public class LoginServlet extends HttpServlet {
         try {
             conexion = ds.getConnection();
 
-            AdminDAO adminDAO = new AdminDAO();
-            adminDAO.setConexion(conexion);
+            UserDAO userDAO = new UserDAO();
+            userDAO.setConexion(conexion);
 
             ///////////////////////////////////
             // RECIBIR Y COMPROBAR PARAMETROS
@@ -59,46 +59,44 @@ public class LoginServlet extends HttpServlet {
             String password = request.getParameter("password");
 
             if (btnLogin == null) {
-                /* mostrar login por 1° vez */
+                /* mostrar login */
                 request.getRequestDispatcher("/login/login.jsp").forward(request, response);
             } else {
                 /* encriptar password */
                 String pwdCrypted = StringMD.getStringMessageDigest(password, StringMD.MD5);
 
-                /* comprobar si existe */
+                /* comprobar si existe usuario */
                 try {
-                    Admin admin = adminDAO.findByUserPass(username, pwdCrypted);
+                    UserBean user = userDAO.findByUserPass(username, pwdCrypted);
 
-                    if (admin != null) {
-                        System.out.println("iniciar sesion de admin");
-
+                    if (user != null) {
                         /* crear session */
                         HttpSession session = request.getSession(true);
 
-                        /* asignar 10000 ms de expiracion ante inactividad */
+                        /* asignar 10000 segundos de expiracion ante inactividad */
                         session.setMaxInactiveInterval(10000);
 
                         /* asignar valores a session */
-                        session.setAttribute("admin", username);
-
-                        String access = "" + admin.getTypeAdmin();
-                        session.setAttribute("access", access);
-                        session.setAttribute("idUser", "" + admin.getIdAdmin());
+                        session.setAttribute("idUserX", "" + user.getIdUser());
+                        session.setAttribute("userTypeX", "" + user.getUserType());                        
+                        session.setAttribute("usernameX", user.getUsername());
+                                               
+                        System.out.println(user.getUsername());
 
                         /* send redirect */
-                        response.sendRedirect("AdminMainServlet");
+                        response.sendRedirect("UserMainServlet");
                     } else {
-                        System.out.println("error username o password");
                         request.setAttribute("msgErrorLogin", "ERROR AL INGRESAR USERNAME O PASSWORD.");
                         request.getRequestDispatcher("/login/login.jsp").forward(request, response);
                     }
                 } catch (Exception ex) {
-                    request.setAttribute("msgErrorLogin", "ERROR DE CONEXION.");
+                    ex.printStackTrace();
+                    request.setAttribute("msgErrorLogin", "Error de conexión, intente nuevamente.");
                     request.getRequestDispatcher("/login/login.jsp").forward(request, response);
                 }
             }
         } catch (Exception connectionException) {
-            request.setAttribute("msgErrorLogin", "ERROR DE CONEXION.");
+            request.setAttribute("msgErrorLogin", "Error de conexión, intente nuevamente.");
             request.getRequestDispatcher("/login/login.jsp").forward(request, response);
         } finally {
             /* cerrar conexion */

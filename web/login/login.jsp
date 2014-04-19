@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> SmartAdmin </title>
+        <title> ERP </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -66,22 +66,18 @@
 
             <!-- MAIN CONTENT -->
             <div id="content" class="container">
-
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
                         <h1 class="txt-color-red login-header-big">SmartAdmin</h1>
                         <div class="hero">
-
                             <div class="pull-left login-desc-box-l">
-                                <h4 class="paragraph-header">Esta bien ser Inteligente. Experimente la simplicidad de Manager Panel, donde quiera que vaya!</h4>
+                                <h4 class="paragraph-header">Esta bien ser Inteligente. Experimente la simplicidad de ERP Bisuite, donde quiera que vaya!</h4>
                                 <div class="login-app-icons">
                                     <a href="javascript:void(0);" class="btn btn-danger btn-sm">Panel administrativo</a>
                                     <a href="javascript:void(0);" class="btn btn-danger btn-sm">Aprende más</a>
                                 </div>
                             </div>
-
                             <img src="img/demo/iphoneview.png" class="pull-right display-image" alt="" style="width:210px">
-
                         </div>
 
                         <div class="row">
@@ -102,26 +98,24 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                         <div class="well no-padding">
-
                             <form action="LoginServlet" method="POST" id="login-form" class="smart-form client-form">
                                 <header>
                                     Log in
                                 </header>
 
                                 <fieldset>
-
                                     <section>
                                         <label class="label">Username</label>
                                         <label class="input"> <i class="icon-append fa fa-user"></i>
                                             <input type="text" name="username">
-                                            <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Ingrese username</b></label>
+                                            <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>Por favor ingrese username o email</b></label>
                                     </section>
 
                                     <section>
                                         <label class="label">Password</label>
                                         <label class="input"> <i class="icon-append fa fa-lock"></i>
                                             <input type="password" name="password">
-                                            <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Ingrese password</b> </label>
+                                            <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i>Por favor ingrese password</b> </label>
                                         <div class="note">
                                             <a href="forgotpassword.html">Forgot password?</a>
                                         </div>
@@ -136,17 +130,16 @@
                                         <p><font color="red" ><c:out value="${msgErrorLogin}" /></font></p>
                                         </c:if>
                                 </fieldset>
+                                
                                 <footer>
                                     <button type="submit" name="btnLogin" class="btn btn-primary">
                                         Log in
                                     </button>
                                 </footer>
                             </form>
-
                         </div>
 
                         <h5 class="text-center"> - O ingresa usando -</h5>
-
                         <ul class="list-inline text-center">
                             <li>
                                 <a href="javascript:void(0);" class="btn btn-primary btn-circle"><i class="fa fa-facebook"></i></a>
@@ -158,9 +151,8 @@
                                 <a href="javascript:void(0);" class="btn btn-warning btn-circle"><i class="fa fa-linkedin"></i></a>
                             </li>
                         </ul>
-
                     </div>
-                </div>
+                </div>               
             </div>
 
         </div>

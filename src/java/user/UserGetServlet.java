@@ -2,11 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package admin;
+package user;
 
 import Helpers.Message;
 import Helpers.MessageList;
+import admin.Admin;
+import admin.AdminDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,10 +24,10 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author patricio alberto
+ * @author patricio
  */
-@WebServlet(name = "AdminGetServlet", urlPatterns = {"/AdminGetServlet"})
-public class AdminGetServlet extends HttpServlet {
+@WebServlet(name = "UserGetServlet", urlPatterns = {"/UserGetServlet"})
+public class UserGetServlet extends HttpServlet {
 
     @Resource(name = "jdbc/ERP")
     private DataSource ds;
@@ -52,8 +55,8 @@ public class AdminGetServlet extends HttpServlet {
         try {
             conexion = ds.getConnection();
 
-            AdminDAO adminDAO = new AdminDAO();
-            adminDAO.setConexion(conexion);
+            UserDAO userDAO = new UserDAO();
+            userDAO.setConexion(conexion);
 
             ////////////////////////
             // COMPROBAR SESSION
@@ -63,16 +66,22 @@ public class AdminGetServlet extends HttpServlet {
                 HttpSession session = request.getSession(false);
 
                 /* obtener parametros de session */
-                int access = Integer.parseInt((String) session.getAttribute("access"));
-                String user = (String) session.getAttribute("admin");
+                int idUserX = Integer.parseInt((String) session.getAttribute("idUserX"));
+                int userTypeX = Integer.parseInt((String) session.getAttribute("userTypeX"));
+                String usernameX = (String) session.getAttribute("usernameX");
+
+                ///////////////////////////////////
+                // COMPROBAR PERMISOS DE USUARIO
+                ///////////////////////////////////
 
                 /* comprobar permisos de usuario */
-                if (access != 777) {
+                if (userTypeX > 2) {
                     request.getRequestDispatcher("/ForbiddenServlet").forward(request, response);
                 } else {
-                    /* obtener los valores de session y asignar valores a la jsp */
-                    request.setAttribute("userJsp", user);
-                    request.setAttribute("access", access);
+
+                    /* establecer variables de session a jsp */
+                    request.setAttribute("idUserX", idUserX);
+                    request.setAttribute("usernameX", usernameX);
 
                     ////////////////////////////////////
                     // RECIBIR Y COMPROBAR PARAMETROS
@@ -85,7 +94,7 @@ public class AdminGetServlet extends HttpServlet {
                     String redirect = (String) session.getAttribute("redirectUpdate");
                     String username = (String) session.getAttribute("username");
                     String email = (String) session.getAttribute("email");
-                    String stype = (String) session.getAttribute("type");                                     
+                    String stype = (String) session.getAttribute("type");
 
                     /* obtener mensajes de session */
                     String msgErrorUsername = (String) session.getAttribute("msgErrorUsername");
@@ -104,85 +113,76 @@ public class AdminGetServlet extends HttpServlet {
                     session.setAttribute("msgErrorPwd1", null);
                     session.setAttribute("msgErrorPwd2", null);
                     session.setAttribute("msgOk", null);
-                    
-                    /* instanciar url */
-                    String url = "";
 
                     /* instanciar lista de mensajes */
                     Collection<Message> msgList = new ArrayList<Message>();
-
-                    /* comprobar id */
-                    int id = 0;
+                    
+                    /* obtener user por id */
+                    UserBean reg = null;
                     try {
-                        id = Integer.parseInt(sid);
-                    } catch (NumberFormatException n) {
-                    }
-
-                    /* buscar admin por id */
-                    try {
-                        Admin reg = adminDAO.findById(id);
-
-                        if (reg != null) {
-                            /* establecer atributos de reg */
-                            request.setAttribute("id", reg.getIdAdmin());
-
-                            /* comprobar redirect */
-                            if (redirect == null || redirect.trim().equals("")) {
-                                /* establecer atributos de reg */
-                                request.setAttribute("msg", "Se encontró el registro!");
-                                request.setAttribute("username", reg.getUsername());
-                                request.setAttribute("email", reg.getEmail());
-                                request.setAttribute("type", reg.getTypeAdmin());
-
-                            } else if (redirect.equals("admin")) {
-                                /* establecer atributos de session */
-                                request.setAttribute("username", username);
-                                request.setAttribute("email", email);
-                                try {
-                                    request.setAttribute("type", Integer.parseInt(stype));
-                                } catch (NumberFormatException n) {
-                                }
-
-                                /* mensaje de error por username */
-                                if (msgErrorUsername == null || msgErrorUsername.trim().equals("")) {
-                                } else {
-                                    request.setAttribute("msgErrorUsername", true);
-                                    msgList.add(MessageList.addMessage(msgErrorUsername));
-                                }
-
-                                /* mensaje de error por email */
-                                if (msgErrorEmail == null || msgErrorEmail.trim().equals("")) {
-                                } else {
-                                    request.setAttribute("msgErrorEmail", true);
-                                    msgList.add(MessageList.addMessage(msgErrorEmail));
-                                }
-
-                                /* mensaje de error por pwd1 */
-                                if (msgErrorPwd1 == null || msgErrorPwd1.trim().equals("")) {
-                                } else {
-                                    request.setAttribute("msgErrorPwd1", true);
-                                    msgList.add(MessageList.addMessage(msgErrorPwd1));
-                                }
-
-                                /* mensaje de error pwd2 */
-                                if (msgErrorPwd2 == null || msgErrorPwd2.trim().equals("")) {
-                                } else {
-                                    request.setAttribute("msgErrorPwd2", true);
-                                    msgList.add(MessageList.addMessage(msgErrorPwd2));
-                                }
-
-                                /* mensaje de exito */
-                                if (msgOk == null || msgOk.trim().equals("")) {
-                                } else {
-                                    request.setAttribute("msgOk", msgOk);
-                                }
-                            }
-                        } else {
-                            request.setAttribute("msgErrorFound", true);
-                            msgList.add(MessageList.addMessage("No se encontró el registro."));
-                        }
+                        reg = userDAO.findById(Integer.parseInt(sid));
                     } catch (Exception ex) {
                         ex.printStackTrace();
+                    }
+
+                    if (reg != null) {
+                        /* establecer atributos de reg */
+                        request.setAttribute("id", reg.getIdUser());
+
+                        /* comprobar redirect */
+                        if (redirect == null || redirect.trim().equals("")) {
+                            /* establecer atributos de reg */
+                            request.setAttribute("msg", "Se encontró el registro!");
+                            request.setAttribute("username", reg.getUsername());
+                            request.setAttribute("email", reg.getEmail());
+                            request.setAttribute("type", reg.getAccess());
+
+                        } else if (redirect.equals("admin")) {
+                            /* establecer atributos de session */
+                            request.setAttribute("username", username);
+                            request.setAttribute("email", email);
+                            try {
+                                request.setAttribute("type", Integer.parseInt(stype));
+                            } catch (NumberFormatException n) {
+                            }
+
+                            /* mensaje de error por username */
+                            if (msgErrorUsername == null || msgErrorUsername.trim().equals("")) {
+                            } else {
+                                request.setAttribute("msgErrorUsername", true);
+                                msgList.add(MessageList.addMessage(msgErrorUsername));
+                            }
+
+                            /* mensaje de error por email */
+                            if (msgErrorEmail == null || msgErrorEmail.trim().equals("")) {
+                            } else {
+                                request.setAttribute("msgErrorEmail", true);
+                                msgList.add(MessageList.addMessage(msgErrorEmail));
+                            }
+
+                            /* mensaje de error por pwd1 */
+                            if (msgErrorPwd1 == null || msgErrorPwd1.trim().equals("")) {
+                            } else {
+                                request.setAttribute("msgErrorPwd1", true);
+                                msgList.add(MessageList.addMessage(msgErrorPwd1));
+                            }
+
+                            /* mensaje de error pwd2 */
+                            if (msgErrorPwd2 == null || msgErrorPwd2.trim().equals("")) {
+                            } else {
+                                request.setAttribute("msgErrorPwd2", true);
+                                msgList.add(MessageList.addMessage(msgErrorPwd2));
+                            }
+
+                            /* mensaje de exito */
+                            if (msgOk == null || msgOk.trim().equals("")) {
+                            } else {
+                                request.setAttribute("msgOk", msgOk);
+                            }
+                        }
+                    } else {
+                        request.setAttribute("msgErrorFound", true);
+                        msgList.add(MessageList.addMessage("No se encontró el registro."));
                     }
 
                     /* establecer lista a la petición */
@@ -191,13 +191,11 @@ public class AdminGetServlet extends HttpServlet {
                     }
 
                     /* despachar a la vista */
-                    request.getRequestDispatcher("/admin/adminUpdate.jsp").forward(request, response);
+                    request.getRequestDispatcher("/user/userUpdate.jsp").forward(request, response);
                 }
-            } catch (Exception sessionException) {
-                /* enviar a la vista de login */
+            } catch (Exception sessionException) {                
                 request.getRequestDispatcher("/login/login.jsp").forward(request, response);
-                System.out.println("no ha iniciado session");
-                sessionException.printStackTrace();
+                System.out.println("no ha iniciado session");                
             }
         } catch (Exception connectionException) {
             connectionException.printStackTrace();
@@ -208,6 +206,7 @@ public class AdminGetServlet extends HttpServlet {
             } catch (Exception noGestionar) {
             }
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

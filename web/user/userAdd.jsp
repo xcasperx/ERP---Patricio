@@ -50,7 +50,7 @@
         <!-- GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
-
+        
         <script type='text/javascript'>
             //window.onload = detectarCarga;
             function detectarCarga() {
@@ -142,12 +142,12 @@
                 <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! Esto reiniciará la configuración de widgets." data-html="true"><i class="fa fa-refresh"></i></span> </span>
 
                 <!-- breadcrumb -->
-                <ol class="breadcrumb">                    
+                <ol class="breadcrumb">
                     <li>
-                        <a href="AdminMainServlet"><i class="text-primary fa fa-table"></i> DataTable Administradores</a>
-                    </li>      
+                        <a href="UserMainServlet"><i class="text-primary fa fa-table"></i> DataTable Administradores</a>
+                    </li>
                     <li>
-                        <i class="fa fa-edit"></i>Actualizar Administrador
+                        <i class="fa fa-edit"></i> Agregar Administrador
                     </li>
                 </ol>
                 <!-- end breadcrumb -->
@@ -245,7 +245,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Actualizar datos administrador </h2>				
+                                    <h2>Agregar nuevo administrador </h2>				
 
                                 </header>
 
@@ -260,23 +260,17 @@
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
-                                    <div class="widget-body no-padding">                                        
+                                    <div class="widget-body no-padding">
 
-                                        <form action="AdminUpdateServlet" method="POST" name="formUpdate" id="formUpdate" class="smart-form" novalidate="novalidate">
+                                        <form action="UserAddServlet" method="POST" name="formAdd" id="formAdd" class="smart-form" novalidate="novalidate">
 
                                             <fieldset>
                                                 <div class="row">
-                                                    <section class="col col-6">
-                                                        <section>
-                                                            <small class="text-primary slideInRight"><font size="2"><strong>ID Administrador #<c:out value="${id}"/></strong></font></small>                                                            
-                                                            <label class="input state-disabled">
-                                                                <input type="hidden" name="id" value="<c:out value="${id}" />"/>
-                                                            </label>
-                                                        </section>
+                                                    <section class="col col-6">                                                        
                                                         <c:if test="${msgErrorUsername == null}">
                                                             <label class="label">Username</label>
                                                             <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                                                <input type="text" maxlength="30" name="username" placeholder="Ingrese Username" value="<c:out value="${username}" />">                                                                
+                                                                <input type="text" maxlength="30" name="username" placeholder="Ingrese Username" value="<c:out value="${username}" />">
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
@@ -295,14 +289,14 @@
                                                         <c:if test="${msgErrorEmail == null}">
                                                             <label class="label">Email</label>
                                                             <label class="input"> <i class="icon-prepend fa fa-envelope-o"></i>
-                                                                <input type="email" maxlength="255" name="email" placeholder="E-mail" value="<c:out value="${email}" />">                                                                
+                                                                <input type="email" maxlength="255" name="email" placeholder="Ingrese email" value="<c:out value="${email}" />">                                                                
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
                                                         <c:if test="${msgErrorEmail != null}">
                                                             <label class="label">Email</label>
                                                             <label class="input state-error">
-                                                                <input type="email" maxlength="255" name="email" placeholder="E-mail" value="<c:out value="${email}" />">                                                                
+                                                                <input type="email" maxlength="255" name="email" placeholder="Ingrese email" value="<c:out value="${email}" />">                                                                
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
@@ -327,62 +321,55 @@
                                                 </fieldset>
 
                                                 <fieldset>
-                                                    <section>
-                                                        <label class="checkbox">                                                            
-                                                            <input type="checkbox" name="chk" id="chk" onClick="changeDisplay();"/>
-                                                            <i></i>Cambiar password</label>                                                        
-                                                    </section>
-                                                    <div id="pwd" style="display:none">
-                                                        <label>Password</label>
-                                                        <p>&nbsp;</p>
-                                                    <c:if test="${msgErrorPwd1 == null && msgErrorPwd2 == null }" >
-                                                        <div class="row">                                                    
-                                                            <section class="col col-6">                                                      
+                                                    <label>Constraseña</label>
+                                                    <p>&nbsp;</p>
+                                                <c:if test="${msgErrorPwd1 == null && msgErrorPwd2 == null }" >
+                                                    <div class="row">                                                    
+                                                        <section class="col col-6">                                                      
+                                                            <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                                                <input type="password" maxlength="20" name="pwd1" placeholder="Ingrese contraseña" id="pwd1">
+                                                                <div class="note note-error">Este campo es requerido.</div>
+                                                                <b class="tooltip tooltip-bottom-right">No olvide ingresar contraseña</b> </label>
+                                                        </section>
+                                                    </div>
+                                                    <div class="row">
+                                                        <section class="col col-6">                                                        
+                                                            <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                                                <input type="password" maxlength="20" name="pwd2" placeholder="Confirme contraseña" id="pwd2">
+                                                                <div class="note note-error">Este campo es requerido.</div>
+                                                                <b class="tooltip tooltip-bottom-right">No olvide confirmar contraseña</b> </label>                                                        
+                                                        </section>                                                   
+                                                    </div>                                                   
+                                                </c:if>
+                                                <c:if test="${msgErrorPwd1 != null || msgErrorPwd2 != null }" >
+                                                    <div class="row">                                                    
+                                                        <section class="col col-6">
+                                                            <label class="input state-error">
                                                                 <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                    <input type="password" maxlength="20" name="pwd1" placeholder="Password" id="pwd1">
+                                                                    <input type="password" maxlength="20" name="pwd1" placeholder="Ingrese contraseña" id="pwd1">
                                                                     <div class="note note-error">Este campo es requerido.</div>
-                                                                    <b class="tooltip tooltip-bottom-right">No olvide ingresar password</b> </label>
-                                                            </section>
-                                                        </div>
-                                                        <div class="row">
-                                                            <section class="col col-6">                                                        
+                                                                    <b class="tooltip tooltip-bottom-right">No olvide ingresar contraseña</b> </label>
+                                                            </label>
+                                                        </section>
+                                                    </div>
+                                                    <div class="row">
+                                                        <section class="col col-6">                                                        
+                                                            <label class="input state-error">
                                                                 <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                    <input type="password"  maxlength="20" name="pwd2" placeholder="Confirmar password" id="pwd2">
+                                                                    <input type="password" maxlength="20" name="pwd2" placeholder="Confirme contraseña" id="pwd2">
                                                                     <div class="note note-error">Este campo es requerido.</div>
-                                                                    <b class="tooltip tooltip-bottom-right">No olvide ingresar password</b> </label>                                                        
-                                                            </section>                                                   
-                                                        </div>                                                   
-                                                    </c:if>
-                                                    <c:if test="${msgErrorPwd1 != null || msgErrorPwd2 != null }" >
-                                                        <div class="row">                                                    
-                                                            <section class="col col-6">
-                                                                <label class="input state-error">
-                                                                    <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                        <input type="password"  maxlength="20" name="pwd1" placeholder="Password" id="pwd1">
-                                                                        <div class="note note-error">Este campo es requerido.</div>
-                                                                        <b class="tooltip tooltip-bottom-right">No olvide ingresar password</b> </label>
-                                                                </label>
-                                                            </section>
-                                                        </div>
-                                                        <div class="row">
-                                                            <section class="col col-6">                                                        
-                                                                <label class="input state-error">
-                                                                    <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                        <input type="password"  maxlength="20" name="pwd2" placeholder="Confirmar password" id="pwd2">
-                                                                        <div class="note note-error">Este campo es requerido.</div>
-                                                                        <b class="tooltip tooltip-bottom-right">No olvide ingresar password</b> </label>                                                        
-                                                                </label>
-                                                            </section>                                                   
-                                                        </div>
-                                                    </c:if>
-                                                </div>
-                                            </fieldset>                                                                                       
+                                                                    <b class="tooltip tooltip-bottom-right">No olvide confirmar contraseña</b> </label>                                                        
+                                                            </label>
+                                                        </section>                                                   
+                                                    </div>
+                                                </c:if>
+                                            </fieldset>                                        
 
                                             <footer>
                                                 <input type="hidden" name="add" value="ok"/>
-                                                <button name="btnUpdate" class="btn btn-primary" type="submit">
-                                                    <strong><font size="1">ACTUALIZAR</strong>
-                                                </button>                                                
+                                                <button name="btnAdd" class="btn btn-primary" type="submit">
+                                                    <strong><font size="1">AGREGAR</font></strong>
+                                                </button>
                                             </footer>
                                         </form>
 
@@ -478,7 +465,7 @@
 
         <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
 
-        <![endif]-->       
+        <![endif]-->      
 
         <!-- MAIN APP JS FILE -->
         <script src="js/app.js"></script>
@@ -490,20 +477,6 @@
         <script src="js/disabledButton.js"></script>
 
         <script type="text/javascript">
-            function changeDisplay() {
-                chk = document.getElementById("chk");
-                pwd = document.getElementById("pwd");
-
-
-                if (document.formUpdate.chk.checked) {
-                    pwd.style.display = 'block';
-                } else {
-                    pwd.style.display = 'none';
-                }
-            }
-        </script>
-
-        <script type="text/javascript">
 
             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
@@ -511,7 +484,7 @@
 
                 pageSetUp();
 
-                var $checkoutForm = $('#formUpdate').validate({
+                var $checkoutForm = $('#formAdd').validate({
                     // Rules for form validation
                     rules: {
                         username: {
@@ -567,7 +540,7 @@
                         timeout: 5000
                     });
                     e.preventDefault();
-                })
+                });
             </c:if>
 
             <c:if test="${msgList != null}">
@@ -580,9 +553,8 @@
                             timeout: 5000
                         });
                         e.preventDefault();
-                    })
+                    });
             </c:if>
-
 
                     // START AND FINISH DATE
                     $('#startdate').datepicker({
@@ -605,7 +577,7 @@
 
 
 
-                })
+                });
 
         </script>
 
@@ -624,7 +596,7 @@
                 s.parentNode.insertBefore(ga, s);
             })();
 
-        </script>
+        </script>               
 
     </body>
 

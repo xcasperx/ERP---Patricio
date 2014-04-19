@@ -60,6 +60,7 @@ public class AdminAddServlet extends HttpServlet {
                 HttpSession session = request.getSession(false);
 
                 /* obtener parametros de session */
+                int idAdmin = Integer.parseInt((String) session.getAttribute("idAdmin"));
                 int access = Integer.parseInt((String) session.getAttribute("access"));
                 String user = (String) session.getAttribute("admin");
 
@@ -67,6 +68,8 @@ public class AdminAddServlet extends HttpServlet {
                 if (access != 777) {
                     request.getRequestDispatcher("/ForbiddenServlet").forward(request, response);
                 } else {
+                    // SUPERUSUARIO
+
                     /* obtener los valores de session y asignar valores a la jsp */
                     request.setAttribute("userJsp", user);
                     request.setAttribute("access", access);
@@ -166,9 +169,9 @@ public class AdminAddServlet extends HttpServlet {
                         }
                     }
 
-                    ////////////////////////
+                    //////////////////////
                     // LOGICA DE NEGOCIO
-                    ////////////////////////
+                    //////////////////////
                     if (!error) {
                         try {
                             /* insertar registro */
@@ -197,8 +200,8 @@ public class AdminAddServlet extends HttpServlet {
             }
         }
     }
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.

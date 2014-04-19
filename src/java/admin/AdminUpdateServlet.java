@@ -84,10 +84,10 @@ public class AdminUpdateServlet extends HttpServlet {
                     String pwd2 = request.getParameter("pwd2");
 
                     /* instanciar url */
-                    String url = "?id=" + sid;
+                    String url = "?id=" + sid;                                     
 
                     /* establecer variables de sesion */
-                    session.setAttribute("redirectUpdate", "Admin");
+                    session.setAttribute("redirectUpdate", "admin");
                     session.setAttribute("username", username);
                     session.setAttribute("email", email);
                     session.setAttribute("type", type);
@@ -210,7 +210,7 @@ public class AdminUpdateServlet extends HttpServlet {
                         }
                     }
                     /* send redirect */
-                    response.sendRedirect("/POINTEX1/AdminGetServlet" + url);
+                    response.sendRedirect("/ERP/AdminGetServlet" + url);
                 }
             } catch (Exception sessionException) {
                 /* enviar a la vista de login */

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : admin
+    Document   : userMain
     Created on : 26-dic-2013, 16:08:09
     Author     : patricio alberto
 --%>
@@ -12,7 +12,7 @@
     <head>       
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->       
-        <title> ERP | Administradores </title>
+        <title> ERP | Usuarios </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -138,7 +138,7 @@
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
                     <li>                        
-                        <a href="AdminMainServlet"><i class="text-primary fa fa-table"></i> DataTable Administradores </a>
+                        <a href="UserMainServlet"><i class="text-primary fa fa-table"></i> DataTable Usuarios </a>
                     </li>                                 
                 </ol>
                 <!-- end breadcrumb -->
@@ -168,7 +168,7 @@
                             Mantenedor 
                             <span>
                                 <i class="fa fa-user fa-fw "></i> 
-                                Administradores
+                                Usuarios
                             </span>
                         </h2>
                     </div>
@@ -217,7 +217,7 @@
                                         </ul>
                                     </div>
                                     <div class="btn-group">                                                      
-                                        <button class="btn btn-default btn-sm" name="btnAdd" type="button" onclick="location.href = 'AdminGetAddServlet';" rel="tooltip" data-placement="top" data-original-title="Nuevo Administrador">
+                                        <button class="btn btn-default btn-sm" name="btnAdd" type="button" onclick="location.href = 'UserGetAddServlet';" rel="tooltip" data-placement="top" data-original-title="Nuevo Usuario">
                                             <i class="glyphicon glyphicon-plus-sign"></i>
                                             <font size="1"><strong>AGREGAR</strong></font>
                                         </button>
@@ -245,12 +245,12 @@
                                         <div class="widget-body-toolbar">                                                                                        
                                         </div>
                                         <div class="table-responsive">
-                                            <form action="AdminDeleteServlet" method="post" name="form">
+                                            <form action="UserDeleteServlet" method="post" name="form">
                                                 <table id="datatable_col_reorder" class="table table-striped table-hover">
 
                                                     <thead>
                                                         <tr>
-                                                            <th>                                                                                               
+                                                            <th class="center">                                                                                               
                                                                 <button class="btn btn-default btn-sm" type="submit" name="btnDelCol" data-title="refresh" rel="tooltip" data-placement="right" data-original-title="<i class='text-warning fa fa-warning'></i> Eliminar </br> elementos </br> seleccionados" data-html="true">                                                                
                                                                     &nbsp;&nbsp;
                                                                     <i class="glyphicon glyphicon-trash"> </i>
@@ -258,7 +258,7 @@
                                                                 </button>
 
                                                             </th>
-                                                            <th>ID Admin</th>
+                                                            <th>ID</th>
                                                             <th>Username</th>
                                                             <th>Email</th>
                                                             <th>Fecha Creación</th>
@@ -268,34 +268,34 @@
                                                     <tbody>
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
-                                                                <td>
-                                                                    <c:if test="${list.idAdmin != idAdmin}" >                                                                
-                                                                        <input type="checkbox" name="chk" value="<c:out value="${list.idAdmin}"/>"/>
+                                                                <td class="center">
+                                                                    <c:if test="${list.idUser != idUserX}" >                                                                
+                                                                        <input type="checkbox" name="chk" value="<c:out value="${list.idUser}"/>"/>
                                                                     </c:if>
-                                                                    <c:if test="${list.idAdmin == idAdmin}" >
+                                                                    <c:if test="${list.idUser == idUserX}" >
                                                                         <input type="checkbox" name="chk" disabled/>
                                                                     </c:if>
                                                                 </td>
-                                                                <td><c:out value="${list.idAdmin}" /></td>
+                                                                <td><c:out value="${list.idUser}" /></td>
                                                                 <td><c:out value="${list.username}" /></td>
                                                                 <td><c:out value="${list.email}" /></td>
                                                                 <td><c:out value="${list.createTime}" /></td>
                                                                 <td width=280>
                                                                     <div align="right">
-                                                                        <a href="AdminGetServlet?id=<c:out value="${list.idAdmin}" />">
+                                                                        <a href="UserGetServlet?id=<c:out value="${list.idUser}" />">
                                                                             <button class="btn btn-labeled btn-primary" name="btnUpOne" type="button">
                                                                                 <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>
                                                                                 <strong><font size="1">VER / ACTUALIZAR</font></strong>
                                                                             </button>
                                                                         </a>
-                                                                        <c:if test="${list.idAdmin != idAdmin}" >
-                                                                            <button class="btn btn-labeled btn-danger" name="btnDelRow" id="btnDelRow<c:out value="${list.idAdmin}"/>">                                                
+                                                                        <c:if test="${list.idUser != idUserX}" >
+                                                                            <button class="btn btn-labeled btn-danger" name="btnDelRow" id="btnDelRow<c:out value="${list.idUser}"/>">                                                
                                                                                 <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
                                                                                 <strong><font size="1">ELIMINAR</font></strong>
                                                                             </button>
-                                                                            <input type="hidden" name="idAdminDelRow<c:out value="${list.idAdmin}"/>" id="idAdminDelRow<c:out value="${list.idAdmin}"/>" value="<c:out value="${list.idAdmin}"/>">
+                                                                            <input type="hidden" name="idUserDelRow<c:out value="${list.idUser}"/>" id="idUserDelRow<c:out value="${list.idUser}"/>" value="<c:out value="${list.idUser}"/>">
                                                                         </c:if>
-                                                                        <c:if test="${list.idAdmin == idAdmin}" >
+                                                                        <c:if test="${list.idUser == idUserX}" >
                                                                             <button class="btn btn-labeled btn-danger" name="btnDelRow" disabled>
                                                                                 <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
                                                                                 <strong><font size="1">ELIMINAR</font></strong>
@@ -429,8 +429,7 @@
                                                     pageSetUp();
                                                     // confirmar eliminar
             <c:forEach var="list" items="${list}">
-
-                                                    $("#btnDelRow<c:out value="${list.idAdmin}"/>").click(function(e) {
+                                                    $("#btnDelRow<c:out value="${list.idUser}"/>").click(function(e) {
 
                                                         $.SmartMessageBox({
                                                             title: "<i class='fa fa-exclamation-triangle txt-color-orangeDark'></i> Desea eliminar el registro?",
@@ -439,7 +438,7 @@
                                                         }, function(ButtonPressed) {
                                                             if (ButtonPressed === "Sí") {
 
-                                                                var url = 'AdminDeleteServlet?btnDelRow&id=' + $('#idAdminDelRow<c:out value="${list.idAdmin}"/>').attr("value");
+                                                                var url = 'UserDeleteServlet?btnDelRow&id=' + $('#idUserDelRow<c:out value="${list.idUser}"/>').attr("value");
                                                                 $(location).attr('href', url);
                                                             }
 
@@ -486,7 +485,7 @@
                         e.preventDefault();
                     });
             </c:if>
-
+        
                     /*
                      * BASIC
                      */
@@ -529,7 +528,7 @@
                         "sPaginationType": "bootstrap",
                         "sDom": "R<'dt-top-row'Clf>r<'dt-wrapper't><'dt-row dt-bottom-row'<'row'<'col-sm-6'i><'col-sm-6 text-right'p>>",
                         "fnInitComplete": function(oSettings, json) {
-                            $('.ColVis_Button').addClass('btn btn-default btn-sm').html('Columns <i class="icon-arrow-down"></i>');
+                            $('.ColVis_Button').addClass('btn btn-default btn-sm').html('Columnas <i class="icon-arrow-down"></i>');
                         }
                     });
                     /* END COL ORDER */

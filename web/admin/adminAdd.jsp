@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> POINTEX | Admin</title>
+        <title> ERP | Administradores</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -50,8 +50,15 @@
         <!-- GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
+        
+        <script type='text/javascript'>
+            //window.onload = detectarCarga;
+            function detectarCarga() {
+                document.getElementById("imgLOAD").hidden = true;
+            }
+        </script>
     </head>
-    <body class="">
+    <body class="" onload="detectarCarga();">
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
         <!-- HEADER -->
@@ -132,12 +139,15 @@
             <!-- RIBBON -->
             <div id="ribbon">
 
-                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh"  rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! Esto reiniciará la configuración de widgets." data-html="true"><i class="fa fa-refresh"></i></span> </span>
 
                 <!-- breadcrumb -->
-                <ol class="breadcrumb">                    
+                <ol class="breadcrumb">
                     <li>
-                        Admin
+                        <a href="AdminMainServlet"><i class="text-primary fa fa-table"></i> DataTable Administradores</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-edit"></i> Agregar Administrador
                     </li>
                 </ol>
                 <!-- end breadcrumb -->
@@ -159,25 +169,55 @@
             <!-- MAIN CONTENT -->
             <div id="content">
 
-
                 <div class="row">
-                    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-                        <h1 class="page-title txt-color-blueDark">
-
-                            <!-- PAGE HEADER -->
-                            <i class="fa-fw fa fa-pencil-square-o"></i> 
-                            <a href="AdminMainServlet">Mantenedor <span>Admin</span></a>
+                     <!-- TITULO MANTENEDOR -->
+                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                        <h2 class="page-title txt-color-blueDark">
+                            <i class="fa fa-table fa-fw"></i> 
+                            Mantenedor 
                             <span>
-                                >  
-                                Agregar
+                                <i class="fa fa-user fa-fw "></i> 
+                                Administradores
                             </span>
-                        </h1>
-                    </div>                   
+                        </h2>
+                    </div>
+                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+                        <ul id="sparks" class="">
+                            <li class="sparks-info">
+                                <h5> IPC <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;0,80%</span></h5>
+                                <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+                                    110,150,300,130,400,240,220,310,220,300, 270, 210
+                                </div>
+                            </li>
+                            <li class="sparks-info">
+                                <h5> U.F. <span class="txt-color-blue"><i class="fa fa-usd" data-rel="bootstrap-tooltip"></i> 23.672,60</span></h5>
+                                <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+                                    1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
+                                </div>
+                            </li>                            
+                            <li class="sparks-info">
+                                <h5> Dolar Obs. <span class="txt-color-greenDark"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i> <i class="fa fa-usd"></i> 548,31</span></h5>
+                                <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+                                    513,501,530,525,510,520,540,545,547,545, 550, 555
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- MENSAJES -->
                 <c:import var="formMsg" url="/formMsg.jsp" />
                 <c:out value="${formMsg}" escapeXml="false" />
+
+                <div id="imgLOAD" style="text-align:center;">
+                    <!-- Modal -->                            
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <b>Cargando...</b>
+                            <img src="http://lh5.googleusercontent.com/-0aSv6m3phMw/UMeO0WwwdJI/AAAAAAAAILo/HNpuIWX0aEo/s150/loadingbar-green2.gif" />
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->                                            
+                </div>
 
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
@@ -205,7 +245,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Formulario </h2>				
+                                    <h2>Agregar nuevo administrador </h2>				
 
                                 </header>
 
@@ -249,14 +289,14 @@
                                                         <c:if test="${msgErrorEmail == null}">
                                                             <label class="label">Email</label>
                                                             <label class="input"> <i class="icon-prepend fa fa-envelope-o"></i>
-                                                                <input type="email" maxlength="255" name="email" placeholder="E-mail" value="<c:out value="${email}" />">                                                                
+                                                                <input type="email" maxlength="255" name="email" placeholder="Ingrese email" value="<c:out value="${email}" />">                                                                
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
                                                         <c:if test="${msgErrorEmail != null}">
                                                             <label class="label">Email</label>
                                                             <label class="input state-error">
-                                                                <input type="email" maxlength="255" name="email" placeholder="E-mail" value="<c:out value="${email}" />">                                                                
+                                                                <input type="email" maxlength="255" name="email" placeholder="Ingrese email" value="<c:out value="${email}" />">                                                                
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
@@ -281,23 +321,23 @@
                                                 </fieldset>
 
                                                 <fieldset>
-                                                    <label>Password</label>
+                                                    <label>Constraseña</label>
                                                     <p>&nbsp;</p>
                                                 <c:if test="${msgErrorPwd1 == null && msgErrorPwd2 == null }" >
                                                     <div class="row">                                                    
                                                         <section class="col col-6">                                                      
                                                             <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                <input type="password" maxlength="20" name="pwd1" placeholder="Password" id="pwd1">
+                                                                <input type="password" maxlength="20" name="pwd1" placeholder="Ingrese contraseña" id="pwd1">
                                                                 <div class="note note-error">Este campo es requerido.</div>
-                                                                <b class="tooltip tooltip-bottom-right">No olvide ingresar password</b> </label>
+                                                                <b class="tooltip tooltip-bottom-right">No olvide ingresar contraseña</b> </label>
                                                         </section>
                                                     </div>
                                                     <div class="row">
                                                         <section class="col col-6">                                                        
                                                             <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                <input type="password" maxlength="20" name="pwd2" placeholder="Confirmar password" id="pwd2">
+                                                                <input type="password" maxlength="20" name="pwd2" placeholder="Confirme contraseña" id="pwd2">
                                                                 <div class="note note-error">Este campo es requerido.</div>
-                                                                <b class="tooltip tooltip-bottom-right">No olvide ingresar password</b> </label>                                                        
+                                                                <b class="tooltip tooltip-bottom-right">No olvide confirmar contraseña</b> </label>                                                        
                                                         </section>                                                   
                                                     </div>                                                   
                                                 </c:if>
@@ -306,9 +346,9 @@
                                                         <section class="col col-6">
                                                             <label class="input state-error">
                                                                 <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                    <input type="password" maxlength="20" name="pwd1" placeholder="Password" id="pwd1">
+                                                                    <input type="password" maxlength="20" name="pwd1" placeholder="Ingrese contraseña" id="pwd1">
                                                                     <div class="note note-error">Este campo es requerido.</div>
-                                                                    <b class="tooltip tooltip-bottom-right">No olvide ingresar password</b> </label>
+                                                                    <b class="tooltip tooltip-bottom-right">No olvide ingresar contraseña</b> </label>
                                                             </label>
                                                         </section>
                                                     </div>
@@ -316,9 +356,9 @@
                                                         <section class="col col-6">                                                        
                                                             <label class="input state-error">
                                                                 <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                    <input type="password" maxlength="20" name="pwd2" placeholder="Confirmar password" id="pwd2">
+                                                                    <input type="password" maxlength="20" name="pwd2" placeholder="Confirme contraseña" id="pwd2">
                                                                     <div class="note note-error">Este campo es requerido.</div>
-                                                                    <b class="tooltip tooltip-bottom-right">No olvide ingresar password</b> </label>                                                        
+                                                                    <b class="tooltip tooltip-bottom-right">No olvide confirmar contraseña</b> </label>                                                        
                                                             </label>
                                                         </section>                                                   
                                                     </div>
@@ -327,8 +367,8 @@
 
                                             <footer>
                                                 <input type="hidden" name="add" value="ok"/>
-                                                <button name="btnAdd" class="btn btn-primary" onclick="disabledButtonAdd();">
-                                                    <strong><font size="1"><object name="btn1">AGREGAR</object><object name="btn2" hidden="true">AGREGANDO...</object></font></strong>
+                                                <button name="btnAdd" class="btn btn-primary" type="submit">
+                                                    <strong><font size="1">AGREGAR</font></strong>
                                                 </button>
                                             </footer>
                                         </form>
@@ -373,16 +413,16 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-                                                    if (!window.jQuery) {
-                                                        document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                    }
+            if (!window.jQuery) {
+                document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+            }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-                                                    if (!window.jQuery.ui) {
-                                                        document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                    }
+            if (!window.jQuery.ui) {
+                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+            }
         </script>
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events
@@ -425,10 +465,7 @@
 
         <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
 
-        <![endif]-->
-
-        <!-- Demo purpose only -->
-        <script src="js/demo.js"></script>
+        <![endif]-->      
 
         <!-- MAIN APP JS FILE -->
         <script src="js/app.js"></script>
@@ -441,79 +478,106 @@
 
         <script type="text/javascript">
 
-                                                    // DO NOT REMOVE : GLOBAL FUNCTIONS!
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                    $(document).ready(function() {
+            $(document).ready(function() {
 
-                                                        pageSetUp();
+                pageSetUp();
 
-                                                        var $checkoutForm = $('#formAdd').validate({
-                                                            // Rules for form validation
-                                                            rules: {
-                                                                username: {
-                                                                    required: true
-                                                                },
-                                                                email: {
-                                                                    required: true,
-                                                                    email: true
-                                                                },
-                                                                pwd1: {
-                                                                    required: true,
-                                                                    minlength: 3,
-                                                                    maxlength: 20
-                                                                },
-                                                                pwd2: {
-                                                                    required: true,
-                                                                    minlength: 3,
-                                                                    maxlength: 20,
-                                                                    equalTo: '#pwd1'
-                                                                }
-                                                            },
-                                                            // Messages for form validation
-                                                            messages: {
-                                                                username: {
-                                                                    required: 'Por favor ingrese username'
-                                                                },
-                                                                email: {
-                                                                    required: 'Por favor ingrese email',
-                                                                    email: 'Por favor ingrese un email VÁLIDO'
-                                                                },
-                                                                pwd1: {
-                                                                    required: 'Por favor ingrese password'
-                                                                },
-                                                                pwd2: {
-                                                                    required: 'Por favor ingrese password una vez más',
-                                                                    equalTo: 'Por favor ingrese la misma password de arriba'
-                                                                }
-                                                            },
-                                                            // Do not change code below
-                                                            errorPlacement: function(error, element) {
-                                                                error.insertAfter(element.parent());
-                                                            }
-                                                        });
+                var $checkoutForm = $('#formAdd').validate({
+                    // Rules for form validation
+                    rules: {
+                        username: {
+                            required: true
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        pwd1: {
+                            required: true,
+                            minlength: 6,
+                            maxlength: 20
+                        },
+                        pwd2: {
+                            required: true,
+                            minlength: 6,
+                            maxlength: 20,
+                            equalTo: '#pwd1'
+                        }
+                    },
+                    // Messages for form validation
+                    messages: {
+                        username: {
+                            required: 'Por favor ingrese username'
+                        },
+                        email: {
+                            required: 'Por favor ingrese email',
+                            email: 'Por favor ingrese un email VÁLIDO'
+                        },
+                        pwd1: {
+                            required: 'Por favor ingrese contraseña'
+                        },
+                        pwd2: {
+                            required: 'Por favor ingrese contraseña una vez más',
+                            equalTo: 'Por favor ingrese la misma contraseña de arriba'
+                        }
+                    },
+                    // Do not change code below
+                    errorPlacement: function(error, element) {
+                        error.insertAfter(element.parent());
+                    }
+                });
 
-                                                        // START AND FINISH DATE
-                                                        $('#startdate').datepicker({
-                                                            dateFormat: 'dd.mm.yy',
-                                                            prevText: '<i class="fa fa-chevron-left"></i>',
-                                                            nextText: '<i class="fa fa-chevron-right"></i>',
-                                                            onSelect: function(selectedDate) {
-                                                                $('#finishdate').datepicker('option', 'minDate', selectedDate);
-                                                            }
-                                                        });
+                // Mensajes emergentes
+            <c:if test="${msgOk != null}">
+                $("#correcto").ready(function(e) {
+                    $.smallBox({
+                        title: "Correcto!",
+                        content: "<i class='glyphicon glyphicon-floppy-disk'></i> <i> Registro guardado...</i>",
+                        color: "#659265",
+                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                        timeout: 5000
+                    });
+                    e.preventDefault();
+                });
+            </c:if>
 
-                                                        $('#finishdate').datepicker({
-                                                            dateFormat: 'dd.mm.yy',
-                                                            prevText: '<i class="fa fa-chevron-left"></i>',
-                                                            nextText: '<i class="fa fa-chevron-right"></i>',
-                                                            onSelect: function(selectedDate) {
-                                                                $('#startdate').datepicker('option', 'maxDate', selectedDate);
-                                                            }
-                                                        });
+            <c:if test="${msgList != null}">
+                    $("#errores").ready(function(e) {
+                        $.smallBox({
+                            title: "Error!",
+                            content: "<i class='glyphicon glyphicon-floppy-remove'></i> <i>No se pudo guardar el registro...</i>",
+                            color: "#C46A69",
+                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                            timeout: 5000
+                        });
+                        e.preventDefault();
+                    });
+            </c:if>
+
+                    // START AND FINISH DATE
+                    $('#startdate').datepicker({
+                        dateFormat: 'dd.mm.yy',
+                        prevText: '<i class="fa fa-chevron-left"></i>',
+                        nextText: '<i class="fa fa-chevron-right"></i>',
+                        onSelect: function(selectedDate) {
+                            $('#finishdate').datepicker('option', 'minDate', selectedDate);
+                        }
+                    });
+
+                    $('#finishdate').datepicker({
+                        dateFormat: 'dd.mm.yy',
+                        prevText: '<i class="fa fa-chevron-left"></i>',
+                        nextText: '<i class="fa fa-chevron-right"></i>',
+                        onSelect: function(selectedDate) {
+                            $('#startdate').datepicker('option', 'maxDate', selectedDate);
+                        }
+                    });
 
 
 
-                                                    })
+                });
 
         </script>
 
@@ -532,7 +596,7 @@
                 s.parentNode.insertBefore(ga, s);
             })();
 
-        </script>
+        </script>               
 
     </body>
 

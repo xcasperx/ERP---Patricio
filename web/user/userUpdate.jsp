@@ -1,5 +1,5 @@
 <%-- 
-    Document   : admin
+    Document   : user
     Created on : 26-dic-2013, 16:08:09
     Author     : patricio alberto
 --%>
@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> ERP | Administradores</title>
+        <title> ERP | Usuarios</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -144,10 +144,10 @@
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">                    
                     <li>
-                        <a href="AdminMainServlet"><i class="text-primary fa fa-table"></i> DataTable Administradores</a>
+                        <a href="UserMainServlet"><i class="text-primary fa fa-table"></i> DataTable Usuarios</a>
                     </li>      
                     <li>
-                        <i class="fa fa-edit"></i>Actualizar Administrador
+                        <i class="fa fa-edit"></i>Actualizar Usuarios
                     </li>
                 </ol>
                 <!-- end breadcrumb -->
@@ -177,7 +177,7 @@
                             Mantenedor 
                             <span>
                                 <i class="fa fa-user fa-fw "></i> 
-                                Administradores
+                                Usuarios
                             </span>
                         </h2>
                     </div>
@@ -245,7 +245,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Actualizar datos administrador </h2>				
+                                    <h2>Actualizar datos Usuario </h2>				
 
                                 </header>
 
@@ -262,13 +262,13 @@
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">                                        
 
-                                        <form action="AdminUpdateServlet" method="POST" name="formUpdate" id="formUpdate" class="smart-form" novalidate="novalidate">
+                                        <form action="UserUpdateServlet" method="POST" name="formUpdate" id="formUpdate" class="smart-form" novalidate="novalidate">
 
                                             <fieldset>
                                                 <div class="row">
                                                     <section class="col col-6">
                                                         <section>
-                                                            <small class="text-primary slideInRight"><font size="2"><strong>ID Administrador #<c:out value="${id}"/></strong></font></small>                                                            
+                                                            <small class="text-primary slideInRight"><font size="2"><strong>ID Usuario #<c:out value="${id}"/></strong></font></small>                                                            
                                                             <label class="input state-disabled">
                                                                 <input type="hidden" name="id" value="<c:out value="${id}" />"/>
                                                             </label>

@@ -1,8 +1,14 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * NOMBRE DEL PROGRAMA: UserMainServlet
+ * 
+ * DESCRIPCION: 
+ * Este programa permite mostrar todos los registros de usuarios existentes en 
+ * la base de datos alojandolos en datatable.
+ * 
+ * FUNCIONALIDAD: 
+ * El programa es invocado mediante url por los items "DataTable Usuarios".
  */
-package admin;
+package user;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -18,10 +24,10 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author patricio alberto
+ * @author patricio
  */
-@WebServlet(name = "AdminMainServlet", urlPatterns = {"/AdminMainServlet"})
-public class AdminMainServlet extends HttpServlet {
+@WebServlet(name = "UserMainServlet", urlPatterns = {"/UserMainServlet"})
+public class UserMainServlet extends HttpServlet {
 
     @Resource(name = "jdbc/ERP")
     private DataSource ds;
@@ -49,8 +55,8 @@ public class AdminMainServlet extends HttpServlet {
         try {
             conexion = ds.getConnection();
 
-            AdminDAO adminDAO = new AdminDAO();
-            adminDAO.setConexion(conexion);
+            UserDAO userDAO = new UserDAO();
+            userDAO.setConexion(conexion);
 
             ////////////////////////
             // COMPROBAR SESSION
@@ -60,23 +66,28 @@ public class AdminMainServlet extends HttpServlet {
                 HttpSession session = request.getSession(false);
 
                 /* obtener parametros de session */
-                int idAdmin = Integer.parseInt((String) session.getAttribute("idAdmin"));
-                String user = (String) session.getAttribute("admin");
-                int access = Integer.parseInt((String) session.getAttribute("access"));
+                int idUserX = Integer.parseInt((String) session.getAttribute("idUserX"));
+                int userTypeX = Integer.parseInt((String) session.getAttribute("userTypeX"));
+                String usernameX = (String) session.getAttribute("usernameX");
 
-                /* comprobar permisos de usuario */
-                if (access != 777) {
+                ///////////////////////////////////
+                // COMPROBAR PERMISOS DE USUARIO
+                ///////////////////////////////////
+
+                if (userTypeX > 2) {
+                    /* acceso prohibido */
                     request.getRequestDispatcher("/ForbiddenServlet").forward(request, response);
-                } else {
-                    /* obtener los valores de session y asignar valores a la jsp */
-                    request.setAttribute("userJsp", user);
-                    request.setAttribute("access", access);
+                } else {                    
+                    
+                    /* establecer variables de session a jsp */
+                    request.setAttribute("idUserX", idUserX);
+                    request.setAttribute("usernameX", usernameX);                    
 
                     //////////////////////////////////
                     // RECIBIR Y COMPROBAR PARAMETOS
                     //////////////////////////////////
 
-                    /* obtener atributos de session */
+                    /* obtener variables de session */
                     String redirect = (String) session.getAttribute("redirectDel");
 
                     /* obtener mensajes de session */
@@ -90,9 +101,9 @@ public class AdminMainServlet extends HttpServlet {
                     session.setAttribute("msgErrorConstraint", null);
                     session.setAttribute("msgListErrorConstraint", null);
 
-                    /* comprobar redirect */
+                    /* comprobar redirect desde UserDeleteServlet */
                     if (redirect == null || redirect.trim().equals("")) {
-                    } else if (redirect.equals("admin")) {
+                    } else if (redirect.equals("user")) {
 
                         /* comprobar eliminacion */
                         if (msgDel == null || msgDel.trim().equals("")) {
@@ -100,24 +111,22 @@ public class AdminMainServlet extends HttpServlet {
                             request.setAttribute("msgDel", msgDel);
                         }
 
-                        /* comprobar error eliminacion */
+                        /* comprobar error eliminacion individual */
                         if (msgErrorConstraint == null || msgErrorConstraint.trim().equals("")) {
                         } else {
                             request.setAttribute("msgErrorConstraint", msgErrorConstraint);
                         }
 
-
-                        /* comprobar lista de errores de eliminacion */
+                        /* comprobar errores de eliminacion grupal */
                         if (msgListErrorConstaint == null || msgListErrorConstaint.isEmpty() || msgListErrorConstaint.trim().equals("")) {
                         } else {
                             request.setAttribute("msgListErrorConstraint", msgListErrorConstaint);
                         }
-
                     }
 
-                    /* obtener lista de registros */
+                    /* obtener lista de usuarios */
                     try {
-                        Collection< Admin> list = adminDAO.getAll();
+                        Collection<UserBean> list = userDAO.getAll();
                         request.setAttribute("list", list);
 
                     } catch (Exception ex) {
@@ -125,14 +134,11 @@ public class AdminMainServlet extends HttpServlet {
                     }
 
                     /* despachar a la vista */
-                    request.getRequestDispatcher("/admin/admin.jsp").forward(request, response);
+                    request.getRequestDispatcher("/user/userMain.jsp").forward(request, response);
                 }
-            } catch (Exception sessionException) {
-                /* enviar a la vista de login */
+            } catch (Exception ex) {
                 System.out.println("no ha iniciado session");
-                /*enviar al login*/
                 request.getRequestDispatcher("/login/login.jsp").forward(request, response);
-                sessionException.printStackTrace();
             }
         } catch (Exception connectionException) {
             connectionException.printStackTrace();
@@ -143,6 +149,7 @@ public class AdminMainServlet extends HttpServlet {
             } catch (Exception noGestionar) {
             }
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

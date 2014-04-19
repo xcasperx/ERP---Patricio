@@ -11,13 +11,13 @@
 
     <!-- collapse menu button -->
     <div id="hide-menu" class="btn-header pull-right">
-        <span> <a href="javascript:void(0);" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+        <span> <a href="javascript:void(0);" title="Minimizar Menú"><i class="fa fa-reorder"></i></a> </span>
     </div>
     <!-- end collapse menu -->
 
     <!-- logout button -->
     <div id="logout" class="btn-header transparent pull-right">
-        <span> <a href="LogoutServlet" title="Sign Out"><i class="fa fa-sign-out"></i></a> </span>
+        <span> <a href="LogoutServlet" title="Cerrar Sesión"><i class="fa fa-sign-out"></i></a> </span>
     </div>
     <!-- end logout button -->
 
@@ -29,7 +29,7 @@
 
     <!-- input: search field -->
     <form action="#search.html" class="header-search pull-right">
-        <input type="text" placeholder="Find reports and more" id="search-fld">
+        <input type="text" placeholder="Encuentre reportes y más" id="search-fld">
         <button type="submit">
             <i class="fa fa-search"></i>
         </button>
@@ -40,18 +40,7 @@
     <!-- multiple lang dropdown : find all flags in the image folder -->
     <ul class="header-dropdown-list hidden-xs">
         <li>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img alt="" src="img/flags/us.png"> <span> US </span> <i class="fa fa-angle-down"></i> </a>
-            <ul class="dropdown-menu pull-right">
-                <li class="active">
-                    <a href="javascript:void(0);"><img alt="" src="img/flags/us.png"> US</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);"><img alt="" src="img/flags/es.png"> Spanish</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);"><img alt="" src="img/flags/de.png"> German</a>
-                </li>
-            </ul>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img alt="" src="img/flags/es.png"> <span> ES </span> <i class="fa fa-angle-down"></i> </a>            
         </li>
     </ul>
     <!-- end multiple lang -->

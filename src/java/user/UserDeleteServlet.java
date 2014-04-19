@@ -2,11 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package admin;
+package user;
 
 import Helpers.Message;
 import Helpers.MessageList;
+import admin.AdminDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,8 +25,8 @@ import javax.sql.DataSource;
  *
  * @author patricio
  */
-@WebServlet(name = "AdminDeleteServlet", urlPatterns = {"/AdminDeleteServlet"})
-public class AdminDeleteServlet extends HttpServlet {
+@WebServlet(name = "UserDeleteServlet", urlPatterns = {"/UserDeleteServlet"})
+public class UserDeleteServlet extends HttpServlet {
 
     @Resource(name = "jdbc/ERP")
     private DataSource ds;
@@ -52,8 +54,8 @@ public class AdminDeleteServlet extends HttpServlet {
         try {
             conexion = ds.getConnection();
 
-            AdminDAO adminDAO = new AdminDAO();
-            adminDAO.setConexion(conexion);
+            UserDAO userDAO = new UserDAO();
+            userDAO.setConexion(conexion);
 
             ///////////////////////
             // COMPROBAR SESSION
@@ -63,17 +65,21 @@ public class AdminDeleteServlet extends HttpServlet {
                 HttpSession session = request.getSession(false);
 
                 /* obtener parametros de session */
-                int idAdmin = Integer.parseInt((String) session.getAttribute("idAdmin"));
-                int access = Integer.parseInt((String) session.getAttribute("access"));
-                String user = (String) session.getAttribute("admin");
+                int idUserX = Integer.parseInt((String) session.getAttribute("idUserX"));
+                int userTypeX = Integer.parseInt((String) session.getAttribute("userTypeX"));
+                String usernameX = (String) session.getAttribute("usernameX");
 
-                /* comprobar permisos de usuario */
-                if (access != 777) {
+                ///////////////////////////////////
+                // COMPROBAR PERMISOS DE USUARIO
+                ///////////////////////////////////
+
+                if (userTypeX > 2) {
+                    /* acceso prohibido */
                     request.getRequestDispatcher("/ForbiddenServlet").forward(request, response);
                 } else {
-                    /* obtener los valores de session y asignar valores a la jsp */
-                    request.setAttribute("userJsp", user);
-                    request.setAttribute("access", access);
+                    /* establecer variables de session a jsp */
+                    request.setAttribute("idUserX", idUserX);
+                    request.setAttribute("usernameX", usernameX);
 
                     ////////////////////////////////////
                     // RECIBIR Y COMPROBAR PARAMETROS
@@ -83,49 +89,44 @@ public class AdminDeleteServlet extends HttpServlet {
                     String btnDelCol = request.getParameter("btnDelCol");
 
                     /* establecer atributos de session */
-                    session.setAttribute("redirectDel", "admin");
+                    session.setAttribute("redirectDel", "user");
 
                     //////////////////////////
                     // ELIMINAR POR REGISTRO
                     //////////////////////////
 
-                    if (btnDelRow != null) {                        
-                        /* recibir parametros */
-                        try {
-                        int id = Integer.parseInt(request.getParameter("id"));                            
+                    if (btnDelRow != null) {
                         /* comprobar auto eliminacion */
-                        if (id != idAdmin) {
-                            try {
-                                adminDAO.delete(id);
+
+                        try {
+                            int id = Integer.parseInt(request.getParameter("id"));
+                            if (id != idUserX) {
+                                userDAO.delete(id);
                                 session.setAttribute("msgDel", "Un administrador ha sido eliminado.");
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-                                session.setAttribute("msgErrorConstraint", "No se pudo ejecutar la instrucción.");
+                            } else {
+                                session.setAttribute("msgErrorConstraint", "No puede eliminarse a sí mismo.");
                             }
-                        } else {
-                            session.setAttribute("msgErrorConstraint", "No puede eliminarse a sí mismo.");
-                        }
                         } catch (Exception ex) {
                             ex.printStackTrace();
+                            session.setAttribute("msgErrorConstraint", "No se pudo ejecutar la instrucción.");
                         }
                     }
 
                     ///////////////////////////////
                     // ELIMINAR VARIOS REGISTROS
-                    ///////////////////////////////
-                    
-                    /* instanciar lista de mensajes */
-                    Collection<Message> msgList = new ArrayList<Message>();
-                    
+                    ///////////////////////////////                    
+
                     if (btnDelCol != null) {
-                        /* recibir parametros */
-                        String[] outerArray = request.getParameterValues("chk");
+                        /* instanciar lista de mensajes */
+                        Collection<Message> msgList = new ArrayList<Message>();
+
                         int i = 0;
                         int cont = 0;
+                        String[] outerArray = request.getParameterValues("chk");
                         try {
                             while (outerArray[i] != null) {
                                 try {
-                                    adminDAO.delete(Integer.parseInt(outerArray[i]));
+                                    userDAO.delete(Integer.parseInt(outerArray[i]));
                                     cont++;
                                 } catch (Exception ex) {
                                     msgList.add(MessageList.addMessage("No se pudo eliminar el registro con ID: " + outerArray[i]));
@@ -136,25 +137,23 @@ public class AdminDeleteServlet extends HttpServlet {
                         } catch (Exception ex) {
                         }
 
-                        /* establecer lista de mensajes */
-                        if (!msgList.isEmpty()) {
-                            session.setAttribute("msgListErrorConstraint", msgList);
-                        }                        
-
                         if (i == 1) {
                             session.setAttribute("msgDel", "Un registro ha sido eliminado.");
                         } else if (i > 1) {
                             session.setAttribute("msgDel", cont + " registros han sido eliminados.");
                         }
+
+                        /* establecer lista de mensajes */
+                        if (!msgList.isEmpty()) {
+                            session.setAttribute("msgListErrorConstraint", msgList);
+                        }
                     }
 
                     /* send redirect */
-                    response.sendRedirect("AdminMainServlet");
+                    response.sendRedirect("UserMainServlet");
                 }
             } catch (Exception sessionException) {
-                /* enviar a la vista de login */
                 System.out.println("no ha iniciado session");
-                /*enviar al login*/
                 request.getRequestDispatcher("/login/login.jsp").forward(request, response);
             }
         } catch (Exception connectionException) {
@@ -166,6 +165,7 @@ public class AdminDeleteServlet extends HttpServlet {
             } catch (Exception noGestionar) {
             }
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
