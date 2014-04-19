@@ -351,16 +351,16 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-                                                if (!window.jQuery) {
-                                                    document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                }
+                                            if (!window.jQuery) {
+                                                document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+                                            }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-                                                if (!window.jQuery.ui) {
-                                                    document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                }
+                                            if (!window.jQuery.ui) {
+                                                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                            }
         </script>
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events
@@ -421,30 +421,30 @@
         <script src="js/plugin/datatables/DT_bootstrap.js"></script>
 
         <script type="text/javascript">
+            
+                                            // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                // DO NOT REMOVE : GLOBAL FUNCTIONS!
+                                            $(document).ready(function() {
 
-                                                $(document).ready(function() {
-
-                                                    pageSetUp();
-                                                    // confirmar eliminar
+                                                pageSetUp();
+                                                // confirmar eliminar
             <c:forEach var="list" items="${list}">
-                                                    $("#btnDelRow<c:out value="${list.idUser}"/>").click(function(e) {
+                                                $("#btnDelRow<c:out value="${list.idUser}"/>").click(function(e) {
 
-                                                        $.SmartMessageBox({
-                                                            title: "<i class='fa fa-exclamation-triangle txt-color-orangeDark'></i> Desea eliminar el registro?",
-                                                            content: "Si presiona 'Sí', se eliminará el registro permanentemente.",
-                                                            buttons: '[No][Sí]'
-                                                        }, function(ButtonPressed) {
-                                                            if (ButtonPressed === "Sí") {
+                                                    $.SmartMessageBox({
+                                                        title: "<i class='fa fa-exclamation-triangle txt-color-orangeDark'></i> Desea eliminar el registro?",
+                                                        content: "Si presiona 'Sí', se eliminará el registro permanentemente.",
+                                                        buttons: '[No][Sí]'
+                                                    }, function(ButtonPressed) {
+                                                        if (ButtonPressed === "Sí") {
 
-                                                                var url = 'UserDeleteServlet?btnDelRow&id=' + $('#idUserDelRow<c:out value="${list.idUser}"/>').attr("value");
-                                                                $(location).attr('href', url);
-                                                            }
+                                                            var url = 'UserDeleteServlet?btnDelRow&id=' + $('#idUserDelRow<c:out value="${list.idUser}"/>').attr("value");
+                                                            $(location).attr('href', url);
+                                                        }
 
-                                                        });
-                                                        e.preventDefault();
                                                     });
+                                                    e.preventDefault();
+                                                });
             </c:forEach>
 
                     // Mensajes emergentes
@@ -485,7 +485,7 @@
                         e.preventDefault();
                     });
             </c:if>
-        
+
                     /*
                      * BASIC
                      */
@@ -551,8 +551,7 @@
                         }
                     });
                     /* END TABLE TOOLS */
-                })
-
+                });
         </script>
 
         <!-- Your GOOGLE ANALYTICS CODE Below -->
@@ -568,7 +567,7 @@
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(ga, s);
             })();
-
+            
         </script>
 
     </body>
