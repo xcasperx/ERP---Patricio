@@ -77,11 +77,12 @@ public class UserMainServlet extends HttpServlet {
                 if (userTypeX > 2) {
                     /* acceso prohibido */
                     request.getRequestDispatcher("/ForbiddenServlet").forward(request, response);
-                } else {                    
-                    
-                    /* establecer variables de session a jsp */
+                } else {
+
+                    /* establecer variables de usuario en sesion */
                     request.setAttribute("idUserX", idUserX);
-                    request.setAttribute("usernameX", usernameX);                    
+                    request.setAttribute("usernameX", usernameX);
+                    request.setAttribute("userTypeX", userTypeX);
 
                     //////////////////////////////////
                     // RECIBIR Y COMPROBAR PARAMETOS
@@ -132,6 +133,9 @@ public class UserMainServlet extends HttpServlet {
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
+
+                    /* marcar item de menu */
+                    request.setAttribute("userActive", "active");
 
                     /* despachar a la vista */
                     request.getRequestDispatcher("/user/userMain.jsp").forward(request, response);

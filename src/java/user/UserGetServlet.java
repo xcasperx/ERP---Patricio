@@ -79,9 +79,10 @@ public class UserGetServlet extends HttpServlet {
                     request.getRequestDispatcher("/ForbiddenServlet").forward(request, response);
                 } else {
 
-                    /* establecer variables de session a jsp */
+                    /* establecer variables de usuario en sesion */
                     request.setAttribute("idUserX", idUserX);
                     request.setAttribute("usernameX", usernameX);
+                    request.setAttribute("userTypeX", userTypeX);
 
                     ////////////////////////////////////
                     // RECIBIR Y COMPROBAR PARAMETROS
@@ -94,29 +95,31 @@ public class UserGetServlet extends HttpServlet {
                     String redirect = (String) session.getAttribute("redirectUpdate");
                     String username = (String) session.getAttribute("username");
                     String email = (String) session.getAttribute("email");
-                    String stype = (String) session.getAttribute("type");
+                    String userType = (String) session.getAttribute("userType");
 
                     /* obtener mensajes de session */
                     String msgErrorUsername = (String) session.getAttribute("msgErrorUsername");
                     String msgErrorEmail = (String) session.getAttribute("msgErrorEmail");
                     String msgErrorPwd1 = (String) session.getAttribute("msgErrorPwd1");
                     String msgErrorPwd2 = (String) session.getAttribute("msgErrorPwd2");
+                    String msgErrorUpdate = (String) session.getAttribute("msgErrorUpdate");
                     String msgOk = (String) session.getAttribute("msgOk");
 
                     /* limpiar variables de sesion */
                     session.setAttribute("redirectUpdate", null);
                     session.setAttribute("username", null);
                     session.setAttribute("email", null);
-                    session.setAttribute("type", null);
+                    session.setAttribute("userType", null);
                     session.setAttribute("msgErrorUsername", null);
                     session.setAttribute("msgErrorEmail", null);
                     session.setAttribute("msgErrorPwd1", null);
                     session.setAttribute("msgErrorPwd2", null);
+                    session.setAttribute("msgErrorUpdate", null);
                     session.setAttribute("msgOk", null);
 
                     /* instanciar lista de mensajes */
                     Collection<Message> msgList = new ArrayList<Message>();
-                    
+
                     /* obtener user por id */
                     UserBean reg = null;
                     try {
@@ -132,17 +135,17 @@ public class UserGetServlet extends HttpServlet {
                         /* comprobar redirect */
                         if (redirect == null || redirect.trim().equals("")) {
                             /* establecer atributos de reg */
-                            request.setAttribute("msg", "Se encontró el registro!");
+                            request.setAttribute("msg", "El registro ha sido encontrado!");
                             request.setAttribute("username", reg.getUsername());
                             request.setAttribute("email", reg.getEmail());
-                            request.setAttribute("type", reg.getAccess());
+                            request.setAttribute("userType", reg.getUserType());
 
-                        } else if (redirect.equals("admin")) {
+                        } else if (redirect.equals("user")) {
                             /* establecer atributos de session */
                             request.setAttribute("username", username);
                             request.setAttribute("email", email);
                             try {
-                                request.setAttribute("type", Integer.parseInt(stype));
+                                request.setAttribute("userType", Integer.parseInt(userType));
                             } catch (NumberFormatException n) {
                             }
 
@@ -174,6 +177,13 @@ public class UserGetServlet extends HttpServlet {
                                 msgList.add(MessageList.addMessage(msgErrorPwd2));
                             }
 
+                            /* comprobar update */
+                            if (msgErrorUpdate == null || msgErrorUpdate.trim().equals("")) {
+                            } else {
+                                request.setAttribute("msgErrorUpdate", true);
+                                msgList.add(MessageList.addMessage(msgErrorUpdate));
+                            }
+
                             /* mensaje de exito */
                             if (msgOk == null || msgOk.trim().equals("")) {
                             } else {
@@ -190,12 +200,15 @@ public class UserGetServlet extends HttpServlet {
                         request.setAttribute("msgList", msgList);
                     }
 
+                    /* marcar item de menu */
+                    request.setAttribute("userActive", "active");
+
                     /* despachar a la vista */
                     request.getRequestDispatcher("/user/userUpdate.jsp").forward(request, response);
                 }
-            } catch (Exception sessionException) {                
+            } catch (Exception sessionException) {
                 request.getRequestDispatcher("/login/login.jsp").forward(request, response);
-                System.out.println("no ha iniciado session");                
+                System.out.println("no ha iniciado session");
             }
         } catch (Exception connectionException) {
             connectionException.printStackTrace();

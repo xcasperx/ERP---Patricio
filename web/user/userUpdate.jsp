@@ -49,16 +49,9 @@
 
         <!-- GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
-
-
-        <script type='text/javascript'>
-            //window.onload = detectarCarga;
-            function detectarCarga() {
-                document.getElementById("imgLOAD").hidden = true;
-            }
-        </script>
     </head>
-    <body class="" onload="detectarCarga();">
+
+    <body class="">
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
         <!-- HEADER -->
@@ -170,7 +163,7 @@
             <div id="content">
 
                 <div class="row">
-                     <!-- TITULO MANTENEDOR -->
+                    <!-- TITULO MANTENEDOR -->
                     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
                         <h2 class="page-title txt-color-blueDark">
                             <i class="fa fa-table fa-fw"></i> 
@@ -207,17 +200,7 @@
 
                 <!-- MENSAJES -->
                 <c:import var="formMsg" url="/formMsg.jsp" />
-                <c:out value="${formMsg}" escapeXml="false" />
-
-                <div id="imgLOAD" style="text-align:center;">
-                    <!-- Modal -->                            
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <b>Cargando...</b>
-                            <img src="http://lh5.googleusercontent.com/-0aSv6m3phMw/UMeO0WwwdJI/AAAAAAAAILo/HNpuIWX0aEo/s150/loadingbar-green2.gif" />
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->                                            
-                </div>
+                <c:out value="${formMsg}" escapeXml="false"/>
 
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
@@ -229,20 +212,7 @@
                         <article class="col-sm-12 col-md-12 col-lg-6">
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
-                                <!-- widget options:
-                                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-                                        
-                                        data-widget-colorbutton="false"	
-                                        data-widget-editbutton="false"
-                                        data-widget-togglebutton="false"
-                                        data-widget-deletebutton="false"
-                                        data-widget-fullscreenbutton="false"
-                                        data-widget-custombutton="false"
-                                        data-widget-collapsed="true" 
-                                        data-widget-sortable="false"
-                                        
-                                -->
+                            <div class="jarviswidget" id="wid-id-1" data-widget-togglebutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
                                     <h2>Actualizar datos Usuario </h2>				
@@ -317,11 +287,13 @@
                                                         <p>&nbsp;</p>
                                                         <p>&nbsp;</p>
                                                         <label class="select">
-                                                            <select class="form-control" name="type_admin">
-                                                                <option value="333" <c:if test="${type == 333}">selected</c:if>>Nivel 3: Acceso a tarjetas y clientes</option>
-                                                                <option value="555" <c:if test="${type == 555}">selected</c:if>>Nivel 5: Acceso a eventos, promos y regalos</option>
-                                                                <option value="777" <c:if test="${type == 777}">selected</c:if>>Nivel 7: Acceso a todo</option>
-                                                                </select> <i></i> </label>
+                                                            <select class="form-control" name="userType">
+                                                                <option value="1" <c:if test="${userType == 1}">selected</c:if>>Superusuario</option>
+                                                                <option value="2" <c:if test="${userType == 2}">selected</c:if>>Administrador</option>
+                                                                <option value="3" <c:if test="${userType == 3}">selected</c:if>>Coordinador</option>
+                                                                <option value="4" <c:if test="${userType == 4}">selected</c:if>>Operario</option>
+                                                                </select> <i></i> 
+                                                        </label>
                                                         </section>                                                    
                                                     </div>
                                                 </fieldset>
@@ -330,7 +302,7 @@
                                                     <section>
                                                         <label class="checkbox">                                                            
                                                             <input type="checkbox" name="chk" id="chk" onClick="changeDisplay();"/>
-                                                            <i></i>Cambiar password</label>                                                        
+                                                            <i></i>Cambiar contraseña</label>                                                        
                                                     </section>
                                                     <div id="pwd" style="display:none">
                                                         <label>Password</label>
@@ -339,17 +311,17 @@
                                                         <div class="row">                                                    
                                                             <section class="col col-6">                                                      
                                                                 <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                    <input type="password" maxlength="20" name="pwd1" placeholder="Password" id="pwd1">
+                                                                    <input type="password" maxlength="20" name="pwd1" placeholder="Ingrese contraseña" id="pwd1">
                                                                     <div class="note note-error">Este campo es requerido.</div>
-                                                                    <b class="tooltip tooltip-bottom-right">No olvide ingresar password</b> </label>
+                                                                    <b class="tooltip tooltip-bottom-right">No olvide ingresar contraseña</b> </label>
                                                             </section>
                                                         </div>
                                                         <div class="row">
                                                             <section class="col col-6">                                                        
                                                                 <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                    <input type="password"  maxlength="20" name="pwd2" placeholder="Confirmar password" id="pwd2">
+                                                                    <input type="password"  maxlength="20" name="pwd2" placeholder="Confirme contraseña" id="pwd2">
                                                                     <div class="note note-error">Este campo es requerido.</div>
-                                                                    <b class="tooltip tooltip-bottom-right">No olvide ingresar password</b> </label>                                                        
+                                                                    <b class="tooltip tooltip-bottom-right">No olvide confirmar contraseña</b> </label>                                                        
                                                             </section>                                                   
                                                         </div>                                                   
                                                     </c:if>
@@ -358,9 +330,9 @@
                                                             <section class="col col-6">
                                                                 <label class="input state-error">
                                                                     <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                        <input type="password"  maxlength="20" name="pwd1" placeholder="Password" id="pwd1">
+                                                                        <input type="password"  maxlength="20" name="pwd1" placeholder="Ingrese contraseña" id="pwd1">
                                                                         <div class="note note-error">Este campo es requerido.</div>
-                                                                        <b class="tooltip tooltip-bottom-right">No olvide ingresar password</b> </label>
+                                                                        <b class="tooltip tooltip-bottom-right">No olvide ingresar contraseña</b> </label>
                                                                 </label>
                                                             </section>
                                                         </div>
@@ -368,9 +340,9 @@
                                                             <section class="col col-6">                                                        
                                                                 <label class="input state-error">
                                                                     <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                        <input type="password"  maxlength="20" name="pwd2" placeholder="Confirmar password" id="pwd2">
+                                                                        <input type="password"  maxlength="20" name="pwd2" placeholder="Confirme contraseña" id="pwd2">
                                                                         <div class="note note-error">Este campo es requerido.</div>
-                                                                        <b class="tooltip tooltip-bottom-right">No olvide ingresar password</b> </label>                                                        
+                                                                        <b class="tooltip tooltip-bottom-right">No olvide confirmar contraseña</b> </label>                                                        
                                                                 </label>
                                                             </section>                                                   
                                                         </div>
@@ -426,16 +398,16 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-            if (!window.jQuery) {
-                document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
-            }
+                                                                if (!window.jQuery) {
+                                                                    document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                                }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }
+                                                                if (!window.jQuery.ui) {
+                                                                    document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                                }
         </script>
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events
@@ -490,17 +462,17 @@
         <script src="js/disabledButton.js"></script>
 
         <script type="text/javascript">
-            function changeDisplay() {
-                chk = document.getElementById("chk");
-                pwd = document.getElementById("pwd");
+                                                                function changeDisplay() {
+                                                                    chk = document.getElementById("chk");
+                                                                    pwd = document.getElementById("pwd");
 
 
-                if (document.formUpdate.chk.checked) {
-                    pwd.style.display = 'block';
-                } else {
-                    pwd.style.display = 'none';
-                }
-            }
+                                                                    if (document.formUpdate.chk.checked) {
+                                                                        pwd.style.display = 'block';
+                                                                    } else {
+                                                                        pwd.style.display = 'none';
+                                                                    }
+                                                                }
         </script>
 
         <script type="text/javascript">

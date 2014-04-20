@@ -20,8 +20,8 @@ import javax.sql.DataSource;
  *
  * @author patricio
  */
-@WebServlet(name = "UserUpdateServlet", urlPatterns = {"/UserUpdateServlet"})
-public class UserUpdateServlet extends HttpServlet {
+@WebServlet(name = "UserAddServlet", urlPatterns = {"/UserAddServlet"})
+public class UserAddServlet extends HttpServlet {
 
     @Resource(name = "jdbc/ERP")
     private DataSource ds;
@@ -43,18 +43,18 @@ public class UserUpdateServlet extends HttpServlet {
 
         Connection conexion = null;
 
-        ///////////////////////////
+        /////////////////////////
         // ESTABLECER CONEXION
-        ///////////////////////////
+        /////////////////////////
         try {
             conexion = ds.getConnection();
 
             UserDAO userDAO = new UserDAO();
             userDAO.setConexion(conexion);
 
-            ////////////////////////
+            ///////////////////////
             // COMPROBAR SESSION
-            ////////////////////////
+            ///////////////////////
             try {
                 /* recuperar sesion */
                 HttpSession session = request.getSession(false);
@@ -82,39 +82,24 @@ public class UserUpdateServlet extends HttpServlet {
                     // RECIBIR Y COMPROBAR PARAMETROS
                     ////////////////////////////////////
 
-                    String chk = request.getParameter("chk");
-                    String sid = request.getParameter("id");
+                    /* obtener parametros de la vista */
                     String username = request.getParameter("username");
                     String email = request.getParameter("email");
                     String userType = request.getParameter("userType");
                     String pwd1 = request.getParameter("pwd1");
                     String pwd2 = request.getParameter("pwd2");
 
-                    /* instanciar url */
-                    String url = "?id=" + sid;
-
                     /* establecer variables de sesion */
-                    session.setAttribute("redirectUpdate", "user");
+                    session.setAttribute("redirectAdd", "user");
                     session.setAttribute("username", username);
                     session.setAttribute("email", email);
                     session.setAttribute("userType", userType);
 
-                    /* instanciar admin */
+                    /* instanciar user */
                     UserBean user = new UserBean();
 
                     /* flag de error */
                     boolean error = false;
-
-                    /* comprobar id admin */
-                    if (sid == null || sid.trim().equals("")) {
-                        error = true;
-                    } else {
-                        try {
-                            user.setIdUser(Integer.parseInt(sid));
-                        } catch (NumberFormatException n) {
-                            error = true;
-                        }
-                    }
 
                     /* comprobar username */
                     if (username == null || username.trim().equals("")) {
@@ -126,7 +111,7 @@ public class UserUpdateServlet extends HttpServlet {
 
                     /* comprobar email */
                     if (email == null || email.trim().equals("")) {
-                        session.setAttribute("msgErrorEmail", "Debe ingresar email.");
+                        session.setAttribute("msgErrorEmail", "Debe ingresar Email.");
                         error = true;
                     } else {
                         user.setEmail(email);
@@ -136,17 +121,40 @@ public class UserUpdateServlet extends HttpServlet {
                     if (userType == null || userType.trim().equals("")) {
                         error = true;
                     } else {
-                        try {
-                            user.setUserType(Integer.parseInt(userType));
-                        } catch (NumberFormatException n) {
+                        user.setUserType(Integer.parseInt(userType));
+                    }
+                    /* comprobar pwd1 */
+                    if (pwd1 == null || pwd1.trim().equals("")) {
+                        session.setAttribute("msgErrorPwd1", "Debe ingresar contraseña.");
+                        error = true;
+                    } else {
+                        user.setPwd1(pwd1);
+                        /* comprobar pwd2 */
+                        if (pwd2 == null || pwd2.trim().equals("")) {
+                            session.setAttribute("msgErrorPwd1", "Debe ingresar contraseña.");
                             error = true;
+                        } else {
+                            user.setPwd2(pwd2);
+                            /* comprobar coincidencias */
+                            if (!pwd1.equals(pwd2)) {
+                                session.setAttribute("msgErrorPwd1", "Las contraseñas no coinciden");
+                                error = true;
+                            }
+                            /* comprobar largo de caracteres */
+                            if (pwd1.length() < 6 || pwd2.length() < 6) {
+                                session.setAttribute("msgErrorPwd2", "La contraseña debe contener al menos 6 caracteres.");
+                                error = true;
+                            }
+                            /*encriptar password en hash MD5 */
+                            if (!error) {
+                                user.setPassword(StringMD.getStringMessageDigest(pwd1, StringMD.MD5));
+                            }
                         }
                     }
 
-
-                    ///////////////////////
+                    //////////////////////
                     // LOGICA DE NEGOCIO
-                    /////////////////////// 
+                    //////////////////////
 
                     /* comprobar username duplicado */
                     try {
@@ -172,58 +180,21 @@ public class UserUpdateServlet extends HttpServlet {
                         error = true;
                     }
 
-                    /* comprobar actualizar password */
-                    if (chk != null) {
-                        /* comprobar pwd1 */
-                        if (pwd1 == null || pwd1.trim().equals("")) {
-                            session.setAttribute("msgErrorPwd1", "Debe ingresar password");
-                        } else {
-                            user.setPwd1(pwd1);
-                            /* comprobar pwd2 */
-                            if (pwd2 == null || pwd2.trim().equals("")) {
-                                session.setAttribute("msgErrorPwd2", "Debe ingresar password.");
-                            } else {
-                                user.setPwd2(pwd2);
-                                /* comprobar coincidencias */
-                                if (!pwd1.equals(pwd2)) {
-                                    session.setAttribute("msgErrorPwd1", "Las passwords no coinciden.");
-                                    error = true;
-                                }
-                                if (pwd1.length() < 6 || pwd2.length() < 6) {
-                                    session.setAttribute("msgErrorPwd2", "La password debe poseer al menos 6 caracteres.");
-                                    error = true;
-                                }
-
-                                if (!error) {
-                                    /* actualizar password */
-                                    user.setPassword(StringMD.getStringMessageDigest(pwd1, StringMD.MD5));
-                                    try {
-                                        userDAO.updatePassword(user);
-                                        session.setAttribute("msgOk", "Registro actualizado exitosamente.");
-                                    } catch (Exception ex) {
-                                        ex.getCause();
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        if (!error) {
-                            /* no actualizar password */
-                            try {
-                                userDAO.update(user);
-                                session.setAttribute("msgOk", "Registro actualizado exitosamente.");
-                            } catch (Exception ex) {
-                                session.setAttribute("msgErrorUpdate", "Verifique que no exista username o email duplicados.");
-                                ex.getCause();
-                            }
+                     /* insertar registro */
+                    if (!error) {
+                        try {                           
+                            userDAO.insert(user);
+                            session.setAttribute("msgOk", "Registro ingresado exitosamente.");
+                        } catch (Exception ex) {
+                            session.setAttribute("msgErrorDup", "Registro duplicado, verifique campos ingresados.");
                         }
                     }
+
                     /* send redirect */
-                    response.sendRedirect("/ERP/UserGetServlet" + url);
+                    response.sendRedirect("UserGetAddServlet");
                 }
-            } catch (Exception sessionException) {
-                /* enviar a la vista de login */
-                System.out.println("no ha iniciado session");
+            } catch (Exception sesionException) {                
+                System.err.println("no ha iniciado session");
                 request.getRequestDispatcher("/login/login.jsp").forward(request, response);
             }
         } catch (Exception connectionException) {
@@ -235,6 +206,7 @@ public class UserUpdateServlet extends HttpServlet {
             } catch (Exception noGestionar) {
             }
         }
+
 
     }
 

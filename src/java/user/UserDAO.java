@@ -52,7 +52,6 @@ public class UserDAO {
                 reg.setUsername(result.getString("username"));
                 reg.setEmail(result.getString("email"));
                 reg.setUserType(result.getInt("user_type"));
-                reg.setAccess(result.getInt("access"));
                 reg.setCreateTime(result.getString("create_time"));
                 /* agregar a la lista */
                 list.add(reg);
@@ -108,7 +107,6 @@ public class UserDAO {
                 reg.setEmail(result.getString("email"));
                 reg.setCreateTime(result.getString("create_time"));
                 reg.setUserType(result.getInt("user_type"));
-                reg.setAccess(result.getInt("access"));                
             }
 
         } catch (MySQLSyntaxErrorException ex) {
@@ -158,7 +156,6 @@ public class UserDAO {
                 reg.setUsername(result.getString("username"));
                 reg.setEmail(result.getString("email"));
                 reg.setUserType(result.getInt("user_type"));
-                reg.setAccess(result.getInt("access"));
                 reg.setCreateTime(result.getString("create_time"));
             }
 
@@ -183,37 +180,95 @@ public class UserDAO {
             }
         }
         return reg;
-    }    
-
-    public void delete(int id) {
+    }
+    
+        public boolean validateDuplicateUsername(UserBean reg) {
 
         PreparedStatement sentence = null;
+        ResultSet result = null;
+
+        boolean find = false;
 
         try {
-            String sql = "delete from user where id_user = ?";
+            String sql = "select * from user where id_user <> ? and username = ?";
 
             sentence = conexion.prepareStatement(sql);
 
-            sentence.setInt(1, id);
+            sentence.setInt(1, reg.getIdUser());
+            sentence.setString(2, reg.getUsername());
 
-            sentence.executeUpdate();
+            result = sentence.executeQuery();
+
+            while (result.next()) {
+                find = true;
+            }
 
         } catch (MySQLSyntaxErrorException ex) {
-            System.out.println("Error de sintaxis en UserDAO, delete() : " + ex);
-            throw new RuntimeException("MySQL Syntax Exception en UserDAO, delete() : " + ex);
+            System.out.println("Error de sintaxis en UserDAO, validateDuplicateUsername() : " + ex);
+            throw new RuntimeException("MySQL Syntax Exception en UserDAO, validateDuplicateUsername() : " + ex);
         } catch (MySQLIntegrityConstraintViolationException ex) {
-            System.out.println("MySQL Excepción de integridad en UserDAO, delete() : " + ex);
-            throw new RuntimeException("MySQL Excepción de integridad en UserDAO, delete() : " + ex);
+            System.out.println("MySQL Excepción de integridad en UserDAO, validateDuplicateUsername() : " + ex);
+            throw new RuntimeException("MySQL Excepción de integridad en UserDAO, validateDuplicateUsername() : " + ex);
         } catch (SQLException ex) {
-            System.out.println("MySQL Excepción inesperada en UserDAO, delete() : " + ex);
-            throw new RuntimeException("MySQL Excepción inesperada en UserDAO, delete() : " + ex);
+            System.out.println("MySQL Excepción inesperada en UserDAO, validateDuplicateUsername() : " + ex);
+            throw new RuntimeException("MySQL Excepción inesperada en UserDAO, validateDuplicateUsername() : " + ex);
         } finally {
             /* liberar recursos */
+            try {
+                result.close();
+            } catch (Exception noGestionar) {
+            }
             try {
                 sentence.close();
             } catch (Exception noGestionar) {
             }
         }
+        return find;
+    }
+
+    public boolean validateDuplicateEmail(UserBean reg) {
+
+        PreparedStatement sentence = null;
+        ResultSet result = null;
+
+        boolean find = false;
+
+        try {
+
+            String sql = "select * from user where id_user <> ? and email = ?";
+
+            sentence = conexion.prepareStatement(sql);
+
+            sentence.setInt(1, reg.getIdUser());
+            sentence.setString(2, reg.getEmail());
+
+            result = sentence.executeQuery();
+
+            while (result.next()) {
+                find = true;
+            }
+
+        } catch (MySQLSyntaxErrorException ex) {
+            System.out.println("Error de sintaxis en UserDAO, validateDuplicateEmail() : " + ex);
+            throw new RuntimeException("MySQL Syntax Exception en UserDAO, validateDuplicateEmail() : " + ex);
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            System.out.println("MySQL Excepción de integridad en UserDAO, validateDuplicateEmail() : " + ex);
+            throw new RuntimeException("MySQL Excepción de integridad en UserDAO, validateDuplicateEmail() : " + ex);
+        } catch (SQLException ex) {
+            System.out.println("MySQL Excepción inesperada en UserDAO, validateDuplicateEmail() : " + ex);
+            throw new RuntimeException("MySQL Excepción inesperada en UserDAO, validateDuplicateEmail() : " + ex);
+        } finally {
+            /* liberar recursos */
+            try {
+                result.close();
+            } catch (Exception noGestionar) {
+            }
+            try {
+                sentence.close();
+            } catch (Exception noGestionar) {
+            }
+        }
+        return find;
     }
 
     public void insert(UserBean user) {
@@ -221,7 +276,7 @@ public class UserDAO {
         PreparedStatement sentence = null;
 
         try {
-            String sql = "insert into user (username, email, password, user_type, access) values (?, ?, ?, ?, ?)";
+            String sql = "insert into user (username, email, password, user_type) values (?, ?, ?, ?)";
 
             sentence = conexion.prepareStatement(sql);
 
@@ -229,7 +284,6 @@ public class UserDAO {
             sentence.setString(2, user.getEmail());
             sentence.setString(3, user.getPassword());
             sentence.setInt(4, user.getUserType());
-            sentence.setInt(5, user.getAccess());
 
             sentence.executeUpdate();
 
@@ -256,20 +310,19 @@ public class UserDAO {
         PreparedStatement sentence = null;
 
         try {
-            String sql = "update user set username = ?, email = ?, user_type = ?, access = ? where id_user = ? ";
+            String sql = "update user set username = ?, email = ?, user_type = ? where id_user = ? ";
 
             sentence = conexion.prepareStatement(sql);
 
             sentence.setString(1, user.getUsername());
             sentence.setString(2, user.getEmail());
             sentence.setInt(3, user.getUserType());
-            sentence.setInt(4, user.getAccess());
-            sentence.setInt(5, user.getIdUser());
+            sentence.setInt(4, user.getIdUser());
 
             sentence.executeUpdate();
 
         } catch (MySQLSyntaxErrorException ex) {
-            System.out.println("Error de sintaxis en UserDAO, update() : " + ex);
+            System.out.println("MySQL Syntax Exception en UserDAO, update() : " + ex);
             throw new RuntimeException("MySQL Syntax Exception en UserDAO, update() : " + ex);
         } catch (MySQLIntegrityConstraintViolationException ex) {
             System.out.println("MySQL Excepción de integridad en UserDAO, update() : " + ex);
@@ -309,6 +362,37 @@ public class UserDAO {
         } catch (SQLException ex) {
             System.out.println("MySQL Excepción inesperada en UserDAO, updatePassword() : " + ex);
             throw new RuntimeException("MySQL Excepción inesperada en UserDAO, updatePassword() : " + ex);
+        } finally {
+            /* liberar recursos */
+            try {
+                sentence.close();
+            } catch (Exception noGestionar) {
+            }
+        }
+    }
+
+    public void delete(int id) {
+
+        PreparedStatement sentence = null;
+
+        try {
+            String sql = "delete from user where id_user = ?";
+
+            sentence = conexion.prepareStatement(sql);
+
+            sentence.setInt(1, id);
+
+            sentence.executeUpdate();
+
+        } catch (MySQLSyntaxErrorException ex) {
+            System.out.println("Error de sintaxis en UserDAO, delete() : " + ex);
+            throw new RuntimeException("MySQL Syntax Exception en UserDAO, delete() : " + ex);
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            System.out.println("MySQL Excepción de integridad en UserDAO, delete() : " + ex);
+            throw new RuntimeException("MySQL Excepción de integridad en UserDAO, delete() : " + ex);
+        } catch (SQLException ex) {
+            System.out.println("MySQL Excepción inesperada en UserDAO, delete() : " + ex);
+            throw new RuntimeException("MySQL Excepción inesperada en UserDAO, delete() : " + ex);
         } finally {
             /* liberar recursos */
             try {

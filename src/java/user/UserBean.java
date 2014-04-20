@@ -16,8 +16,7 @@ public class UserBean implements java.io.Serializable {
     public String password;
     public String pwd1;
     public String pwd2;
-    public int userType;
-    public int access;
+    public int userType;    
     public String createTime;
 
     public UserBean() {
@@ -77,15 +76,7 @@ public class UserBean implements java.io.Serializable {
 
     public void setUserType(int userType) {
         this.userType = userType;
-    }
-
-    public int getAccess() {
-        return access;
-    }
-
-    public void setAccess(int access) {
-        this.access = access;
-    }
+    }   
 
     public String getCreateTime() {
         return createTime;

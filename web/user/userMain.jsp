@@ -226,90 +226,105 @@
                             </div>
                             </br>
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-2" data-widget-custombutton="false" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" >                          
+                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-2" data-widget-togglebutton="false" data-widget-custombutton="false" data-widget-collapsed="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-colorbutton="false">
 
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>DataTable </h2>                                     
-                                </header>                                
+                                    <h2>Data Table </h2>
+                                </header>
+
                                 <!-- widget div-->
                                 <div>
+
                                     <!-- widget edit box -->
                                     <div class="jarviswidget-editbox">
-                                        <!-- This area used as dropdown edit box -->                                        
+                                        <!-- This area used as dropdown edit box -->
+
                                     </div>
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">
-                                        <div class="widget-body-toolbar">                                                                                        
+                                        <div class="widget-body-toolbar">
+
                                         </div>
-                                        <div class="table-responsive">
-                                            <form action="UserDeleteServlet" method="post" name="form">
-                                                <table id="datatable_col_reorder" class="table table-striped table-hover">
-
-                                                    <thead>
+                                        <form action="UserDeleteServlet" method="post" name="form">
+                                            <table id="datatable_col_reorder" class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="center">                                                                                               
+                                                            <button class="btn btn-default btn-sm" type="submit" name="btnDelCol" data-title="refresh" rel="tooltip" data-placement="right" data-original-title="<i class='text-warning fa fa-warning'></i> Eliminar </br> elementos </br> seleccionados" data-html="true">                                                                
+                                                                &nbsp;&nbsp;
+                                                                <i class="glyphicon glyphicon-trash"> </i>
+                                                                &nbsp;&nbsp;
+                                                            </button>
+                                                        </th>
+                                                        <th>ID</th>
+                                                        <th>Username</th>
+                                                        <th>Email</th>
+                                                        <th>Permisos</th>
+                                                        <th>Fecha Creación</th>
+                                                        <th width=280><div align="center">Acciones</div></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach var="list" items="${list}">
                                                         <tr>
-                                                            <th class="center">                                                                                               
-                                                                <button class="btn btn-default btn-sm" type="submit" name="btnDelCol" data-title="refresh" rel="tooltip" data-placement="right" data-original-title="<i class='text-warning fa fa-warning'></i> Eliminar </br> elementos </br> seleccionados" data-html="true">                                                                
-                                                                    &nbsp;&nbsp;
-                                                                    <i class="glyphicon glyphicon-trash"> </i>
-                                                                    &nbsp;&nbsp;
-                                                                </button>
+                                                            <td class="center">
+                                                                <c:if test="${list.idUser != idUserX}" >                                                                
+                                                                    <input type="checkbox" name="chk" value="<c:out value="${list.idUser}"/>"/>
+                                                                </c:if>
+                                                                <c:if test="${list.idUser == idUserX}" >
+                                                                    <input type="checkbox" name="chk" disabled/>
+                                                                </c:if>
+                                                            </td>
+                                                            <td><c:out value="${list.idUser}" /></td>
+                                                            <td><c:out value="${list.username}" /></td>
+                                                            <td><c:out value="${list.email}" /></td>
+                                                            <td>                                                                
+                                                                <c:if test="${list.userType == 1}">
+                                                                    <div class="label label-default">Superusuario </div>                                                                    
+                                                                </c:if>
+                                                                <c:if test="${list.userType == 2}">
+                                                                    <div class="label label-danger">Administrador </div>
+                                                                </c:if>
+                                                                <c:if test="${list.userType == 3}">
+                                                                    <div class="label label-success">Coordinador</div> 
+                                                                </c:if>
+                                                                <c:if test="${list.userType == 4}">
+                                                                    <div class="label label-warning">Operario </div>
+                                                                </c:if>
+                                                            </td>
+                                                            <td><c:out value="${list.createTime}" /></td>
+                                                            <td width=280>
+                                                                <div align="right">
+                                                                    <a href="UserGetServlet?id=<c:out value="${list.idUser}"/>">
+                                                                        <button class="btn btn-labeled btn-primary" name="btnUpOne" type="button">
+                                                                            <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>
+                                                                            <strong><font size="1">VER / ACTUALIZAR</font></strong>
+                                                                        </button>
+                                                                    </a>
 
-                                                            </th>
-                                                            <th>ID</th>
-                                                            <th>Username</th>
-                                                            <th>Email</th>
-                                                            <th>Fecha Creación</th>
-                                                            <th width=280><div align="center">Acciones</div></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <c:forEach var="list" items="${list}">
-                                                            <tr>
-                                                                <td class="center">
-                                                                    <c:if test="${list.idUser != idUserX}" >                                                                
-                                                                        <input type="checkbox" name="chk" value="<c:out value="${list.idUser}"/>"/>
+                                                                    <c:if test="${list.idUser != idUserX}" >
+                                                                        <button class="btn btn-labeled btn-danger" name="btnDelRow" id="btnDelRow<c:out value="${list.idUser}"/>">                                                
+                                                                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
+                                                                            <strong><font size="1">ELIMINAR</font></strong>
+                                                                        </button>
+                                                                        <input type="hidden" name="idUserDelRow<c:out value="${list.idUser}"/>" id="idUserDelRow<c:out value="${list.idUser}"/>" value="<c:out value="${list.idUser}"/>">
                                                                     </c:if>
                                                                     <c:if test="${list.idUser == idUserX}" >
-                                                                        <input type="checkbox" name="chk" disabled/>
+                                                                        <button class="btn btn-labeled btn-danger" name="btnDelRow" disabled>
+                                                                            <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
+                                                                            <strong><font size="1">ELIMINAR</font></strong>
+                                                                        </button>
                                                                     </c:if>
-                                                                </td>
-                                                                <td><c:out value="${list.idUser}" /></td>
-                                                                <td><c:out value="${list.username}" /></td>
-                                                                <td><c:out value="${list.email}" /></td>
-                                                                <td><c:out value="${list.createTime}" /></td>
-                                                                <td width=280>
-                                                                    <div align="right">
-                                                                        <a href="UserGetServlet?id=<c:out value="${list.idUser}" />">
-                                                                            <button class="btn btn-labeled btn-primary" name="btnUpOne" type="button">
-                                                                                <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>
-                                                                                <strong><font size="1">VER / ACTUALIZAR</font></strong>
-                                                                            </button>
-                                                                        </a>
-                                                                        <c:if test="${list.idUser != idUserX}" >
-                                                                            <button class="btn btn-labeled btn-danger" name="btnDelRow" id="btnDelRow<c:out value="${list.idUser}"/>">                                                
-                                                                                <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
-                                                                                <strong><font size="1">ELIMINAR</font></strong>
-                                                                            </button>
-                                                                            <input type="hidden" name="idUserDelRow<c:out value="${list.idUser}"/>" id="idUserDelRow<c:out value="${list.idUser}"/>" value="<c:out value="${list.idUser}"/>">
-                                                                        </c:if>
-                                                                        <c:if test="${list.idUser == idUserX}" >
-                                                                            <button class="btn btn-labeled btn-danger" name="btnDelRow" disabled>
-                                                                                <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
-                                                                                <strong><font size="1">ELIMINAR</font></strong>
-                                                                            </button>
-                                                                        </c:if>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </c:forEach>                                                 
-                                                    </tbody>
-
-                                                </table>
-                                            </form>
-                                        </div>
+                                                                </div>                                                           
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </form>    
                                     </div>
                                     <!-- end widget content -->
 
@@ -421,7 +436,7 @@
         <script src="js/plugin/datatables/DT_bootstrap.js"></script>
 
         <script type="text/javascript">
-            
+
                                             // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
                                             $(document).ready(function() {
@@ -525,7 +540,7 @@
                      * COL ORDER
                      */
                     $('#datatable_col_reorder').dataTable({
-                        "sPaginationType": "bootstrap",
+                        "sPaginationType": "bootstrap_full",
                         "sDom": "R<'dt-top-row'Clf>r<'dt-wrapper't><'dt-row dt-bottom-row'<'row'<'col-sm-6'i><'col-sm-6 text-right'p>>",
                         "fnInitComplete": function(oSettings, json) {
                             $('.ColVis_Button').addClass('btn btn-default btn-sm').html('Columnas <i class="icon-arrow-down"></i>');
@@ -567,7 +582,7 @@
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(ga, s);
             })();
-            
+
         </script>
 
     </body>

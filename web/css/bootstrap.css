@@ -4290,6 +4290,39 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   position: relative;
   top: -1px;
 }
+
+.label-gris {
+  background-color: #999999;
+}
+.label-gris[href]:hover,
+.label-gris[href]:focus {
+  background-color: #808080;
+}
+
+.label-mora {
+  background-color: #4C0B5F;
+}
+.label-mora[href]:hover,
+.label-mora[href]:focus {
+  background-color: #4C0B5F;
+}
+
+.label-verde {
+  background-color: #739e73;
+}
+.label-verde[href]:hover,
+.label-verde[href]:focus {
+  background-color: #5b835b;
+}
+
+.label-caqui {
+  background-color: #c79121;
+}
+.label-caqui[href]:hover,
+.label-caqui[href]:focus {
+  background-color: #9b711a;
+}
+
 .label-default {
   background-color: #999999;
 }

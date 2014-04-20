@@ -16,7 +16,7 @@
             <a href="javascript:void(0);" id="show-shortcut">
                 <img src="img/avatars/sunny.png" alt="me" class="online" /> 
                 <span>
-                    <c:out value="${userJsp}"/>                    
+                    <c:out value="${usernameX}"/>                    
                 </span>
                 <i class="fa fa-angle-down"></i>
             </a> 
@@ -50,8 +50,17 @@
                     <li><a href="inline-charts.html">Inline Charts</a></li>
                 </ul>
             </li>
+            
+            <li>
+                <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Indicador Económico</span></a>
+                <ul>
+                    <li><a href="flot.html">Flot Chart</a></li>
+                    <li><a href="morris.html">Morris Charts</a></li>
+                    <li><a href="inline-charts.html">Inline Charts</a></li>
+                </ul>
+            </li>
 
-            <li><a href="AdminMainServlet"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Administradores</span></a></li>
+            <li <c:if test="${userActive != null}">class="active"</c:if>><a href="UserMainServlet"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Usuarios</span></a></li>
 
             <li>
                 <a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">Inventario</span></a>
@@ -60,9 +69,8 @@
                     <li><a href="#">Productos en Bodega</a></li>
                     <li><a href="#">Ordenes de Bodega</a>
                         <ul>                            
-                            <li><a href="#">Ingreso</a></li>
-                            <li><a href="#">Recepción</a></li>
-                            <li><a href="#">Egreso</a></li>
+                            <li><a href="#">Ingresos</a></li>                            
+                            <li><a href="#">Egresos</a></li>
                         </ul>
                     </li>
                 </ul>

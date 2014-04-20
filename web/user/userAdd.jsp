@@ -50,15 +50,8 @@
         <!-- GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
-        
-        <script type='text/javascript'>
-            //window.onload = detectarCarga;
-            function detectarCarga() {
-                document.getElementById("imgLOAD").hidden = true;
-            }
-        </script>
     </head>
-    <body class="" onload="detectarCarga();">
+    <body class="">
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
         <!-- HEADER -->
@@ -144,10 +137,10 @@
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
                     <li>
-                        <a href="UserMainServlet"><i class="text-primary fa fa-table"></i> DataTable Administradores</a>
+                        <a href="UserMainServlet"><i class="text-primary fa fa-table"></i> DataTable Usuarios</a>
                     </li>
                     <li>
-                        <i class="fa fa-edit"></i> Agregar Administrador
+                        <i class="fa fa-edit"></i> Agregar Usuario
                     </li>
                 </ol>
                 <!-- end breadcrumb -->
@@ -170,14 +163,14 @@
             <div id="content">
 
                 <div class="row">
-                     <!-- TITULO MANTENEDOR -->
+                    <!-- TITULO MANTENEDOR -->
                     <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
                         <h2 class="page-title txt-color-blueDark">
                             <i class="fa fa-table fa-fw"></i> 
                             Mantenedor 
                             <span>
                                 <i class="fa fa-user fa-fw "></i> 
-                                Administradores
+                                Usuarios
                             </span>
                         </h2>
                     </div>
@@ -207,17 +200,7 @@
 
                 <!-- MENSAJES -->
                 <c:import var="formMsg" url="/formMsg.jsp" />
-                <c:out value="${formMsg}" escapeXml="false" />
-
-                <div id="imgLOAD" style="text-align:center;">
-                    <!-- Modal -->                            
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <b>Cargando...</b>
-                            <img src="http://lh5.googleusercontent.com/-0aSv6m3phMw/UMeO0WwwdJI/AAAAAAAAILo/HNpuIWX0aEo/s150/loadingbar-green2.gif" />
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->                                            
-                </div>
+                <c:out value="${formMsg}" escapeXml="false" />              
 
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
@@ -229,7 +212,7 @@
                         <article class="col-sm-12 col-md-12 col-lg-6">
 
                             <!-- Widget ID (each widget will need unique ID)-->
-                            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                            <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-togglebutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
                                 <!-- widget options:
                                         usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
                                         
@@ -245,7 +228,7 @@
                                 -->
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Agregar nuevo administrador </h2>				
+                                    <h2>Agregar nuevo usuario </h2>				
 
                                 </header>
 
@@ -311,11 +294,13 @@
                                                         <p>&nbsp;</p>
                                                         <p>&nbsp;</p>
                                                         <label class="select">
-                                                            <select class="form-control" name="type_admin">
-                                                                <option value="333" <c:if test="${type == 333}">selected</c:if>>Nivel 3: Acceso a tarjetas y clientes</option>
-                                                                <option value="555" <c:if test="${type == 555}">selected</c:if>>Nivel 5: Acceso a eventos, promos y regalos</option>
-                                                                <option value="777" <c:if test="${type == 777}">selected</c:if>>Nivel 7: Acceso a todo</option>
-                                                                </select> <i></i> </label>
+                                                            <select class="form-control" name="userType">
+                                                                <option value="1" <c:if test="${userType == 1}">selected</c:if>>Superusuario</option>
+                                                                <option value="2" <c:if test="${userType == 2}">selected</c:if>>Administrador</option>
+                                                                <option value="3" <c:if test="${userType == 3}">selected</c:if>>Coordinador</option>
+                                                                <option value="4" <c:if test="${userType == 4}">selected</c:if>>Operario</option>
+                                                                </select> <i></i> 
+                                                            </label>                                                        
                                                         </section>                                                    
                                                     </div>
                                                 </fieldset>
