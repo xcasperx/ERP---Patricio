@@ -5,7 +5,6 @@
 package Login;
 
 import java.io.IOException;
-import java.sql.Connection;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,8 +55,7 @@ public class LogoutServlet extends HttpServlet {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            System.out.println("saliendo de session...");
+        } finally {            
             request.setAttribute("msgErrorLogin", "Ha cerrado sesión.");
             request.getRequestDispatcher("/login/login.jsp").forward(request, response);
         }

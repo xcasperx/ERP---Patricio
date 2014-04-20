@@ -4,7 +4,6 @@
  */
 package user;
 
-import admin.Admin;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 import java.sql.Connection;
