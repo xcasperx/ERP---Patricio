@@ -246,14 +246,16 @@
                                                         <c:if test="${msgErrorUsername == null}">
                                                             <label class="label">Username</label>
                                                             <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                                                <input type="text" maxlength="30" name="username" placeholder="Ingrese Username" value="<c:out value="${username}" />">                                                                
+                                                                <input type="text" maxlength="30" name="username" placeholder="Ingrese Username" value="<c:out value="${username}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Por ejemplo: nombre.apellido</b>
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
                                                         <c:if test="${ msgErrorUsername != null}">
                                                             <label class="label">Username</label>
-                                                            <label class="input state-error">
+                                                            <label class="input state-error"> <i class="icon-prepend fa fa-user"></i>
                                                                 <input type="text" maxlength="30" name="username" placeholder="Ingrese Username" value="<c:out value="${username}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Por ejemplo: nombre.apellido</b>
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
@@ -265,14 +267,16 @@
                                                         <c:if test="${msgErrorEmail == null}">
                                                             <label class="label">Email</label>
                                                             <label class="input"> <i class="icon-prepend fa fa-envelope-o"></i>
-                                                                <input type="email" maxlength="255" name="email" placeholder="E-mail" value="<c:out value="${email}" />">                                                                
+                                                                <input type="email" maxlength="255" name="email" placeholder="E-mail" value="<c:out value="${email}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Por ejemplo: micorreo@gmail.com</b>
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
                                                         <c:if test="${msgErrorEmail != null}">
                                                             <label class="label">Email</label>
-                                                            <label class="input state-error">
-                                                                <input type="email" maxlength="255" name="email" placeholder="E-mail" value="<c:out value="${email}" />">                                                                
+                                                            <label class="input state-error"> <i class="icon-prepend fa fa-envelope-o"></i>
+                                                                <input type="email" maxlength="255" name="email" placeholder="E-mail" value="<c:out value="${email}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Por ejemplo: micorreo@gmail.com</b>
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
@@ -312,16 +316,16 @@
                                                             <section class="col col-6">                                                      
                                                                 <label class="input"> <i class="icon-append fa fa-lock"></i>
                                                                     <input type="password" maxlength="20" name="pwd1" placeholder="Ingrese contraseña" id="pwd1">
-                                                                    <div class="note note-error">Este campo es requerido.</div>
-                                                                    <b class="tooltip tooltip-bottom-right">No olvide ingresar contraseña</b> </label>
+                                                                    <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Ingrese entre 6 y 20 caracteres para la contraseña</b> 
+                                                                    <div class="note note-error">Este campo es requerido.</div>                                                                    
                                                             </section>
                                                         </div>
                                                         <div class="row">
                                                             <section class="col col-6">                                                        
                                                                 <label class="input"> <i class="icon-append fa fa-lock"></i>
                                                                     <input type="password"  maxlength="20" name="pwd2" placeholder="Confirme contraseña" id="pwd2">
-                                                                    <div class="note note-error">Este campo es requerido.</div>
-                                                                    <b class="tooltip tooltip-bottom-right">No olvide confirmar contraseña</b> </label>                                                        
+                                                                    <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Escriba la misma contraseña de arriba</b> 
+                                                                    <div class="note note-error">Este campo es requerido.</div>                                                                                                                           
                                                             </section>                                                   
                                                         </div>                                                   
                                                     </c:if>
@@ -331,8 +335,8 @@
                                                                 <label class="input state-error">
                                                                     <label class="input"> <i class="icon-append fa fa-lock"></i>
                                                                         <input type="password"  maxlength="20" name="pwd1" placeholder="Ingrese contraseña" id="pwd1">
-                                                                        <div class="note note-error">Este campo es requerido.</div>
-                                                                        <b class="tooltip tooltip-bottom-right">No olvide ingresar contraseña</b> </label>
+                                                                        <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Ingrese entre 6 y 20 caracteres para la contraseña</b> 
+                                                                        <div class="note note-error">Este campo es requerido.</div>                                                                        
                                                                 </label>
                                                             </section>
                                                         </div>
@@ -341,8 +345,8 @@
                                                                 <label class="input state-error">
                                                                     <label class="input"> <i class="icon-append fa fa-lock"></i>
                                                                         <input type="password"  maxlength="20" name="pwd2" placeholder="Confirme contraseña" id="pwd2">
+                                                                        <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Escriba la misma contraseña de arriba</b>
                                                                         <div class="note note-error">Este campo es requerido.</div>
-                                                                        <b class="tooltip tooltip-bottom-right">No olvide confirmar contraseña</b> </label>                                                        
                                                                 </label>
                                                             </section>                                                   
                                                         </div>

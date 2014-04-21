@@ -56,7 +56,7 @@ public class LogoutServlet extends HttpServlet {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {            
-            request.setAttribute("msgErrorLogin", "Ha cerrado sesión.");
+            request.setAttribute("msgErrorLogin", "Ha salido de sesión.");
             request.getRequestDispatcher("/login/login.jsp").forward(request, response);
         }
     }

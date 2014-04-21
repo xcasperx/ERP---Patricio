@@ -38,9 +38,13 @@
         -->
 
         <ul>
-            <li><a href="index.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard (*)</span></a></li>
+            <li>
+                <a href="index.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard (*)</span></a>
+            </li>
 
-            <li><a href="inbox.html"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Inbox (*)</span><span class="badge pull-right inbox-badge">14</span></a></li>
+            <li>
+                <a href="inbox.html"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Inbox (*)</span><span class="badge pull-right inbox-badge">14</span></a>
+            </li>
 
             <li>
                 <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Estadísticas (*)</span></a>
@@ -50,21 +54,33 @@
                     <li><a href="inline-charts.html">Inline Charts</a></li>
                 </ul>
             </li>
-            
+
             <li>
-                <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Indicador Económico</span></a>
+                <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> Indicador Económico</span></a>
+            </li>
+
+            <li <c:if test="${userActive != null}">class="active"</c:if>>
+                <a href="UserMainServlet"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Usuarios</span></a>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">Recursos Humanos</span></a>
                 <ul>
-                    <li><a href="flot.html">Flot Chart</a></li>
-                    <li><a href="morris.html">Morris Charts</a></li>
-                    <li><a href="inline-charts.html">Inline Charts</a></li>
+                    <li><a href="#">Personal</a>
+                        <ul>
+                            <li><a href="#">Honorarios</a></li>
+                            <li><a href="#">Contratados</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Registro de Asistencia</a></li>
+                    <li><a href="#">Liquidación de Sueldos</a></li>
                 </ul>
             </li>
 
-            <li <c:if test="${userActive != null}">class="active"</c:if>><a href="UserMainServlet"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Usuarios</span></a></li>
-
             <li>
-                <a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">Inventario</span></a>
+                <a href="#"><i class="fa fa-lg fa-fw fa-list-ol"></i> <span class="menu-item-parent">Inventario</span></a>
                 <ul>
+                    <li><a href="#">Asignaciones</a></li>
                     <li><a href="#">Bodegas</a></li>
                     <li><a href="#">Productos en Bodega</a></li>
                     <li><a href="#">Ordenes de Bodega</a>
@@ -72,13 +88,16 @@
                             <li><a href="#">Ingresos</a></li>                            
                             <li><a href="#">Egresos</a></li>
                         </ul>
-                    </li>
+                    </li>                    
                 </ul>
             </li>
             <li>
                 <a href="#"><i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">Producción</span></a>
                 <ul>
-                    
+                    <li><a href="#">Asignaciones</a></li>
+                    <li><a href="#">Proceso General</a></li>
+                    <li><a href="#">Plantas</a></li>
+                    <li><a href="#">Procesos en Plantas</a></li>
                 </ul>
             </li>
 

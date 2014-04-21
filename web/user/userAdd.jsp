@@ -213,19 +213,7 @@
 
                             <!-- Widget ID (each widget will need unique ID)-->
                             <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-togglebutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
-                                <!-- widget options:
-                                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-                                        
-                                        data-widget-colorbutton="false"	
-                                        data-widget-editbutton="false"
-                                        data-widget-togglebutton="false"
-                                        data-widget-deletebutton="false"
-                                        data-widget-fullscreenbutton="false"
-                                        data-widget-custombutton="false"
-                                        data-widget-collapsed="true" 
-                                        data-widget-sortable="false"
-                                        
-                                -->
+
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
                                     <h2>Agregar nuevo usuario </h2>				
@@ -250,17 +238,19 @@
                                             <fieldset>
                                                 <div class="row">
                                                     <section class="col col-6">                                                        
-                                                        <c:if test="${msgErrorUsername == null}">
+                                                        <c:if test="${msgErrorUsername == null}">                                                           
                                                             <label class="label">Username</label>
                                                             <label class="input"> <i class="icon-prepend fa fa-user"></i>
                                                                 <input type="text" maxlength="30" name="username" placeholder="Ingrese Username" value="<c:out value="${username}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Por ejemplo: nombre.apellido</b>
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
                                                         <c:if test="${ msgErrorUsername != null}">
                                                             <label class="label">Username</label>
-                                                            <label class="input state-error">
+                                                            <label class="input state-error"> <i class="icon-prepend fa fa-user"></i>
                                                                 <input type="text" maxlength="30" name="username" placeholder="Ingrese Username" value="<c:out value="${username}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Por ejemplo: nombre.apellido</b>                                                                
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
@@ -272,14 +262,16 @@
                                                         <c:if test="${msgErrorEmail == null}">
                                                             <label class="label">Email</label>
                                                             <label class="input"> <i class="icon-prepend fa fa-envelope-o"></i>
-                                                                <input type="email" maxlength="255" name="email" placeholder="Ingrese email" value="<c:out value="${email}" />">                                                                
+                                                                <input type="email" maxlength="255" name="email" placeholder="Ingrese email" value="<c:out value="${email}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Por ejemplo: micorreo@gmail.com</b>
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
                                                         <c:if test="${msgErrorEmail != null}">
                                                             <label class="label">Email</label>
-                                                            <label class="input state-error">
-                                                                <input type="email" maxlength="255" name="email" placeholder="Ingrese email" value="<c:out value="${email}" />">                                                                
+                                                            <label class="input state-error"> <i class="icon-prepend fa fa-envelope-o"></i>
+                                                                <input type="email" maxlength="255" name="email" placeholder="Ingrese email" value="<c:out value="${email}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Por ejemplo: micorreo@gmail.com</b>
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
@@ -289,8 +281,8 @@
                                                 <div class="row">                                                                                                       
                                                     <section class="col col-6">
                                                         <div>
-                                                            <label class="label col col-4">Permisos de usuario</label>
-                                                        </div> 
+                                                            <label class="label col col-4">Permisos de usuario </label>
+                                                        </div>                                                                                                                
                                                         <p>&nbsp;</p>
                                                         <p>&nbsp;</p>
                                                         <label class="select">
@@ -300,7 +292,7 @@
                                                                 <option value="3" <c:if test="${userType == 3}">selected</c:if>>Coordinador</option>
                                                                 <option value="4" <c:if test="${userType == 4}">selected</c:if>>Operario</option>
                                                                 </select> <i></i> 
-                                                            </label>                                                        
+                                                            </label>                                                                
                                                         </section>                                                    
                                                     </div>
                                                 </fieldset>
@@ -313,16 +305,18 @@
                                                         <section class="col col-6">                                                      
                                                             <label class="input"> <i class="icon-append fa fa-lock"></i>
                                                                 <input type="password" maxlength="20" name="pwd1" placeholder="Ingrese contraseña" id="pwd1">
-                                                                <div class="note note-error">Este campo es requerido.</div>
-                                                                <b class="tooltip tooltip-bottom-right">No olvide ingresar contraseña</b> </label>
+                                                                <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Ingrese entre 6 y 20 caracteres para la contraseña</b> 
+                                                            </label>
+                                                            <div class="note note-error">Este campo es requerido.</div>                                                                
                                                         </section>
                                                     </div>
                                                     <div class="row">
                                                         <section class="col col-6">                                                        
                                                             <label class="input"> <i class="icon-append fa fa-lock"></i>
                                                                 <input type="password" maxlength="20" name="pwd2" placeholder="Confirme contraseña" id="pwd2">
-                                                                <div class="note note-error">Este campo es requerido.</div>
-                                                                <b class="tooltip tooltip-bottom-right">No olvide confirmar contraseña</b> </label>                                                        
+                                                                <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Escriba la misma contraseña de arriba</b> 
+                                                            </label>
+                                                            <div class="note note-error">Este campo es requerido.</div>                                                                
                                                         </section>                                                   
                                                     </div>                                                   
                                                 </c:if>
@@ -332,8 +326,9 @@
                                                             <label class="input state-error">
                                                                 <label class="input"> <i class="icon-append fa fa-lock"></i>
                                                                     <input type="password" maxlength="20" name="pwd1" placeholder="Ingrese contraseña" id="pwd1">
-                                                                    <div class="note note-error">Este campo es requerido.</div>
-                                                                    <b class="tooltip tooltip-bottom-right">No olvide ingresar contraseña</b> </label>
+                                                                    <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Ingrese entre 6 y 20 caracteres para la contraseña</b> 
+                                                                </label>
+                                                                <div class="note note-error">Este campo es requerido.</div>                                                                    
                                                             </label>
                                                         </section>
                                                     </div>
@@ -342,8 +337,9 @@
                                                             <label class="input state-error">
                                                                 <label class="input"> <i class="icon-append fa fa-lock"></i>
                                                                     <input type="password" maxlength="20" name="pwd2" placeholder="Confirme contraseña" id="pwd2">
-                                                                    <div class="note note-error">Este campo es requerido.</div>
-                                                                    <b class="tooltip tooltip-bottom-right">No olvide confirmar contraseña</b> </label>                                                        
+                                                                    <b class="tooltip tooltip-top-right"><i class="fa fa-warning txt-color-teal"></i> Escriba la misma contraseña de arriba</b> 
+                                                                </label>
+                                                                <div class="note note-error">Este campo es requerido.</div>                                                                    
                                                             </label>
                                                         </section>                                                   
                                                     </div>

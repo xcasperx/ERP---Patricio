@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> ERP </title>
+        <title> ERP | Inciar Sesión </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -74,7 +74,7 @@
                                 <h4 class="paragraph-header">Esta bien ser Inteligente. Experimente la simplicidad de ERP Bisuite, donde quiera que vaya!</h4>
                                 <div class="login-app-icons">
                                     <a href="javascript:void(0);" class="btn btn-danger btn-sm">Panel administrativo</a>
-                                    <a href="javascript:void(0);" class="btn btn-danger btn-sm">Aprende más</a>
+                                    <a href="javascript:void(0);" class="btn btn-danger btn-sm">Saber más</a>
                                 </div>
                             </div>
                             <img src="img/demo/iphoneview.png" class="pull-right display-image" alt="" style="width:210px">
@@ -82,7 +82,7 @@
 
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                <h5 class="about-heading">About SmartAdmin - Are you up to date?</h5>
+                                <h5 class="about-heading">Acerca de ERP - Está usted al día?</h5>
                                 <p>
                                     Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.
                                 </p>
@@ -100,7 +100,7 @@
                         <div class="well no-padding">
                             <form action="LoginServlet" method="POST" id="login-form" class="smart-form client-form">
                                 <header>
-                                    Log in
+                                    Iniciar Sesión
                                 </header>
 
                                 <fieldset>
@@ -108,24 +108,20 @@
                                         <label class="label">Username</label>
                                         <label class="input"> <i class="icon-append fa fa-user"></i>
                                             <input type="text" name="username">
-                                            <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Por favor ingrese username o email</b></label>
+                                            <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Por favor ingrese username o email</b>
+                                        </label>
                                     </section>
 
                                     <section>
-                                        <label class="label">Password</label>
+                                        <label class="label">Contraseña</label>
                                         <label class="input"> <i class="icon-append fa fa-lock"></i>
                                             <input type="password" name="password">
-                                            <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Por favor ingrese password</b> </label>
+                                            <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Por favor ingrese su contraseña</b> </label>
                                         <div class="note">
-                                            <a href="forgotpassword.html">Forgot password?</a>
+                                            <a href="forgotpassword.html">Olvidó contraseña?</a>
                                         </div>
                                     </section>
-
-                                    <section>
-                                        <label class="checkbox">
-                                            <input type="checkbox" name="remember" checked="">
-                                            <i></i>No cerrar sesión</label>
-                                    </section>
+                                    
                                     <c:if test="${msgErrorLogin != null}" >
                                         <p><font color="red" ><c:out value="${msgErrorLogin}" /></font></p>
                                         </c:if>

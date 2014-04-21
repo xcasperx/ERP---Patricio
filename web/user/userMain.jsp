@@ -286,13 +286,13 @@
                                                                     <div class="label label-default">Superusuario </div>                                                                    
                                                                 </c:if>
                                                                 <c:if test="${list.userType == 2}">
-                                                                    <div class="label label-danger">Administrador </div>
+                                                                    <div class="label bg-color-magenta">Administrador </div>
                                                                 </c:if>
                                                                 <c:if test="${list.userType == 3}">
-                                                                    <div class="label label-success">Coordinador</div> 
+                                                                    <div class="label bg-color-green">Coordinador</div> 
                                                                 </c:if>
                                                                 <c:if test="${list.userType == 4}">
-                                                                    <div class="label label-warning">Operario </div>
+                                                                    <div class="label bg-color-orangeDark">Operario </div>
                                                                 </c:if>
                                                             </td>
                                                             <td><c:out value="${list.createTime}" /></td>

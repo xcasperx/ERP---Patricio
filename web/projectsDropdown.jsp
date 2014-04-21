@@ -9,23 +9,23 @@
 
 <div id="project-context">
 
-    <span class="label">Projects:</span>
-    <span id="project-selector" class="popover-trigger-element dropdown-toggle" data-toggle="dropdown">Recent projects <i class="fa fa-angle-down"></i></span>
+    <span class="label">Actualizaciones:</span>
+    <span id="project-selector" class="popover-trigger-element dropdown-toggle" data-toggle="dropdown">Actualizaciones Recientes <i class="fa fa-angle-down"></i></span>
 
     <!-- Suggestion: populate this list with fetch and push technique -->
     <ul class="dropdown-menu">
         <li>
-            <a href="javascript:void(0);">Online e-merchant management system - attaching integration with the iOS</a>
+            <a href="javascript:void(0);">Módulo C3 Sistema de administración de e-merchant Online</a>
         </li>
         <li>
-            <a href="javascript:void(0);">Notes on pipeline upgradee</a>
+            <a href="javascript:void(0);">Módulo D2 - Sistema de Inventario auto proyectado</a>
         </li>
         <li>
-            <a href="javascript:void(0);">Assesment Report for merchant account</a>
+            <a href="javascript:void(0);">Módulo R1- para Planificación de Procesos Productivos </a>
         </li>
         <li class="divider"></li>
         <li>
-            <a href="javascript:void(0);"><i class="fa fa-power-off"></i> Clear</a>
+            <a href="javascript:void(0);"><i class="fa fa-power-off"></i> Limpiar</a>
         </li>
     </ul>
     <!-- end dropdown-menu-->
