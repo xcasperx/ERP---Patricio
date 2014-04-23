@@ -188,11 +188,11 @@ $(document).ready(function() {
 	// RESET WIDGETS
 	$('#refresh').click(function(e) {
 		$.SmartMessageBox({
-			title : "<i class='fa fa-refresh' style='color:green'></i> Clear Local Storage",
-			content : "Would you like to RESET all your saved widgets and clear LocalStorage?",
-			buttons : '[No][Yes]'
+			title : "<i class='fa fa-refresh' style='color:green'></i> Reestablecer Configuración",
+			content : "Desearía REESTABLECER color, posición y widgets eliminados?",
+			buttons : '[No][Sí]'
 		}, function(ButtonPressed) {
-			if (ButtonPressed == "Yes" && localStorage) {
+			if (ButtonPressed == "Sí" && localStorage) {
 				localStorage.clear();
 				location.reload();
 			}
@@ -1046,7 +1046,7 @@ function setup_widgets_desktop() {
 			labelError : 'Sorry but there was a error:',
 			labelUpdated : 'Last Update:',
 			labelRefresh : 'Refresh',
-			labelDelete : 'Delete widget:',
+			labelDelete : 'Eliminar widget:',
 			afterLoad : function() {
 			},
 			rtl : false, // best not to toggle this!

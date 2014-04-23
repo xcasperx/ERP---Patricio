@@ -5,9 +5,9 @@
  |  |/ __ \|  | \/\   /|  |\___ \
  /\__|  (____  /__|    \_/ |__/____  >
  \______|    \/                    \/
-
+ 
  Copyright 2013 - SmartAdmin Template
-
+ 
  * This script is part of an item on wrapbootstrap.com
  * https://wrapbootstrap.com/user/myorange
  *
@@ -25,7 +25,7 @@
  *
  * ************************************************************* */
 ;
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
 
     //"use strict"; // jshint ;_;
 
@@ -46,16 +46,16 @@
         this.customClass = this.o.customClass.split('|');
 
         this.init();
-    };
+    }
+    ;
 
     Plugin.prototype = {
-
         /**
          * Important settings like storage and touch support.
          *
          * @param:
          **/
-        _settings: function () {
+        _settings: function() {
 
             var self = this;
 
@@ -63,14 +63,15 @@
             //////////////////////// LOCALSTORAGE CHECK /////////////////////////
             //*****************************************************************//
 
-            storage = !! function () {
+            storage = !!function() {
                 var result, uid = +new Date;
                 try {
                     localStorage.setItem(uid, uid);
                     result = localStorage.getItem(uid) == uid;
                     localStorage.removeItem(uid);
                     return result;
-                } catch (e) {}
+                } catch (e) {
+                }
             }() && localStorage;
 
             //*****************************************************************//
@@ -124,30 +125,28 @@
             }
 
         },
-
         /**
          * Function for the indicator image.
          *
          * @param:
          **/
-        _runLoaderWidget: function (elm) {
+        _runLoaderWidget: function(elm) {
             var self = this;
             if (self.o.indicator === true) {
                 elm.parents(self.o.widgets)
-                    .find('.jarviswidget-loader')
-                    .stop(true, true)
-                    .fadeIn(100)
-                    .delay(self.o.indicatorTime)
-                    .fadeOut(100);
+                        .find('.jarviswidget-loader')
+                        .stop(true, true)
+                        .fadeIn(100)
+                        .delay(self.o.indicatorTime)
+                        .fadeOut(100);
             }
         },
-
         /**
          * Create a fixed timestamp.
          *
          * @param: t | date | Current date.
          **/
-        _getPastTimestamp: function (t) {
+        _getPastTimestamp: function(t) {
 
             var self = this;
 
@@ -187,15 +186,14 @@
              * The output, how you want it.
              **/
             var format = self.o.timestampFormat.replace(/%d%/g, tsDay)
-                .replace(/%m%/g, tsMonth)
-                .replace(/%y%/g, tsYear)
-                .replace(/%h%/g, tsHours)
-                .replace(/%i%/g, tsMinutes)
-                .replace(/%s%/g, tsSeconds);
+                    .replace(/%m%/g, tsMonth)
+                    .replace(/%y%/g, tsYear)
+                    .replace(/%h%/g, tsHours)
+                    .replace(/%i%/g, tsMinutes)
+                    .replace(/%s%/g, tsSeconds);
 
             return format;
         },
-
         /**
          * AJAX load File, which get and shows the .
          *
@@ -203,46 +201,46 @@
          * @param: file    | file    | The file thats beeing loaded.
          * @param: loader  | object  | The widget.
          **/
-        _loadAjaxFile: function (awidget, file, loader) {
+        _loadAjaxFile: function(awidget, file, loader) {
 
             var self = this
 
             awidget.find('.widget-body')
-                .load(file, function (response, status, xhr) {
+                    .load(file, function(response, status, xhr) {
 
-                    var $this = $(this);
+                var $this = $(this);
 
-                    /**
-                     * If action runs into an error display an error msg.
-                     **/
-                    if (status == "error") {
-                        $this.html('<h4 class="alert alert-danger">' + self.o.labelError + '<b> ' +
+                /**
+                 * If action runs into an error display an error msg.
+                 **/
+                if (status == "error") {
+                    $this.html('<h4 class="alert alert-danger">' + self.o.labelError + '<b> ' +
                             xhr.status + " " + xhr.statusText + '</b></h4>');
+                }
+
+                /**
+                 * Run if there are no errors.
+                 **/
+                if (status == "success") {
+
+                    /**
+                     * Show a timestamp.
+                     **/
+                    var aPalceholder = awidget.find(self.o.timestampPlaceholder);
+
+                    if (aPalceholder.length) {
+
+                        aPalceholder.html(self._getPastTimestamp(new Date()));
                     }
 
                     /**
-                     * Run if there are no errors.
+                     * Run the callback function.
                      **/
-                    if (status == "success") {
-
-                        /**
-                         * Show a timestamp.
-                         **/
-                        var aPalceholder = awidget.find(self.o.timestampPlaceholder);
-
-                        if (aPalceholder.length) {
-
-                            aPalceholder.html(self._getPastTimestamp(new Date()));
-                        }
-
-                        /**
-                         * Run the callback function.
-                         **/
-                        if (typeof self.o.afterLoad == 'function') {
-                            self.o.afterLoad.call(this, awidget);
-                        }
+                    if (typeof self.o.afterLoad == 'function') {
+                        self.o.afterLoad.call(this, awidget);
                     }
-                });
+                }
+            });
 
             /**
              * Run function for the indicator image.
@@ -250,13 +248,12 @@
             self._runLoaderWidget(loader);
 
         },
-
         /**
          * Save all settings to the localStorage.
          *
          * @param:
          **/
-        _saveSettingsWidget: function () {
+        _saveSettingsWidget: function() {
 
             var self = this;
 
@@ -266,22 +263,22 @@
                 var storeSettings = [];
 
                 self.obj.find(self.o.widgets)
-                    .each(function () {
-                        var storeSettingsStr = {};
-                        storeSettingsStr['id'] = $(this)
+                        .each(function() {
+                    var storeSettingsStr = {};
+                    storeSettingsStr['id'] = $(this)
                             .attr('id');
-                        storeSettingsStr['style'] = $(this)
+                    storeSettingsStr['style'] = $(this)
                             .attr('data-widget-attstyle');
-                        storeSettingsStr['title'] = $(this)
+                    storeSettingsStr['title'] = $(this)
                             .children('header')
                             .children('h2')
                             .text();
-                        storeSettingsStr['hidden'] = ($(this)
+                    storeSettingsStr['hidden'] = ($(this)
                             .is(':hidden') ? 1 : 0);
-                        storeSettingsStr['collapsed'] = ($(this)
+                    storeSettingsStr['collapsed'] = ($(this)
                             .hasClass('jarviswidget-collapsed') ? 1 : 0);
-                        storeSettings.push(storeSettingsStr);
-                    });
+                    storeSettings.push(storeSettingsStr);
+                });
 
                 var storeSettingsObj = JSON.stringify({
                     'widget': storeSettings
@@ -300,13 +297,12 @@
                 self.o.onSave.call(this, null, storeSettingsObj);
             }
         },
-
         /**
          * Save positions to the localStorage.
          *
          * @param:
          **/
-        _savePositionWidget: function () {
+        _savePositionWidget: function() {
 
             var self = this;
 
@@ -316,21 +312,21 @@
                 var mainArr = [];
 
                 self.obj.find(self.o.grid + '.sortable-grid')
-                    .each(function () {
-                        var subArr = [];
-                        $(this)
+                        .each(function() {
+                    var subArr = [];
+                    $(this)
                             .children(self.o.widgets)
-                            .each(function () {
-                                var subObj = {};
-                                subObj['id'] = $(this)
-                                    .attr('id');
-                                subArr.push(subObj);
-                            });
-                        var out = {
-                            'section': subArr
-                        }
-                        mainArr.push(out);
+                            .each(function() {
+                        var subObj = {};
+                        subObj['id'] = $(this)
+                                .attr('id');
+                        subArr.push(subObj);
                     });
+                    var out = {
+                        'section': subArr
+                    }
+                    mainArr.push(out);
+                });
 
                 var storePositionObj = JSON.stringify({
                     'grid': mainArr
@@ -349,13 +345,12 @@
                 self.o.onSave.call(this, storePositionObj);
             }
         },
-
         /**
          * Code that we run at the start.
          *
          * @param:
          **/
-        init: function () {
+        init: function() {
 
             var self = this;
 
@@ -365,7 +360,7 @@
              * Force users to use an id(it's needed for the local storage).
              **/
             if (!$('#' + self.objId)
-                .length) {
+                    .length) {
                 alert('It looks like your using a class instead of an ID, dont do that!')
             }
 
@@ -374,7 +369,7 @@
              **/
             if (self.o.rtl === true) {
                 $('body')
-                    .addClass('rtl');
+                        .addClass('rtl');
             }
 
             /**
@@ -383,14 +378,14 @@
              **/
 
             $(self.o.grid)
-                .each(function () {
-                    if ($(this)
+                    .each(function() {
+                if ($(this)
                         .find(self.o.widgets)
                         .length) {
-                        $(this)
+                    $(this)
                             .addClass('sortable-grid');
-                    }
-                });
+                }
+            });
 
             //*****************************************************************//
             //////////////////////// SET POSITION WIDGET ////////////////////////
@@ -408,7 +403,7 @@
                  **/
                 for (var key in jsonPosition.grid) {
                     var changeOrder = self.obj.find(self.o.grid + '.sortable-grid')
-                        .eq(key);
+                            .eq(key);
                     for (var key2 in jsonPosition.grid[key].section) {
                         changeOrder.append($('#' + jsonPosition.grid[key].section[key2].id));
                     }
@@ -441,8 +436,8 @@
                     if (jsonSettings.widget[key].style) {
                         //console.log("test");
                         widgetId.removeClassPrefix('jarviswidget-color-')
-                            .addClass(jsonSettings.widget[key].style)
-                            .attr('data-widget-attstyle', '' + jsonSettings.widget[key].style + '');
+                                .addClass(jsonSettings.widget[key].style)
+                                .attr('data-widget-attstyle', '' + jsonSettings.widget[key].style + '');
                     }
 
                     /**
@@ -452,7 +447,7 @@
                         widgetId.hide(1);
                     } else {
                         widgetId.show(1)
-                            .removeAttr('data-widget-hidden');
+                                .removeAttr('data-widget-hidden');
                     }
 
                     /**
@@ -460,19 +455,19 @@
                      **/
                     if (jsonSettings.widget[key].collapsed == 1) {
                         widgetId.addClass('jarviswidget-collapsed')
-                            .children('div')
-                            .hide(1);
+                                .children('div')
+                                .hide(1);
                     }
 
                     /**
                      * Update title widget (if needed).
                      **/
                     if (widgetId.children('header')
-                        .children('h2')
-                        .text() != jsonSettings.widget[key].title) {
-                        widgetId.children('header')
                             .children('h2')
-                            .text(jsonSettings.widget[key].title);
+                            .text() != jsonSettings.widget[key].title) {
+                        widgetId.children('header')
+                                .children('h2')
+                                .text(jsonSettings.widget[key].title);
                     }
                 }
             }
@@ -484,17 +479,17 @@
             /**
              * This will add/edit/remove the settings to all widgets
              **/
-            self.widget.each(function () {
+            self.widget.each(function() {
 
                 var tWidget = $(this);
                 var thisHeader = $(this)
-                    .children('header');
+                        .children('header');
 
                 /**
                  * Dont double wrap(check).
                  **/
                 if (!thisHeader.parent()
-                    .attr('role')) {
+                        .attr('role')) {
 
                     /**
                      * Hide the widget if the dataset 'widget-hidden' is set to true.
@@ -505,14 +500,14 @@
                     }
 
                     /**
-					 * Hide the content of the widget if the dataset
-					 * 'widget-collapsed' is set to true.
-
-					 **/
+                     * Hide the content of the widget if the dataset
+                     * 'widget-collapsed' is set to true.
+                     
+                     **/
                     if (tWidget.data('widget-collapsed') === true) {
                         tWidget.addClass('jarviswidget-collapsed')
-                            .children('div')
-                            .hide();
+                                .children('div')
+                                .hide();
                     }
 
                     /**
@@ -528,10 +523,10 @@
                      * Add a delete button to the widget header (if set to true).
                      **/
                     if (self.o.customButton === true && tWidget.data('widget-custombutton') ===
-                        undefined && self.customClass[0].length != 0) {
+                            undefined && self.customClass[0].length != 0) {
                         var customBtn =
-                            '<a href="javascript:void(0);" class="button-icon jarviswidget-custom-btn"><i class="' +
-                            self.customClass[0] + '"></i></a>';
+                                '<a href="javascript:void(0);" class="button-icon jarviswidget-custom-btn"><i class="' +
+                                self.customClass[0] + '"></i></a>';
                     } else {
                         customBtn = '';
                     }
@@ -540,10 +535,10 @@
                      * Add a delete button to the widget header (if set to true).
                      **/
                     if (self.o.deleteButton === true && tWidget.data('widget-deletebutton') ===
-                        undefined) {
+                            undefined) {
                         var deleteBtn =
-                            '<a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="Delete" data-placement="bottom"><i class="' +
-                            self.o.deleteClass + '"></i></a>';
+                                '<a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="Delete" data-placement="bottom"><i class="' +
+                                self.o.deleteClass + '"></i></a>';
                     } else {
                         deleteBtn = '';
                     }
@@ -553,8 +548,8 @@
                      **/
                     if (self.o.editButton === true && tWidget.data('widget-editbutton') === undefined) {
                         var editBtn =
-                            '<a href="javascript:void(0);" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="Edit Title" data-placement="bottom"><i class="' +
-                            self.editClass[0] + '"></i></a>';
+                                '<a href="javascript:void(0);" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="Edit Title" data-placement="bottom"><i class="' +
+                                self.editClass[0] + '"></i></a>';
                     } else {
                         editBtn = '';
                     }
@@ -563,10 +558,10 @@
                      * Add a delete button to the widget header (if set to true).
                      **/
                     if (self.o.fullscreenButton === true && tWidget.data('widget-fullscreenbutton') ===
-                        undefined) {
+                            undefined) {
                         var fullscreenBtn =
-                            '<a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="Fullscreen" data-placement="bottom"><i class="' +
-                            self.fullscreenClass[0] + '"></i></a>';
+                                '<a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="Fullscreen" data-placement="bottom"><i class="' +
+                                self.fullscreenClass[0] + '"></i></a>';
                     } else {
                         fullscreenBtn = '';
                     }
@@ -575,9 +570,9 @@
                      * Add a delete button to the widget header (if set to true).
                      **/
                     if (self.o.colorButton === true && tWidget.data('widget-colorbutton') ===
-                        undefined) {
+                            undefined) {
                         var widgetcolorBtn =
-                            '<a data-toggle="dropdown" class="dropdown-toggle color-box selector" href="javascript:void(0);"></a><ul class="dropdown-menu arrow-box-up-right color-select pull-right"><li><span class="bg-color-green" data-widget-setstyle="jarviswidget-color-green" rel="tooltip" data-placement="left" data-original-title="Green Grass"></span></li><li><span class="bg-color-greenDark" data-widget-setstyle="jarviswidget-color-greenDark" rel="tooltip" data-placement="top" data-original-title="Dark Green"></span></li><li><span class="bg-color-greenLight" data-widget-setstyle="jarviswidget-color-greenLight" rel="tooltip" data-placement="top" data-original-title="Light Green"></span></li><li><span class="bg-color-purple" data-widget-setstyle="jarviswidget-color-purple" rel="tooltip" data-placement="top" data-original-title="Purple"></span></li><li><span class="bg-color-magenta" data-widget-setstyle="jarviswidget-color-magenta" rel="tooltip" data-placement="top" data-original-title="Magenta"></span></li><li><span class="bg-color-pink" data-widget-setstyle="jarviswidget-color-pink" rel="tooltip" data-placement="right" data-original-title="Pink"></span></li><li><span class="bg-color-pinkDark" data-widget-setstyle="jarviswidget-color-pinkDark" rel="tooltip" data-placement="left" data-original-title="Fade Pink"></span></li><li><span class="bg-color-blueLight" data-widget-setstyle="jarviswidget-color-blueLight" rel="tooltip" data-placement="top" data-original-title="Light Blue"></span></li><li><span class="bg-color-teal" data-widget-setstyle="jarviswidget-color-teal" rel="tooltip" data-placement="top" data-original-title="Teal"></span></li><li><span class="bg-color-blue" data-widget-setstyle="jarviswidget-color-blue" rel="tooltip" data-placement="top" data-original-title="Ocean Blue"></span></li><li><span class="bg-color-blueDark" data-widget-setstyle="jarviswidget-color-blueDark" rel="tooltip" data-placement="top" data-original-title="Night Sky"></span></li><li><span class="bg-color-darken" data-widget-setstyle="jarviswidget-color-darken" rel="tooltip" data-placement="right" data-original-title="Night"></span></li><li><span class="bg-color-yellow" data-widget-setstyle="jarviswidget-color-yellow" rel="tooltip" data-placement="left" data-original-title="Day Light"></span></li><li><span class="bg-color-orange" data-widget-setstyle="jarviswidget-color-orange" rel="tooltip" data-placement="bottom" data-original-title="Orange"></span></li><li><span class="bg-color-orangeDark" data-widget-setstyle="jarviswidget-color-orangeDark" rel="tooltip" data-placement="bottom" data-original-title="Dark Orange"></span></li><li><span class="bg-color-red" data-widget-setstyle="jarviswidget-color-red" rel="tooltip" data-placement="bottom" data-original-title="Red Rose"></span></li><li><span class="bg-color-redLight" data-widget-setstyle="jarviswidget-color-redLight" rel="tooltip" data-placement="bottom" data-original-title="Light Red"></span></li><li><span class="bg-color-white" data-widget-setstyle="jarviswidget-color-white" rel="tooltip" data-placement="right" data-original-title="Purity"></span></li><li><a href="javascript:void(0);" class="jarviswidget-remove-colors" data-widget-setstyle="" rel="tooltip" data-placement="bottom" data-original-title="Reset widget color to default">Remove</a></li></ul>';
+                                '<a data-toggle="dropdown" class="dropdown-toggle color-box selector" href="javascript:void(0);"></a><ul class="dropdown-menu arrow-box-up-right color-select pull-right"><li><span class="bg-color-green" data-widget-setstyle="jarviswidget-color-green" rel="tooltip" data-placement="left" data-original-title="Green Grass"></span></li><li><span class="bg-color-greenDark" data-widget-setstyle="jarviswidget-color-greenDark" rel="tooltip" data-placement="top" data-original-title="Dark Green"></span></li><li><span class="bg-color-greenLight" data-widget-setstyle="jarviswidget-color-greenLight" rel="tooltip" data-placement="top" data-original-title="Light Green"></span></li><li><span class="bg-color-purple" data-widget-setstyle="jarviswidget-color-purple" rel="tooltip" data-placement="top" data-original-title="Purple"></span></li><li><span class="bg-color-magenta" data-widget-setstyle="jarviswidget-color-magenta" rel="tooltip" data-placement="top" data-original-title="Magenta"></span></li><li><span class="bg-color-pink" data-widget-setstyle="jarviswidget-color-pink" rel="tooltip" data-placement="right" data-original-title="Pink"></span></li><li><span class="bg-color-pinkDark" data-widget-setstyle="jarviswidget-color-pinkDark" rel="tooltip" data-placement="left" data-original-title="Fade Pink"></span></li><li><span class="bg-color-blueLight" data-widget-setstyle="jarviswidget-color-blueLight" rel="tooltip" data-placement="top" data-original-title="Light Blue"></span></li><li><span class="bg-color-teal" data-widget-setstyle="jarviswidget-color-teal" rel="tooltip" data-placement="top" data-original-title="Teal"></span></li><li><span class="bg-color-blue" data-widget-setstyle="jarviswidget-color-blue" rel="tooltip" data-placement="top" data-original-title="Ocean Blue"></span></li><li><span class="bg-color-blueDark" data-widget-setstyle="jarviswidget-color-blueDark" rel="tooltip" data-placement="top" data-original-title="Night Sky"></span></li><li><span class="bg-color-darken" data-widget-setstyle="jarviswidget-color-darken" rel="tooltip" data-placement="right" data-original-title="Night"></span></li><li><span class="bg-color-yellow" data-widget-setstyle="jarviswidget-color-yellow" rel="tooltip" data-placement="left" data-original-title="Day Light"></span></li><li><span class="bg-color-orange" data-widget-setstyle="jarviswidget-color-orange" rel="tooltip" data-placement="bottom" data-original-title="Orange"></span></li><li><span class="bg-color-orangeDark" data-widget-setstyle="jarviswidget-color-orangeDark" rel="tooltip" data-placement="bottom" data-original-title="Dark Orange"></span></li><li><span class="bg-color-red" data-widget-setstyle="jarviswidget-color-red" rel="tooltip" data-placement="bottom" data-original-title="Red Rose"></span></li><li><span class="bg-color-redLight" data-widget-setstyle="jarviswidget-color-redLight" rel="tooltip" data-placement="bottom" data-original-title="Light Red"></span></li><li><span class="bg-color-white" data-widget-setstyle="jarviswidget-color-white" rel="tooltip" data-placement="right" data-original-title="Purity"></span></li><li><a href="javascript:void(0);" class="jarviswidget-remove-colors" data-widget-setstyle="" rel="tooltip" data-placement="bottom" data-original-title="Reset widget color to default">Remove</a></li></ul>';
                         thisHeader.prepend('<div class="widget-toolbar">' + widgetcolorBtn + '</div>');
 
                     } else {
@@ -588,16 +583,16 @@
                      * Add a toggle button to the widget header (if set to true).
                      **/
                     if (self.o.toggleButton === true && tWidget.data('widget-togglebutton') ===
-                        undefined) {
+                            undefined) {
                         if (tWidget.data('widget-collapsed') === true || tWidget.hasClass(
-                            'jarviswidget-collapsed')) {
+                                'jarviswidget-collapsed')) {
                             var toggleSettings = self.toggleClass[1];
                         } else {
                             toggleSettings = self.toggleClass[0];
                         }
                         var toggleBtn =
-                            '<a href="#" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="Collapse" data-placement="bottom"><i class="' +
-                            toggleSettings + '"></i></a>';
+                                '<a href="#" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="Collapse" data-placement="bottom"><i class="' +
+                                toggleSettings + '"></i></a>';
                     } else {
                         toggleBtn = '';
                     }
@@ -606,10 +601,10 @@
                      * Add a refresh button to the widget header (if set to true).
                      **/
                     if (self.o.refreshButton === true && tWidget.data('widget-refreshbutton') !=
-                        false && tWidget.data('widget-load')) {
+                            false && tWidget.data('widget-load')) {
                         var refreshBtn =
-                            '<a href="#" class="button-icon jarviswidget-refresh-btn" data-loading-text="&nbsp;&nbsp;Loading...&nbsp;" rel="tooltip" title="Refresh" data-placement="bottom"><i class="' +
-                            self.o.refreshButtonClass + '"></i></a>';
+                                '<a href="#" class="button-icon jarviswidget-refresh-btn" data-loading-text="&nbsp;&nbsp;Loading...&nbsp;" rel="tooltip" title="Refresh" data-placement="bottom"><i class="' +
+                                self.o.refreshButtonClass + '"></i></a>';
                     } else {
                         refreshBtn = '';
                     }
@@ -618,19 +613,19 @@
                      * Set the buttons order.
                      **/
                     var formatButtons = self.o.buttonOrder.replace(/%refresh%/g, refreshBtn)
-                        .replace(/%delete%/g, deleteBtn)
-                        .replace(/%custom%/g, customBtn)
-                        .replace(/%fullscreen%/g, fullscreenBtn)
-                        .replace(/%edit%/g, editBtn)
-                        .replace(/%toggle%/g, toggleBtn);
+                            .replace(/%delete%/g, deleteBtn)
+                            .replace(/%custom%/g, customBtn)
+                            .replace(/%fullscreen%/g, fullscreenBtn)
+                            .replace(/%edit%/g, editBtn)
+                            .replace(/%toggle%/g, toggleBtn);
 
                     /**
                      * Add a button wrapper to the header.
                      **/
                     if (refreshBtn != '' || deleteBtn != '' || customBtn != '' || fullscreenBtn != '' ||
-                        editBtn != '' || toggleBtn != '') {
+                            editBtn != '' || toggleBtn != '') {
                         thisHeader.prepend('<div class="jarviswidget-ctrls">' + formatButtons +
-                            '</div>');
+                                '</div>');
                     }
 
                     /**
@@ -646,10 +641,10 @@
                      * If the edit box is present copy the title to the input.
                      **/
                     if (tWidget.find(self.o.editPlaceholder)
-                        .length) {
+                            .length) {
                         tWidget.find(self.o.editPlaceholder)
-                            .find('input')
-                            .val($.trim(thisHeader.children('h2')
+                                .find('input')
+                                .val($.trim(thisHeader.children('h2')
                                 .text()));
                     }
 
@@ -657,19 +652,19 @@
                      * Prepend the image to the widget header.
                      **/
                     thisHeader.append(
-                        '<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>'
-                    );
+                            '<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>'
+                            );
 
                     /**
                      * Adding roles to some parts.
                      **/
                     tWidget.attr('role', 'widget')
-                        .children('div')
-                        .attr('role', 'content')
-                        .prev('header')
-                        .attr('role', 'heading')
-                        .children('div')
-                        .attr('role', 'menu');
+                            .children('div')
+                            .attr('role', 'content')
+                            .prev('header')
+                            .attr('role', 'heading')
+                            .children('div')
+                            .attr('role', 'menu');
                 }
             });
 
@@ -678,12 +673,12 @@
              **/
             if (self.o.buttonsHidden === true) {
                 $(self.o.pwCtrls)
-                    .hide();
+                        .hide();
             }
 
             /* activate all tooltips */
             $(".jarviswidget header [rel=tooltip]")
-                .tooltip();
+                    .tooltip();
 
             //******************************************************************//
             //////////////////////////////// AJAX ////////////////////////////////
@@ -693,55 +688,55 @@
              * Loop all ajax widgets.
              **/
             self.obj.find('[data-widget-load]')
-                .each(function () {
+                    .each(function() {
 
-                    /**
-                     * Variables.
-                     **/
-                    var thisItem = $(this),
+                /**
+                 * Variables.
+                 **/
+                var thisItem = $(this),
                         thisItemHeader = thisItem.children(),
                         pathToFile = thisItem.data('widget-load'),
                         reloadTime = thisItem.data('widget-refresh') * 1000,
                         ajaxLoader = thisItem.children();
 
-                    if (!thisItem.find('.jarviswidget-ajax-placeholder')
+                if (!thisItem.find('.jarviswidget-ajax-placeholder')
                         .length) {
 
-                        /**
-                         * Append a AJAX placeholder.
-                         **/
-                        thisItem.children('widget-body')
+                    /**
+                     * Append a AJAX placeholder.
+                     **/
+                    thisItem.children('widget-body')
                             .append('<div class="jarviswidget-ajax-placeholder">' + self.o.loadingLabel +
-                                '</div>');
+                            '</div>');
+
+                    /**
+                     * If widget has a reload time refresh the widget, if the value
+                     * has been set to 0 dont reload.
+                     **/
+                    if (thisItem.data('widget-refresh') > 0) {
 
                         /**
-                         * If widget has a reload time refresh the widget, if the value
-                         * has been set to 0 dont reload.
+                         * Load file on start.
                          **/
-                        if (thisItem.data('widget-refresh') > 0) {
+                        self._loadAjaxFile(thisItem, pathToFile, thisItemHeader);
 
-                            /**
-                             * Load file on start.
-                             **/
+                        /**
+                         * Set an interval to reload the content every XXX seconds.
+                         **/
+                        setInterval(function() {
+
                             self._loadAjaxFile(thisItem, pathToFile, thisItemHeader);
+                        }, reloadTime);
+                    } else {
 
-                            /**
-                             * Set an interval to reload the content every XXX seconds.
-                             **/
-                            setInterval(function () {
+                        /**
+                         * Load the content just once.
+                         **/
+                        self._loadAjaxFile(thisItem, pathToFile, thisItemHeader);
 
-                                self._loadAjaxFile(thisItem, pathToFile, thisItemHeader);
-                            }, reloadTime);
-                        } else {
-
-                            /**
-                             * Load the content just once.
-                             **/
-                            self._loadAjaxFile(thisItem, pathToFile, thisItemHeader);
-
-                        }
                     }
-                });
+                }
+            });
 
             //******************************************************************//
             ////////////////////////////// SORTABLE //////////////////////////////
@@ -753,7 +748,7 @@
              **/
             if (self.o.sortable === true && jQuery.ui) {
                 var sortItem = self.obj.find('.sortable-grid')
-                    .not('[data-widget-excludegrid]');
+                        .not('[data-widget-excludegrid]');
                 sortItem.sortable({
                     items: sortItem.find('.jarviswidget-sortable'),
                     connectWith: sortItem,
@@ -767,7 +762,7 @@
                     handle: self.o.dragHandle,
                     forcePlaceholderSize: true,
                     forceHelperSize: true,
-                    update: function (event, ui) {
+                    update: function(event, ui) {
                         /* run pre-loader in the widget */
                         self._runLoaderWidget(ui.item.children());
                         /* store the positions of the plugins */
@@ -797,17 +792,17 @@
                  * Show and hide the buttons.
                  **/
                 self.widget.children('header')
-                    .hover(function () {
-                        $(this)
+                        .hover(function() {
+                    $(this)
                             .children(self.o.pwCtrls)
                             .stop(true, true)
                             .fadeTo(100, 1.0);
-                    }, function () {
-                        $(this)
+                }, function() {
+                    $(this)
                             .children(self.o.pwCtrls)
                             .stop(true, true)
                             .fadeTo(100, 0.0);
-                    });
+                });
             }
 
             //*****************************************************************//
@@ -824,29 +819,29 @@
              * Delete the settings key.
              **/
             $(self.o.deleteSettingsKey)
-                .on(clickEvent, this, function (e) {
-                    if (storage && self.o.localStorage) {
-                        var cleared = confirm(self.o.settingsKeyLabel);
-                        if (cleared) {
-                            localStorage.removeItem(keySettings);
-                        }
+                    .on(clickEvent, this, function(e) {
+                if (storage && self.o.localStorage) {
+                    var cleared = confirm(self.o.settingsKeyLabel);
+                    if (cleared) {
+                        localStorage.removeItem(keySettings);
                     }
-                    e.preventDefault();
-                });
+                }
+                e.preventDefault();
+            });
 
             /**
              * Delete the position key.
              **/
             $(self.o.deletePositionKey)
-                .on(clickEvent, this, function (e) {
-                    if (storage && self.o.localStorage) {
-                        var cleared = confirm(self.o.positionKeyLabel);
-                        if (cleared) {
-                            localStorage.removeItem(keyPosition);
-                        }
+                    .on(clickEvent, this, function(e) {
+                if (storage && self.o.localStorage) {
+                    var cleared = confirm(self.o.positionKeyLabel);
+                    if (cleared) {
+                        localStorage.removeItem(keyPosition);
                     }
-                    e.preventDefault();
-                });
+                }
+                e.preventDefault();
+            });
 
             //*****************************************************************//
             ///////////////////////// CREATE NEW KEYS  //////////////////////////
@@ -875,13 +870,12 @@
             }
 
         },
-
         /**
          * All of the click events.
          *
          * @param:
          **/
-        _clickEvents: function () {
+        _clickEvents: function() {
 
             var self = this;
 
@@ -894,7 +888,7 @@
             /**
              * Allow users to toggle the content of the widgets.
              **/
-            self.widget.on(clickEvent, '.jarviswidget-toggle-btn', function (e) {
+            self.widget.on(clickEvent, '.jarviswidget-toggle-btn', function(e) {
 
                 var tWidget = $(this);
                 var pWidget = tWidget.parents(self.o.widgets);
@@ -909,24 +903,24 @@
                  **/
                 if (pWidget.hasClass('jarviswidget-collapsed')) {
                     tWidget.children()
-                        .removeClass(self.toggleClass[1])
-                        .addClass(self.toggleClass[0])
-                        .parents(self.o.widgets)
-                        .removeClass('jarviswidget-collapsed')
-                        .children('[role=content]')
-                        .slideDown(self.o.toggleSpeed, function () {
-                            self._saveSettingsWidget();
-                        });
+                            .removeClass(self.toggleClass[1])
+                            .addClass(self.toggleClass[0])
+                            .parents(self.o.widgets)
+                            .removeClass('jarviswidget-collapsed')
+                            .children('[role=content]')
+                            .slideDown(self.o.toggleSpeed, function() {
+                        self._saveSettingsWidget();
+                    });
                 } else {
                     tWidget.children()
-                        .removeClass(self.toggleClass[0])
-                        .addClass(self.toggleClass[1])
-                        .parents(self.o.widgets)
-                        .addClass('jarviswidget-collapsed')
-                        .children('[role=content]')
-                        .slideUp(self.o.toggleSpeed, function () {
-                            self._saveSettingsWidget();
-                        });
+                            .removeClass(self.toggleClass[0])
+                            .addClass(self.toggleClass[1])
+                            .parents(self.o.widgets)
+                            .addClass('jarviswidget-collapsed')
+                            .children('[role=content]')
+                            .slideUp(self.o.toggleSpeed, function() {
+                        self._saveSettingsWidget();
+                    });
                 }
 
                 /**
@@ -948,35 +942,35 @@
              **/
             function heightFullscreen() {
                 if ($('#jarviswidget-fullscreen-mode')
-                    .length) {
+                        .length) {
 
                     /**
                      * Setting height variables.
                      **/
                     var heightWindow = $(window)
-                        .height();
+                            .height();
                     var heightHeader = $('#jarviswidget-fullscreen-mode')
-                        .find(self.o.widgets)
-                        .children('header')
-                        .height();
+                            .find(self.o.widgets)
+                            .children('header')
+                            .height();
 
                     /**
                      * Setting the height to the right widget.
                      **/
                     $('#jarviswidget-fullscreen-mode')
-                        .find(self.o.widgets)
-                        .children('div')
-                        .height(heightWindow - heightHeader - 15);
+                            .find(self.o.widgets)
+                            .children('div')
+                            .height(heightWindow - heightHeader - 15);
                 }
             }
 
             /**
              * On click go to fullscreen mode.
              **/
-            self.widget.on(clickEvent, '.jarviswidget-fullscreen-btn', function (e) {
+            self.widget.on(clickEvent, '.jarviswidget-fullscreen-btn', function(e) {
 
                 var thisWidget = $(this)
-                    .parents(self.o.widgets);
+                        .parents(self.o.widgets);
                 var thisWidgetContent = thisWidget.children('div');
 
                 /**
@@ -988,36 +982,36 @@
                  * Wrap the widget and go fullsize.
                  **/
                 if ($('#jarviswidget-fullscreen-mode')
-                    .length) {
+                        .length) {
 
                     /**
                      * Remove class from the body.
                      **/
                     $('.nooverflow')
-                        .removeClass('nooverflow');
+                            .removeClass('nooverflow');
 
                     /**
                      * Unwrap the widget, remove the height, set the right
                      * fulscreen button back, and show all other buttons.
                      **/
                     thisWidget.unwrap('<div>')
-                        .children('div')
-                        .removeAttr('style')
-                        .end()
-                        .find('.jarviswidget-fullscreen-btn')
-                        .children()
-                        .removeClass(self.fullscreenClass[1])
-                        .addClass(self.fullscreenClass[0])
-                        .parents(self.pwCtrls)
-                        .children('a')
-                        .show();
+                            .children('div')
+                            .removeAttr('style')
+                            .end()
+                            .find('.jarviswidget-fullscreen-btn')
+                            .children()
+                            .removeClass(self.fullscreenClass[1])
+                            .addClass(self.fullscreenClass[0])
+                            .parents(self.pwCtrls)
+                            .children('a')
+                            .show();
 
                     /**
                      * Reset collapsed widgets.
                      **/
                     if (thisWidgetContent.hasClass('jarviswidget-visible')) {
                         thisWidgetContent.hide()
-                            .removeClass('jarviswidget-visible');
+                                .removeClass('jarviswidget-visible');
                     }
 
                 } else {
@@ -1026,29 +1020,29 @@
                      * Prevent the body from scrolling.
                      **/
                     $('body')
-                        .addClass('nooverflow');
+                            .addClass('nooverflow');
 
                     /**
-					 * Wrap, append it to the body, show the right button
-
-					 * and hide all other buttons.
-					 **/
+                     * Wrap, append it to the body, show the right button
+                     
+                     * and hide all other buttons.
+                     **/
                     thisWidget.wrap('<div id="jarviswidget-fullscreen-mode"/>')
-                        .parent()
-                        .find('.jarviswidget-fullscreen-btn')
-                        .children()
-                        .removeClass(self.fullscreenClass[0])
-                        .addClass(self.fullscreenClass[1])
-                        .parents(self.pwCtrls)
-                        .children('a:not(.jarviswidget-fullscreen-btn)')
-                        .hide();
+                            .parent()
+                            .find('.jarviswidget-fullscreen-btn')
+                            .children()
+                            .removeClass(self.fullscreenClass[0])
+                            .addClass(self.fullscreenClass[1])
+                            .parents(self.pwCtrls)
+                            .children('a:not(.jarviswidget-fullscreen-btn)')
+                            .hide();
 
                     /**
                      * Show collapsed widgets.
                      **/
                     if (thisWidgetContent.is(':hidden')) {
                         thisWidgetContent.show()
-                            .addClass('jarviswidget-visible');
+                                .addClass('jarviswidget-visible');
                     }
                 }
 
@@ -1071,13 +1065,13 @@
              * Run the set fullscreen height function when the screen resizes.
              **/
             $(window)
-                .resize(function () {
+                    .resize(function() {
 
-                    /**
-                     * Run the set height function.
-                     **/
-                    heightFullscreen();
-                });
+                /**
+                 * Run the set height function.
+                 **/
+                heightFullscreen();
+            });
 
             //*****************************************************************//
             //////////////////////////// EDIT WIDGETS ///////////////////////////
@@ -1086,10 +1080,10 @@
             /**
              * Allow users to show/hide a edit box.
              **/
-            self.widget.on(clickEvent, '.jarviswidget-edit-btn', function (e) {
+            self.widget.on(clickEvent, '.jarviswidget-edit-btn', function(e) {
 
                 var tWidget = $(this)
-                    .parents(self.o.widgets);
+                        .parents(self.o.widgets);
 
                 /**
                  * Run function for the indicator image.
@@ -1100,24 +1094,24 @@
                  * Show/hide the edit box.
                  **/
                 if (tWidget.find(self.o.editPlaceholder)
-                    .is(':visible')) {
+                        .is(':visible')) {
                     $(this)
-                        .children()
-                        .removeClass(self.editClass[1])
-                        .addClass(self.editClass[0])
-                        .parents(self.o.widgets)
-                        .find(self.o.editPlaceholder)
-                        .slideUp(self.o.editSpeed, function () {
-                            self._saveSettingsWidget();
-                        });
+                            .children()
+                            .removeClass(self.editClass[1])
+                            .addClass(self.editClass[0])
+                            .parents(self.o.widgets)
+                            .find(self.o.editPlaceholder)
+                            .slideUp(self.o.editSpeed, function() {
+                        self._saveSettingsWidget();
+                    });
                 } else {
                     $(this)
-                        .children()
-                        .removeClass(self.editClass[0])
-                        .addClass(self.editClass[1])
-                        .parents(self.o.widgets)
-                        .find(self.o.editPlaceholder)
-                        .slideDown(self.o.editSpeed);
+                            .children()
+                            .removeClass(self.editClass[0])
+                            .addClass(self.editClass[1])
+                            .parents(self.o.widgets)
+                            .find(self.o.editPlaceholder)
+                            .slideDown(self.o.editSpeed);
                 }
 
                 /**
@@ -1134,44 +1128,44 @@
              * Update the widgets title by using the edit input.
              **/
             $(self.o.editPlaceholder)
-                .find('input')
-                .keyup(function () {
-                    $(this)
+                    .find('input')
+                    .keyup(function() {
+                $(this)
                         .parents(self.o.widgets)
                         .children('header')
                         .children('h2')
                         .text($(this)
-                            .val());
-                });
+                        .val());
+            });
 
             /**
              * Set a custom style.
              **/
-            self.widget.on(clickEvent, '[data-widget-setstyle]', function (e) {
+            self.widget.on(clickEvent, '[data-widget-setstyle]', function(e) {
 
                 var val = $(this)
-                    .data('widget-setstyle');
+                        .data('widget-setstyle');
                 var styles = '';
 
                 /**
                  * Get all other styles, in order to remove it.
                  **/
                 $(this)
-                    .parents(self.o.editPlaceholder)
-                    .find('[data-widget-setstyle]')
-                    .each(function () {
-                        styles += $(this)
+                        .parents(self.o.editPlaceholder)
+                        .find('[data-widget-setstyle]')
+                        .each(function() {
+                    styles += $(this)
                             .data('widget-setstyle') + ' ';
-                    });
+                });
 
                 /**
                  * Set the new style.
                  **/
                 $(this)
-                    .parents(self.o.widgets)
-                    .attr('data-widget-attstyle', '' + val + '')
-                    .removeClassPrefix('jarviswidget-color-')
-                    .addClass(val);
+                        .parents(self.o.widgets)
+                        .attr('data-widget-attstyle', '' + val + '')
+                        .removeClassPrefix('jarviswidget-color-')
+                        .addClass(val);
 
                 /**
                  * Run function for the indicator image.
@@ -1193,10 +1187,10 @@
             /**
              * Allow users to show/hide a edit box.
              **/
-            self.widget.on(clickEvent, '.jarviswidget-custom-btn', function (e) {
+            self.widget.on(clickEvent, '.jarviswidget-custom-btn', function(e) {
 
                 var w = $(this)
-                    .parents(self.o.widgets);
+                        .parents(self.o.widgets);
 
                 /**
                  * Run function for the indicator image.
@@ -1207,12 +1201,12 @@
                  * Start and end custom action.
                  **/
                 if ($(this)
-                    .children('.' + self.customClass[0])
-                    .length) {
+                        .children('.' + self.customClass[0])
+                        .length) {
                     $(this)
-                        .children()
-                        .removeClass(self.customClass[0])
-                        .addClass(self.customClass[1]);
+                            .children()
+                            .removeClass(self.customClass[0])
+                            .addClass(self.customClass[1]);
 
                     /**
                      * Run the callback function.
@@ -1222,9 +1216,9 @@
                     }
                 } else {
                     $(this)
-                        .children()
-                        .removeClass(self.customClass[1])
-                        .addClass(self.customClass[0]);
+                            .children()
+                            .removeClass(self.customClass[1])
+                            .addClass(self.customClass[0]);
 
                     /**
                      * Run the callback function.
@@ -1249,26 +1243,25 @@
             /**
              * Allow users to delete the widgets.
              **/
-            self.widget.on(clickEvent, '.jarviswidget-delete-btn', function (e) {
+            self.widget.on(clickEvent, '.jarviswidget-delete-btn', function(e) {
 
                 var tWidget = $(this)
-                    .parents(self.o.widgets);
+                        .parents(self.o.widgets);
                 var removeId = tWidget.attr('id');
                 var widTitle = tWidget.children('header')
-                    .children('h2')
-                    .text();
+                        .children('h2')
+                        .text();
 
                 /**
                  * Delete the widgets with a confirm popup.
                  **/
                 $.SmartMessageBox({
-                    title: "<i class='fa fa-times' style='color:#ed1c24'></i> " + self.o.labelDelete +
-                        ' "' + widTitle + '"',
-                    content: "Warning: This action cannot be undone",
-                    buttons: '[No][Yes]'
-                }, function (ButtonPressed) {
+                    title: "<i class='fa fa-times' style='color:#ed1c24'></i> " + self.o.labelDelete + ' "' + widTitle + '"',
+                    content: "Precaución: Si elimina este widget, para recuperarlo deberá reiniciar la configuración de widgets.",
+                    buttons: '[No][Sí]'
+                }, function(ButtonPressed) {
                     //console.log(ButtonPressed);
-                    if (ButtonPressed == "Yes") {
+                    if (ButtonPressed == "Sí") {
                         /**
                          * Run function for the indicator image.
                          **/
@@ -1278,18 +1271,18 @@
                          * Delete the right widget.
                          **/
                         $('#' + removeId)
-                            .fadeOut(self.o.deleteSpeed, function () {
+                                .fadeOut(self.o.deleteSpeed, function() {
 
-                                $(this)
+                            $(this)
                                     .remove();
 
-                                /**
-                                 * Run the callback function.
-                                 **/
-                                if (typeof self.o.onDelete == 'function') {
-                                    self.o.onDelete.call(this, tWidget);
-                                }
-                            });
+                            /**
+                             * Run the callback function.
+                             **/
+                            if (typeof self.o.onDelete == 'function') {
+                                self.o.onDelete.call(this, tWidget);
+                            }
+                        });
                     }
 
                 });
@@ -1304,23 +1297,23 @@
             /**
              * Refresh ajax upon clicking refresh link.
              **/
-            self.widget.on(clickEvent, '.jarviswidget-refresh-btn', function (e) {
+            self.widget.on(clickEvent, '.jarviswidget-refresh-btn', function(e) {
 
                 /**
                  * Variables.
                  **/
                 var rItem = $(this)
-                    .parents(self.o.widgets),
-                    pathToFile = rItem.data('widget-load'),
-                    ajaxLoader = rItem.children(),
-                    btn = $(this);
+                        .parents(self.o.widgets),
+                        pathToFile = rItem.data('widget-load'),
+                        ajaxLoader = rItem.children(),
+                        btn = $(this);
 
                 /**
                  * Run the ajax function.
                  **/
                 btn.button('loading');
                 ajaxLoader.addClass("widget-body-ajax-loading");
-                setTimeout(function () {
+                setTimeout(function() {
                     btn.button('reset');
                     ajaxLoader.removeClass("widget-body-ajax-loading");
                     self._loadAjaxFile(rItem, pathToFile, ajaxLoader);
@@ -1330,21 +1323,20 @@
                 e.preventDefault();
             });
         },
-
         /**
          * Destroy.
          *
          * @param:
          **/
-        destroy: function () {
+        destroy: function() {
             var self = this;
             self.widget.off('click', self._clickEvents());
             self.obj.removeData(pluginName);
         }
     };
 
-    $.fn[pluginName] = function (option) {
-        return this.each(function () {
+    $.fn[pluginName] = function(option) {
+        return this.each(function() {
             var $this = $(this);
             var data = $this.data(pluginName);
             var options = typeof option == 'object' && option;
@@ -1376,25 +1368,31 @@
         toggleButton: true,
         toggleClass: 'min-10 | plus-10',
         toggleSpeed: 200,
-        onToggle: function () {},
+        onToggle: function() {
+        },
         deleteButton: true,
         deleteClass: 'trashcan-10',
         deleteSpeed: 200,
-        onDelete: function () {},
+        onDelete: function() {
+        },
         editButton: true,
         editPlaceholder: '.jarviswidget-editbox',
         editClass: 'pencil-10 | delete-10',
         editSpeed: 200,
-        onEdit: function () {},
+        onEdit: function() {
+        },
         colorButton: true,
         fullscreenButton: true,
         fullscreenClass: 'fullscreen-10 | normalscreen-10',
         fullscreenDiff: 3,
-        onFullscreen: function () {},
+        onFullscreen: function() {
+        },
         customButton: true,
         customClass: '',
-        customStart: function () {},
-        customEnd: function () {},
+        customStart: function() {
+        },
+        customEnd: function() {
+        },
         buttonOrder: '%refresh% %delete% %custom% %edit% %fullscreen% %toggle%',
         opacity: 1.0,
         dragHandle: '> header',
@@ -1402,19 +1400,22 @@
         indicator: true,
         indicatorTime: 600,
         ajax: true,
-        loadingLabel: 'loading...',
+        loadingLabel: 'cargando...',
         timestampPlaceholder: '.jarviswidget-timestamp',
         timestampFormat: 'Last update: %m%/%d%/%y% %h%:%i%:%s%',
         refreshButton: true,
         refreshButtonClass: 'refresh-10',
         labelError: 'Sorry but there was a error:',
         labelUpdated: 'Last Update:',
-        labelRefresh: 'Refresh',
-        labelDelete: 'Delete widget:',
-        afterLoad: function () {},
+        labelRefresh: 'Refrescar',
+        labelDelete: 'Eliminar widget:',
+        afterLoad: function() {
+        },
         rtl: false,
-        onChange: function () {},
-        onSave: function () {},
+        onChange: function() {
+        },
+        onSave: function() {
+        },
         ajaxnav: true
     };
 
@@ -1425,13 +1426,13 @@
      * Usage: $elem.removeClassPrefix('widget-color-');
      */
 
-    $.fn.removeClassPrefix = function (prefix) {
+    $.fn.removeClassPrefix = function(prefix) {
 
-        this.each(function (i, it) {
+        this.each(function(i, it) {
             var classes = it.className.split(" ")
-                .map(function (item) {
-                    return item.indexOf(prefix) === 0 ? "" : item;
-                });
+                    .map(function(item) {
+                return item.indexOf(prefix) === 0 ? "" : item;
+            });
             //it.className = classes.join(" ");
             it.className = $.trim(classes.join(" "));
 

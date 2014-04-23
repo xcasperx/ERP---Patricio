@@ -12531,6 +12531,11 @@ textarea.clone {
 .txt-color-yellow {
   color: #b09b5b !important;
 }
+
+.txt-color-yellowLight {
+  color: #F7D200 !important;
+}
+
 .txt-color-orange {
   color: #b19a6b !important;
 }

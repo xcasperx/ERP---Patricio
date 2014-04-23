@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> ERP | Inciar Sesión </title>
+        <title> Latte ERP | Inciar Sesión </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -30,6 +30,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production_unminified.css">
         <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.css">
         <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.css">	
 
@@ -108,7 +109,7 @@
                                         <label class="label">Username</label>
                                         <label class="input"> <i class="icon-append fa fa-user"></i>
                                             <input type="text" name="username">
-                                            <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Por favor ingrese username o email</b>
+                                            <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Por favor ingrese username o email</b>
                                         </label>
                                     </section>
 
@@ -116,7 +117,7 @@
                                         <label class="label">Contraseña</label>
                                         <label class="input"> <i class="icon-append fa fa-lock"></i>
                                             <input type="password" name="password">
-                                            <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Por favor ingrese su contraseña</b> </label>
+                                            <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Por favor ingrese su contraseña</b> </label>
                                         <div class="note">
                                             <a href="forgotpassword.html">Olvidó contraseña?</a>
                                         </div>

@@ -1138,7 +1138,7 @@
 
     return Area;
 
-  })(Morris.Line);
+  })(Morris.Line);  
 
   Morris.Bar = (function(_super) {
 

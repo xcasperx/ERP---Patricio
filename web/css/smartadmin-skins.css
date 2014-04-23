@@ -81,6 +81,18 @@ cursor: pointer !important;
 	color:#fb3c4a !important;
 }
 
+.smart-style-1 .MsgTitle .txt-color-yellow {
+	color:#EFEF01 !important;
+}
+
+.smart-style-1 .MsgTitle .txt-color-yellowClear {
+	color:#FFFC12 !important;
+}
+
+.smart-style-1 .MsgTitle .txt-color-green {
+	color:#39D400 !important;
+}
+
 @media (max-width: 979px) and (min-width: 768px) {
 	.smart-style-1  #hide-menu i {
 		color: #fff !important;
