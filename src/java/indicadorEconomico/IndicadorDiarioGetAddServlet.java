@@ -19,15 +19,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-import user.UserBean;
-import user.UserDAO;
 
 /**
  *
  * @author patricio
  */
-@WebServlet(name = "IndicadorDiarioGetServlet", urlPatterns = {"/IndicadorDiarioGetServlet"})
-public class IndicadorDiarioGetServlet extends HttpServlet {
+@WebServlet(name = "IndicadorDiarioGetAddServlet", urlPatterns = {"/IndicadorDiarioGetAddServlet"})
+public class IndicadorDiarioGetAddServlet extends HttpServlet {
 
     @Resource(name = "jdbc/ERP")
     private DataSource ds;
@@ -87,105 +85,78 @@ public class IndicadorDiarioGetServlet extends HttpServlet {
 
                     ////////////////////////////////////
                     // RECIBIR Y COMPROBAR PARAMETROS
-                    ////////////////////////////////////                    
-
-                    /* recibir atributos por PRG */
-                    String sid = request.getParameter("id");
+                    ////////////////////////////////////
 
                     /* obtener atributos de session */
-                    String redirect = (String) session.getAttribute("redirectUpdate");
+                    String redirect = (String) session.getAttribute("redirectAdd");
                     String uf = (String) session.getAttribute("uf");
                     String euro = (String) session.getAttribute("euro");
                     String dolar = (String) session.getAttribute("dolar");
-                    String publicTime = (String) session.getAttribute("publicTime");
 
                     /* obtener mensajes de session */
                     String msgErrorUF = (String) session.getAttribute("msgErrorUF");
                     String msgErrorEuro = (String) session.getAttribute("msgErrorEuro");
                     String msgErrorDolar = (String) session.getAttribute("msgErrorDolar");
-                    String msgErrorUpdate = (String) session.getAttribute("msgErrorUpdate");
+                    String msgErrorAdd = (String) session.getAttribute("msgErrorAdd");
                     String msgOk = (String) session.getAttribute("msgOk");
 
                     /* limpiar variables de sesion */
-                    session.setAttribute("redirectUpdate", null);
+                    session.setAttribute("redirectAdd", null);
                     session.setAttribute("uf", null);
                     session.setAttribute("euro", null);
                     session.setAttribute("dolar", null);
-                    session.setAttribute("publicTime", null);
                     session.setAttribute("msgErrorUF", null);
                     session.setAttribute("msgErrorEuro", null);
                     session.setAttribute("msgErrorDolar", null);
-                    session.setAttribute("msgErrorUpdate", null);
+                    session.setAttribute("msgErrorAdd", null);
                     session.setAttribute("msgOk", null);
 
                     /* instanciar lista de mensajes */
                     Collection<Message> msgList = new ArrayList<Message>();
 
-                    try {
-                        /* obtener indicador por id */
-                        IndicadorEconomicoDiarioBean reg = ieDAO.findByIdDiario(Integer.parseInt(sid));
-                        if (reg != null) {
-                            /* establecer atributos de reg */
-                            request.setAttribute("id", reg.getId());
+                    /* comprobar redirect */
+                    if (redirect == null || redirect.trim().equals("")) {
+                        request.setAttribute("msg", "Ingrese un nuevo indicador para hoy.");
 
-                            /* comprobar redirect */
-                            if (redirect == null || redirect.trim().equals("")) {
-                                /* establecer atributos de reg */
-                                request.setAttribute("msg", "El registro ha sido encontrado!");
-                                request.setAttribute("uf", reg.getUf());
-                                request.setAttribute("euro", reg.getEuro());
-                                request.setAttribute("dolar", reg.getDolar());
-                                request.setAttribute("publicTime", reg.getPublicTime());
+                    } else if (redirect.equals("indicadorDiario")) {
+                        /* establecer atributos de session */
+                        request.setAttribute("uf", uf);
+                        request.setAttribute("euro", euro);
+                        request.setAttribute("dolar", dolar);
 
-                            } else if (redirect.equals("indicadorDiario")) {
-                                /* establecer atributos de session */
-                                request.setAttribute("uf", uf);
-                                request.setAttribute("euro", euro);
-                                request.setAttribute("dolar", dolar);
-                                request.setAttribute("publicTime", publicTime);
-
-                                /* comprobar uf */
-                                if (msgErrorUF == null || msgErrorUF.trim().equals("")) {
-                                } else {
-                                    request.setAttribute("msgErrorUF", true);
-                                    msgList.add(MessageList.addMessage(msgErrorUF));
-                                }
-
-                                /* comprobar euro */
-                                if (msgErrorEuro == null || msgErrorDolar.trim().equals("")) {
-                                } else {
-                                    request.setAttribute("msgErrorEuro", true);
-                                    msgList.add(MessageList.addMessage(msgErrorEuro));
-                                }
-
-                                /* comprobar dolar */
-                                if (msgErrorDolar == null || msgErrorDolar.trim().equals("")) {
-                                } else {
-                                    request.setAttribute("msgErrorDolar", true);
-                                    msgList.add(MessageList.addMessage(msgErrorDolar));
-                                }
-
-                                /* comprobar update */
-                                if (msgErrorUpdate == null || msgErrorUpdate.trim().equals("")) {
-                                } else {
-                                    request.setAttribute("msgErrorUpdate", true);
-                                    msgList.add(MessageList.addMessage(msgErrorUpdate));
-                                }
-
-                                /* mensaje de exito */
-                                if (msgOk == null || msgOk.trim().equals("")) {
-                                } else {
-                                    request.setAttribute("msgOk", msgOk);
-                                }
-                            }
+                        /* comprobar uf */
+                        if (msgErrorUF == null || msgErrorUF.trim().equals("")) {
                         } else {
-                            request.setAttribute("msgErrorFound", true);
-                            msgList.add(MessageList.addMessage("El registro no ha sido encontrado."));
+                            request.setAttribute("msgErrorUF", true);
+                            msgList.add(MessageList.addMessage(msgErrorUF));
                         }
-                    } catch (Exception ex) {
-                        ex.getCause();
-                        request.setAttribute("msgErrorFound", true);
-                        msgList.add(MessageList.addMessage("Ha ocurrido un problema y no puede obtener el registro. Error:" + ex.getLocalizedMessage()));
+
+                        /* comprobar euro */
+                        if (msgErrorEuro == null || msgErrorDolar.trim().equals("")) {
+                        } else {
+                            request.setAttribute("msgErrorEuro", true);
+                            msgList.add(MessageList.addMessage(msgErrorEuro));
+                        }
+
+                        /* comprobar dolar */
+                        if (msgErrorDolar == null || msgErrorDolar.trim().equals("")) {
+                        } else {
+                            request.setAttribute("msgErrorDolar", true);
+                            msgList.add(MessageList.addMessage(msgErrorDolar));
+                        }
+
+                        /* comprobar update */
+                        if (msgErrorAdd == null || msgErrorAdd.trim().equals("")) {
+                        } else {
+                            request.setAttribute("msgErrorUpdate", true);
+                            msgList.add(MessageList.addMessage(msgErrorAdd));
+                        }
+
+                        /* mensaje de exito */
+                        if (msgOk == null || msgOk.trim().equals("")) {
+                        } else {
+                            request.setAttribute("msgOk", msgOk);
+                        }
                     }
 
                     /* despachar lista de mensajes */
@@ -197,7 +168,7 @@ public class IndicadorDiarioGetServlet extends HttpServlet {
                     request.setAttribute("indicadorDiarioActive", "active");
 
                     /* despachar a la vista */
-                    request.getRequestDispatcher("/indicadorEconomico/indicadorDiarioUpdate.jsp").forward(request, response);
+                    request.getRequestDispatcher("/indicadorEconomico/indicadorDiarioAdd.jsp").forward(request, response);
                 }
             } catch (Exception sessionException) {
                 request.getRequestDispatcher("/login/login.jsp").forward(request, response);

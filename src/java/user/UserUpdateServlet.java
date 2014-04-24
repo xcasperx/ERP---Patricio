@@ -201,6 +201,7 @@ public class UserUpdateServlet extends HttpServlet {
                                         userDAO.updatePassword(user);
                                         session.setAttribute("msgOk", "Registro actualizado exitosamente.");
                                     } catch (Exception ex) {
+                                        session.setAttribute("msgErrorUpdate", "Ha ocurrido un problema y no puede actualizar. Error:" + ex.getLocalizedMessage());
                                         ex.getCause();
                                     }
                                 }
@@ -213,7 +214,7 @@ public class UserUpdateServlet extends HttpServlet {
                                 userDAO.update(user);
                                 session.setAttribute("msgOk", "Registro actualizado exitosamente.");
                             } catch (Exception ex) {
-                                session.setAttribute("msgErrorUpdate", "Verifique que no exista username o email duplicados.");
+                                session.setAttribute("msgErrorUpdate", "Ha ocurrido un problema y no puede actualizar. Error:" + ex.getLocalizedMessage());
                                 ex.getCause();
                             }
                         }

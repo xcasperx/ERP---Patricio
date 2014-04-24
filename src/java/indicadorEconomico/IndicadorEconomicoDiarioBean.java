@@ -11,9 +11,9 @@ package indicadorEconomico;
 public class IndicadorEconomicoDiarioBean implements java.io.Serializable {
 
     public int id;
-    public float uf;
-    public float dolar;
-    public float euro;
+    public Float uf;
+    public Float dolar;
+    public Float euro;
     public String publicTime;
 
     public IndicadorEconomicoDiarioBean() {
@@ -27,27 +27,27 @@ public class IndicadorEconomicoDiarioBean implements java.io.Serializable {
         this.id = id;
     }
 
-    public float getUf() {
+    public Float getUf() {
         return uf;
     }
 
-    public void setUf(float uf) {
+    public void setUf(Float uf) {
         this.uf = uf;
     }
 
-    public float getDolar() {
+    public Float getDolar() {
         return dolar;
     }
 
-    public void setDolar(float dolar) {
+    public void setDolar(Float dolar) {
         this.dolar = dolar;
     }
 
-    public float getEuro() {
+    public Float getEuro() {
         return euro;
     }
 
-    public void setEuro(float euro) {
+    public void setEuro(Float euro) {
         this.euro = euro;
     }
 

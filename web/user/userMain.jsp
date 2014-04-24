@@ -211,7 +211,7 @@
 
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Data Table </h2>
+                                    <h2>DataTable </h2>
                                 </header>
 
                                 <!-- widget div-->
@@ -234,7 +234,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="center">                                                                                               
-                                                            <button class="btn btn-default btn-sm" type="submit" name="btnDelCol" data-title="refresh" rel="tooltip" data-placement="right" data-original-title="<i class='text-warning fa fa-warning'></i> Eliminar </br> elementos </br> seleccionados" data-html="true">                                                                
+                                                            <button class="btn btn-default btn-sm" type="submit" name="btnDelCol" data-title="refresh" rel="tooltip" data-placement="right" data-original-title="<i class='text-yellowLight fa fa-warning'></i> Eliminar </br> elementos </br> seleccionados" data-html="true">                                                                
                                                                 &nbsp;&nbsp;
                                                                 <i class="glyphicon glyphicon-trash"> </i>
                                                                 &nbsp;&nbsp;
@@ -282,21 +282,21 @@
                                                                     <a href="UserGetServlet?id=<c:out value="${list.idUser}"/>">
                                                                         <button class="btn btn-labeled btn-primary" name="btnUpOne" type="button">
                                                                             <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>
-                                                                            <strong><font size="1">VER / ACTUALIZAR</font></strong>
+                                                                            <span><font size="1">VER / ACTUALIZAR</font></span>
                                                                         </button>
                                                                     </a>
 
                                                                     <c:if test="${list.idUser != idUserX}" >
                                                                         <button class="btn btn-labeled btn-danger" name="btnDelRow" id="btnDelRow<c:out value="${list.idUser}"/>">                                                
                                                                             <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
-                                                                            <strong><font size="1">ELIMINAR</font></strong>
+                                                                            <span><font size="1">ELIMINAR</font></span>
                                                                         </button>
                                                                         <input type="hidden" name="idUserDelRow<c:out value="${list.idUser}"/>" id="idUserDelRow<c:out value="${list.idUser}"/>" value="<c:out value="${list.idUser}"/>">
                                                                     </c:if>
                                                                     <c:if test="${list.idUser == idUserX}" >
                                                                         <button class="btn btn-labeled btn-danger" name="btnDelRow" disabled>
                                                                             <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
-                                                                            <strong><font size="1">ELIMINAR</font></strong>
+                                                                            <span><font size="1">ELIMINAR</font></span>
                                                                         </button>
                                                                     </c:if>
                                                                 </div>                                                           

@@ -140,7 +140,7 @@
                         <a href="IndicadorDiarioMainServlet"><i class="text-primary fa fa-table"></i> DataTable Indicador Diario</a>
                     </li>      
                     <li>
-                        <i class="fa fa-edit"></i>Actualizar Indicador Diario
+                        <i class="fa fa-edit"></i>Agregar Indicador Diario
                     </li>
                 </ol>
                 <!-- end breadcrumb -->
@@ -196,7 +196,7 @@
                             <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-togglebutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Actualizar Indicador Diario </h2>				
+                                    <h2>Nuevo Indicador Diario </h2>				
 
                                 </header>
 
@@ -213,17 +213,11 @@
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">                                        
 
-                                        <form action="IndicadorDiarioUpdateServlet" method="POST" name="formUpdate" id="formUpdate" class="smart-form" novalidate="novalidate">
+                                        <form action="IndicadorDiarioAddServlet" method="POST" name="form" id="form" class="smart-form" novalidate="novalidate">
 
                                             <fieldset>                                                
                                                 <div class="row">                                                    
-                                                    <section class="col col-6">
-                                                        <section>
-                                                            <small class="slideInRight"><font size="2"><strong>ID Indicador Diario #<c:out value="${id}"/></strong></font></small>
-                                                            <label class="input state-disabled">
-                                                                <input type="hidden" name="id" value="<c:out value="${id}" />"/>
-                                                            </label>                                                                                                                        
-                                                        </section>
+                                                    <section class="col col-6">                                                        
                                                         <c:if test="${msgErrorUF == null}">
                                                             <label class="label">UF</label>
                                                             <label class="input"> <i class="icon-prepend fa fa-usd"></i>
@@ -287,11 +281,11 @@
                                                         <span class="label label-danger"><small class="slideInRight"><font color="white" size="1"><strong>&nbsp;&nbsp; Indicaciones:</strong> Separe decimales con punto (.)</font></small></span>
                                                     </section>
                                                 </div>
-                                            </fieldset>
+                                            </fieldset>                                                                                                                                     
 
-                                            <footer>                                                
+                                            <footer>
                                                 <button class="btn btn-primary" type="submit">
-                                                    <span><font size="1">ACTUALIZAR</font></span>
+                                                    <span><font size="1">AGREGAR</font></span>
                                                 </button>                                                
                                             </footer>
                                         </form>
@@ -407,7 +401,7 @@
 
                 pageSetUp();
 
-                var $checkoutForm = $('#formUpdate').validate({
+                var $checkoutForm = $('#form').validate({
                     // Rules for form validation
                     rules: {
                         uf: {
@@ -434,10 +428,10 @@
                     },
                     // Do not change code below
                     errorPlacement: function(error, element) {
-                        error.insertAfter(element.parent());
-                    }
+                        error.insertAfter(element.parent());                        
+                    }                   
                 });
-
+                               
                 // Mensajes emergentes
             <c:if test="${msgOk != null}">
                 $("#correcto").ready(function(e) {
@@ -485,10 +479,7 @@
                         }
                     });
 
-
-
-                })
-
+                });                
         </script>
 
         <!-- Your GOOGLE ANALYTICS CODE Below -->

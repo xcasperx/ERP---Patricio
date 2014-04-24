@@ -133,12 +133,12 @@
             <!-- RIBBON -->
             <div id="ribbon">
 
-                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! Esto reiniciará la configuración de widgets." data-html="true"><i class="fa fa-refresh"></i></span> </span>
+                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class='text-yellowLight fa fa-warning'></i> Warning! Esto reiniciará la configuración de widgets." data-html="true"><i class="fa fa-refresh"></i></span> </span>
 
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
                     <li>                        
-                        <a href="UserMainServlet"><i class="text-primary fa fa-table"></i> DataTable Usuarios </a>
+                        <a href="IndicadorDiarioMainServlet"><i class="text-primary fa fa-table"></i> DataTable Indicador Diario </a>
                     </li>                                 
                 </ol>
                 <!-- end breadcrumb -->
@@ -198,9 +198,9 @@
                                         </ul>
                                     </div>
                                     <div class="btn-group">                                                      
-                                        <button class="btn btn-default btn-sm" name="btnAdd" type="button" onclick="location.href = 'IndicadorDiarioGetAddServlet';" rel="tooltip" data-placement="top" data-original-title="Nuevo indicador del día">
+                                        <button class="btn btn-default btn-sm" name="btnAdd" type="button" onclick="location.href = 'IndicadorDiarioGetAddServlet';" rel="tooltip" data-placement="top" data-original-title="Nuevo indicador">
                                             <i class="glyphicon glyphicon-plus-sign"></i>
-                                            <font size="1"><strong>AGREGAR</strong></font>
+                                            <span><font size="1"><strong>AGREGAR</strong></font></span>
                                         </button>
                                     </div>
                                 </object>                                   
@@ -211,7 +211,7 @@
 
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                    <h2>Data Table </h2>
+                                    <h2>DataTable </h2>
                                 </header>
 
                                 <!-- widget div-->
@@ -234,7 +234,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="center">                                                                                               
-                                                            <button class="btn btn-default btn-sm" type="submit" name="btnDelCol" data-title="refresh" rel="tooltip" data-placement="right" data-original-title="<i class='text-warning fa fa-warning'></i> Eliminar </br> elementos </br> seleccionados" data-html="true">                                                                
+                                                            <button class="btn btn-default btn-sm" type="submit" name="btnDelCol" data-title="refresh" rel="tooltip" data-placement="right" data-original-title="<i class='text-yellowLight fa fa-warning'></i> Eliminar </br> elementos </br> seleccionados" data-html="true">                                                                
                                                                 &nbsp;&nbsp;
                                                                 <i class="glyphicon glyphicon-trash"> </i>
                                                                 &nbsp;&nbsp;

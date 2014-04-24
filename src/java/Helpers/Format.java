@@ -108,6 +108,28 @@ public class Format {
 
         return cd;
     }
+    
+     public static String currentDateYYMMDDDD() {
+
+        Calendar d = new GregorianCalendar();
+
+        int year = d.get(Calendar.YEAR);
+        int month = d.get(Calendar.MONTH) + 1; //0 == january
+        int day = d.get(Calendar.DAY_OF_MONTH);
+        int hour = d.get(Calendar.HOUR_OF_DAY);
+        int minute = d.get(Calendar.MINUTE);
+        int second = d.get(Calendar.SECOND);
+
+        String sMonth = (month < 10) ? "0" + month : "" + month;
+        String sDay = (day < 10) ? "0" + day : "" + day;
+        String sHour = (hour < 10) ? "0" + hour : "" + hour;
+        String sMinute = (minute < 10) ? "0" + minute : "" + minute;
+        String sSecond = (second < 10) ? "0" + second : "" + second;
+
+        String cd = year + "-" + sMonth + "-" + sDay;
+
+        return cd;
+    }
 
     public static String capital(String text) {
         String[] words = text.split("\\s+");

@@ -118,81 +118,81 @@ public class UserGetServlet extends HttpServlet {
                     Collection<Message> msgList = new ArrayList<Message>();
 
                     /* obtener user por id */
-                    UserBean reg = null;
                     try {
-                        reg = userDAO.findById(Integer.parseInt(sid));
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-
-                    if (reg != null) {
-                        /* establecer atributos de reg */
-                        request.setAttribute("id", reg.getIdUser());
-
-                        /* comprobar redirect */
-                        if (redirect == null || redirect.trim().equals("")) {
+                        UserBean reg = userDAO.findById(Integer.parseInt(sid));
+                        if (reg != null) {
                             /* establecer atributos de reg */
-                            request.setAttribute("msg", "El registro ha sido encontrado!");
-                            request.setAttribute("username", reg.getUsername());
-                            request.setAttribute("email", reg.getEmail());
-                            request.setAttribute("userType", reg.getUserType());
+                            request.setAttribute("id", reg.getIdUser());
 
-                        } else if (redirect.equals("user")) {
-                            /* establecer atributos de session */
-                            request.setAttribute("username", username);
-                            request.setAttribute("email", email);
-                            try {
-                                request.setAttribute("userType", Integer.parseInt(userType));
-                            } catch (NumberFormatException n) {
-                            }
+                            /* comprobar redirect */
+                            if (redirect == null || redirect.trim().equals("")) {
+                                /* establecer atributos de reg */
+                                request.setAttribute("msg", "El registro ha sido encontrado!");
+                                request.setAttribute("username", reg.getUsername());
+                                request.setAttribute("email", reg.getEmail());
+                                request.setAttribute("userType", reg.getUserType());
 
-                            /* mensaje de error por username */
-                            if (msgErrorUsername == null || msgErrorUsername.trim().equals("")) {
-                            } else {
-                                request.setAttribute("msgErrorUsername", true);
-                                msgList.add(MessageList.addMessage(msgErrorUsername));
-                            }
+                            } else if (redirect.equals("user")) {
+                                /* establecer atributos de session */
+                                request.setAttribute("username", username);
+                                request.setAttribute("email", email);
+                                try {
+                                    request.setAttribute("userType", Integer.parseInt(userType));
+                                } catch (NumberFormatException n) {
+                                }
 
-                            /* mensaje de error por email */
-                            if (msgErrorEmail == null || msgErrorEmail.trim().equals("")) {
-                            } else {
-                                request.setAttribute("msgErrorEmail", true);
-                                msgList.add(MessageList.addMessage(msgErrorEmail));
-                            }
+                                /* mensaje de error por username */
+                                if (msgErrorUsername == null || msgErrorUsername.trim().equals("")) {
+                                } else {
+                                    request.setAttribute("msgErrorUsername", true);
+                                    msgList.add(MessageList.addMessage(msgErrorUsername));
+                                }
 
-                            /* mensaje de error por pwd1 */
-                            if (msgErrorPwd1 == null || msgErrorPwd1.trim().equals("")) {
-                            } else {
-                                request.setAttribute("msgErrorPwd1", true);
-                                msgList.add(MessageList.addMessage(msgErrorPwd1));
-                            }
+                                /* mensaje de error por email */
+                                if (msgErrorEmail == null || msgErrorEmail.trim().equals("")) {
+                                } else {
+                                    request.setAttribute("msgErrorEmail", true);
+                                    msgList.add(MessageList.addMessage(msgErrorEmail));
+                                }
 
-                            /* mensaje de error pwd2 */
-                            if (msgErrorPwd2 == null || msgErrorPwd2.trim().equals("")) {
-                            } else {
-                                request.setAttribute("msgErrorPwd2", true);
-                                msgList.add(MessageList.addMessage(msgErrorPwd2));
-                            }
+                                /* mensaje de error por pwd1 */
+                                if (msgErrorPwd1 == null || msgErrorPwd1.trim().equals("")) {
+                                } else {
+                                    request.setAttribute("msgErrorPwd1", true);
+                                    msgList.add(MessageList.addMessage(msgErrorPwd1));
+                                }
 
-                            /* comprobar update */
-                            if (msgErrorUpdate == null || msgErrorUpdate.trim().equals("")) {
-                            } else {
-                                request.setAttribute("msgErrorUpdate", true);
-                                msgList.add(MessageList.addMessage(msgErrorUpdate));
-                            }
+                                /* mensaje de error pwd2 */
+                                if (msgErrorPwd2 == null || msgErrorPwd2.trim().equals("")) {
+                                } else {
+                                    request.setAttribute("msgErrorPwd2", true);
+                                    msgList.add(MessageList.addMessage(msgErrorPwd2));
+                                }
 
-                            /* mensaje de exito */
-                            if (msgOk == null || msgOk.trim().equals("")) {
-                            } else {
-                                request.setAttribute("msgOk", msgOk);
+                                /* comprobar update */
+                                if (msgErrorUpdate == null || msgErrorUpdate.trim().equals("")) {
+                                } else {
+                                    request.setAttribute("msgErrorUpdate", true);
+                                    msgList.add(MessageList.addMessage(msgErrorUpdate));
+                                }
+
+                                /* mensaje de exito */
+                                if (msgOk == null || msgOk.trim().equals("")) {
+                                } else {
+                                    request.setAttribute("msgOk", msgOk);
+                                }
                             }
+                        } else {
+                            request.setAttribute("msgErrorFound", true);
+                            msgList.add(MessageList.addMessage("No se encontró el registro."));
                         }
-                    } else {
+                    } catch (Exception ex) {
+                        ex.getCause();
                         request.setAttribute("msgErrorFound", true);
-                        msgList.add(MessageList.addMessage("No se encontró el registro."));
+                        msgList.add(MessageList.addMessage("Ha ocurrido un problema y no puede obtener el registro. Error:" + ex.getLocalizedMessage()));
                     }
 
-                    /* establecer lista a la petición */
+                    /* despachar lista de mensajes */
                     if (!msgList.isEmpty()) {
                         request.setAttribute("msgList", msgList);
                     }
