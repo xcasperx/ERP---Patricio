@@ -238,7 +238,7 @@
                                                                 &nbsp;&nbsp;
                                                                 <i class="glyphicon glyphicon-trash"> </i>
                                                                 &nbsp;&nbsp;
-                                                            </button>
+                                                            </button>                                                            
                                                         </th>
                                                         <th>ID</th>
                                                         <th>UF</th>
@@ -252,7 +252,10 @@
                                                 <tbody>
                                                     <c:forEach var="list" items="${list}">
                                                         <tr>
-                                                            <td class="center"><input type="checkbox" name="chk" value="<c:out value="${list.id}"/>"/></td>
+                                                            <td class="center">
+                                                                <input type="checkbox" name="chk" value="<c:out value="${list.id}"/>"/>
+                                                                <input type="hidden" value="x">
+                                                            </td>
                                                             <td><c:out value="${list.id}" /></td>
                                                             <td><c:out value="${list.uf}" /></td>
                                                             <td><c:out value="${list.dolar}" /></td>

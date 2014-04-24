@@ -96,7 +96,7 @@ public class IndicadorDiarioMainServlet extends HttpServlet {
                     session.setAttribute("redirectDel", null);
                     session.setAttribute("msgDel", null);
                     session.setAttribute("msgErrorConstraint", null);
-                    session.setAttribute("msgListErrorConstraint", null);
+                    session.setAttribute("msgListErrorConstraint", null);                                       
 
                     /* comprobar redirect desde DeleteServlet */
                     if (redirect == null || redirect.trim().equals("")) {
@@ -105,7 +105,7 @@ public class IndicadorDiarioMainServlet extends HttpServlet {
                         /* comprobar eliminacion */
                         if (msgDel == null || msgDel.trim().equals("")) {
                         } else {
-                            request.setAttribute("msgDel", msgDel);
+                            request.setAttribute("msgDel", msgDel);                            
                         }
 
                         /* comprobar error eliminacion individual */

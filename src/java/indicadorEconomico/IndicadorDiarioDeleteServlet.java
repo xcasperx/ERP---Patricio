@@ -89,14 +89,13 @@ public class IndicadorDiarioDeleteServlet extends HttpServlet {
                     String btnDelCol = request.getParameter("btnDelCol");
 
                     /* establecer atributos de session */
-                    session.setAttribute("redirectDel", "IndicadorDiario");
+                    session.setAttribute("redirectDel", "indicadorDiario");
 
                     //////////////////////////
                     // ELIMINAR POR REGISTRO
                     //////////////////////////
 
                     if (btnDelRow != null) {
-
                         try {
                             int id = Integer.parseInt(request.getParameter("id"));
                             ieDAO.indicadorDiarioDelete(id);
@@ -111,13 +110,14 @@ public class IndicadorDiarioDeleteServlet extends HttpServlet {
                     // ELIMINAR VARIOS REGISTROS
                     ///////////////////////////////                    
 
-                    if (btnDelCol != null) {
+                    if (btnDelCol != null) {                                                
                         /* instanciar lista de mensajes */
                         Collection<Message> msgList = new ArrayList<Message>();
 
                         int i = 0;
                         int cont = 0;
                         String[] outerArray = request.getParameterValues("chk");
+                                                
                         try {
                             while (outerArray[i] != null) {
                                 try {
@@ -131,10 +131,12 @@ public class IndicadorDiarioDeleteServlet extends HttpServlet {
                             }
                         } catch (Exception ex) {
                         }
+                        
+                        System.out.println("cont " + cont); 
 
-                        if (i == 1) {
+                        if (cont == 1) {
                             session.setAttribute("msgDel", "Un registro ha sido eliminado.");
-                        } else if (i > 1) {
+                        } else if (cont > 1) {
                             session.setAttribute("msgDel", cont + " registros han sido eliminados.");
                         }
 

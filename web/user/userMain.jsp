@@ -257,7 +257,7 @@
                                                                 </c:if>
                                                                 <c:if test="${list.idUser == idUserX}" >
                                                                     <input type="checkbox" name="chk" disabled/>
-                                                                </c:if>
+                                                                </c:if>                                                                
                                                             </td>
                                                             <td><c:out value="${list.idUser}" /></td>
                                                             <td><c:out value="${list.username}" /></td>
@@ -285,7 +285,6 @@
                                                                             <span><font size="1">VER / ACTUALIZAR</font></span>
                                                                         </button>
                                                                     </a>
-
                                                                     <c:if test="${list.idUser != idUserX}" >
                                                                         <button class="btn btn-labeled btn-danger" name="btnDelRow" id="btnDelRow<c:out value="${list.idUser}"/>">                                                
                                                                             <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>

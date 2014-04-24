@@ -125,7 +125,7 @@ public class UserDeleteServlet extends HttpServlet {
                             while (outerArray[i] != null) {
                                 try {
                                     userDAO.delete(Integer.parseInt(outerArray[i]));
-                                    cont++;
+                                    cont++;                                    
                                 } catch (Exception ex) {
                                     msgList.add(MessageList.addMessage("No se pudo eliminar el registro con ID: " + outerArray[i]));
                                     ex.printStackTrace();
@@ -133,11 +133,11 @@ public class UserDeleteServlet extends HttpServlet {
                                 i++;
                             }
                         } catch (Exception ex) {
-                        }
+                        }                                               
 
-                        if (i == 1) {
+                        if (cont == 1) {
                             session.setAttribute("msgDel", "Un registro ha sido eliminado.");
-                        } else if (i > 1) {
+                        } else if (cont > 1) {
                             session.setAttribute("msgDel", cont + " registros han sido eliminados.");
                         }
 
