@@ -1,11 +1,11 @@
 <%-- 
-    Document   : admin
-    Created on : 26-dic-2013, 16:08:09
-    Author     : patricio alberto
+    Document   : indicadorDiarioUpdate
+    Created on : 24-04-2014, 11:31:01 AM
+    Author     : patricio
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> Latte ERP | Usuarios</title>
+        <title> Latte ERP | Indicador Diario</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -49,8 +49,8 @@
 
         <!-- GOOGLE FONT -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
-
     </head>
+
     <body class="">
         <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
@@ -135,12 +135,12 @@
                 <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class='text-yellowLight fa fa-warning'></i> Warning! Esto reiniciará la configuración de widgets." data-html="true"><i class="fa fa-refresh"></i></span> </span>
 
                 <!-- breadcrumb -->
-                <ol class="breadcrumb">
+                <ol class="breadcrumb">                    
                     <li>
-                        <a href="UserMainServlet"><i class="text-primary fa fa-table"></i> DataTable Usuarios</a>
-                    </li>
+                        <a href="UserMainServlet"><i class="text-primary fa fa-table"></i> DataTable Indicador Diario</a>
+                    </li>      
                     <li>
-                        <i class="fa fa-edit"></i> Agregar Usuario
+                        <i class="fa fa-edit"></i>Actualizar Indicador Diario
                     </li>
                 </ol>
                 <!-- end breadcrumb -->
@@ -169,8 +169,8 @@
                             <i class="fa fa-table fa-fw"></i> 
                             Mantenedor 
                             <span>
-                                <i class="fa fa-user fa-fw "></i> 
-                                Usuarios
+                                <i class="fa fa-bar-chart-o fa-fw"></i> 
+                                Indicador Diario
                             </span>
                         </h2>
                     </div>
@@ -181,7 +181,7 @@
 
                 <!-- MENSAJES -->
                 <c:import var="formMsg" url="/formMsg.jsp" />
-                <c:out value="${formMsg}" escapeXml="false" />              
+                <c:out value="${formMsg}" escapeXml="false"/>
 
                 <!-- widget grid -->
                 <section id="widget-grid" class="">
@@ -194,10 +194,10 @@
 
                             <!-- Widget ID (each widget will need unique ID)-->
                             <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-togglebutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
-
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Agregar nuevo usuario </h2>
+                                    <h2>Actualizar Indicador Diario </h2>				
+
                                 </header>
 
                                 <!-- widget div-->
@@ -211,126 +211,84 @@
                                     <!-- end widget edit box -->
 
                                     <!-- widget content -->
-                                    <div class="widget-body no-padding">
+                                    <div class="widget-body no-padding">                                        
 
-                                        <form action="UserAddServlet" method="POST" name="formAdd" id="formAdd" class="smart-form" novalidate="novalidate">
+                                        <form action="IndicadorDiarioUpdateServlet" method="POST" name="formUpdate" id="formUpdate" class="smart-form" novalidate="novalidate">
 
                                             <fieldset>
                                                 <div class="row">
-                                                    <section class="col col-6">                                                        
-                                                        <c:if test="${msgErrorUsername == null}">                                                           
-                                                            <label class="label">Username</label>
-                                                            <label class="input"> <i class="icon-prepend fa fa-user"></i>
-                                                                <input type="text" maxlength="30" name="username" placeholder="Ingrese Username" value="<c:out value="${username}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese por ejemplo: nombre.apellido</b>
+                                                    <section class="col col-6">
+                                                        <section>
+                                                            <small class="text-primary slideInRight"><font size="2"><strong>ID Indicador Diario #<c:out value="${id}"/></strong></font></small>                                                            
+                                                            <label class="input state-disabled">
+                                                                <input type="hidden" name="id" value="<c:out value="${id}" />"/>
+                                                            </label>
+                                                        </section>
+                                                        <c:if test="${msgErrorUF == null}">
+                                                            <label class="label">UF</label>
+                                                            <label class="input"> <i class="icon-prepend fa fa-usd"></i>
+                                                                <input type="text" maxlength="8" name="uf" placeholder="Ingrese UF" value="<c:out value="${uf}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el valor de la UF</b>
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
-                                                        <c:if test="${ msgErrorUsername != null}">
-                                                            <label class="label">Username</label>
-                                                            <label class="input state-error"> <i class="icon-prepend fa fa-user"></i>
-                                                                <input type="text" maxlength="30" name="username" placeholder="Ingrese Username" value="<c:out value="${username}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese por ejemplo: nombre.apellido</b>                                                                
+                                                        <c:if test="${ msgErrorUF != null}">
+                                                            <label class="label">UF</label>
+                                                            <label class="input state-error"> <i class="icon-prepend fa fa-usd"></i>
+                                                                <input type="text" maxlength="8" name="uf" placeholder="Ingrese UF" value="<c:out value="${uf}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el valor de la UF</b>
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
                                                     </section>                                                  
                                                 </div>
-
                                                 <div class="row">
                                                     <section class="col col-6">
-                                                        <c:if test="${msgErrorEmail == null}">
-                                                            <label class="label">Email</label>
-                                                            <label class="input"> <i class="icon-prepend fa fa-envelope-o"></i>
-                                                                <input type="email" maxlength="255" name="email" placeholder="Ingrese email" value="<c:out value="${email}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese por ejemplo: micorreo@gmail.com</b>
+                                                        <c:if test="${msgErrorEuro == null}">
+                                                            <label class="label">Euro</label>
+                                                            <label class="input"> <i class="icon-prepend fa fa-euro"></i>
+                                                                <input type="text" maxlength="7" name="euro" placeholder="Ingrese Euro" value="<c:out value="${euro}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese valor del Euro en pesos</b>
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
-                                                        <c:if test="${msgErrorEmail != null}">
-                                                            <label class="label">Email</label>
-                                                            <label class="input state-error"> <i class="icon-prepend fa fa-envelope-o"></i>
-                                                                <input type="email" maxlength="255" name="email" placeholder="Ingrese email" value="<c:out value="${email}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese por ejemplo: micorreo@gmail.com</b>
+                                                        <c:if test="${msgErrorEuro != null}">
+                                                            <label class="label">Euro</label>
+                                                            <label class="input state-error"> <i class="icon-prepend fa fa-euro"></i>
+                                                                <input type="text" maxlength="7" name="euro" placeholder="Ingrese Euro" value="<c:out value="${euro}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese valor del Euro en pesos</b>
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                         </c:if>
                                                     </section>                                                   
                                                 </div>
-
-                                                <div class="row">                                                                                                       
+                                                <div class="row">
                                                     <section class="col col-6">
-                                                        <div>
-                                                            <label class="label col col-4">Permisos de usuario </label>
-                                                        </div>                                                                                                                
-                                                        <p>&nbsp;</p>
-                                                        <p>&nbsp;</p>
-                                                        <label class="select">
-                                                            <select class="form-control" name="userType">
-                                                                <option value="1" <c:if test="${userType == 1}">selected</c:if>>Superusuario</option>
-                                                                <option value="2" <c:if test="${userType == 2}">selected</c:if>>Administrador</option>
-                                                                <option value="3" <c:if test="${userType == 3}">selected</c:if>>Coordinador</option>
-                                                                <option value="4" <c:if test="${userType == 4}">selected</c:if>>Operario</option>
-                                                                </select> <i></i> 
-                                                            </label>                                                                
-                                                        </section>                                                    
-                                                    </div>
-                                                </fieldset>
-
-                                                <fieldset>
-                                                    <label>Constraseña</label>
-                                                    <p>&nbsp;</p>
-                                                <c:if test="${msgErrorPwd1 == null && msgErrorPwd2 == null }" >
-                                                    <div class="row">                                                    
-                                                        <section class="col col-6">                                                      
-                                                            <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                <input type="password" maxlength="20" name="pwd1" placeholder="Ingrese contraseña" id="pwd1">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese entre 6 y 20 caracteres para la contraseña</b> 
+                                                        <c:if test="${msgErrorDolar == null}">
+                                                            <label class="label">Dólar</label>
+                                                            <label class="input"> <i class="icon-prepend fa fa-money"></i>
+                                                                <input type="text" maxlength="7" name="dolar" placeholder="Ingrese Dólar" value="<c:out value="${dolar}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese valor del Dólar en pesos</b>
                                                             </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>                                                                
-                                                        </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-6">                                                        
-                                                            <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                <input type="password" maxlength="20" name="pwd2" placeholder="Confirme contraseña" id="pwd2">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Escriba la misma contraseña de arriba</b> 
+                                                            <div class="note note-error">Este campo es requerido.</div>
+                                                        </c:if>
+                                                        <c:if test="${msgErrorDolar != null}">
+                                                            <label class="label">Dólar</label>
+                                                            <label class="input state-error"> <i class="icon-prepend fa fa-money"></i>
+                                                                <input type="text" maxlength="7" name="dolar" placeholder="Ingrese Dólar" value="<c:out value="${dolar}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese valor del Dólar en pesos</b>
                                                             </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>                                                                
-                                                        </section>                                                   
-                                                    </div>                                                   
-                                                </c:if>
-                                                <c:if test="${msgErrorPwd1 != null || msgErrorPwd2 != null }" >
-                                                    <div class="row">                                                    
-                                                        <section class="col col-6">
-                                                            <label class="input state-error">
-                                                                <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                    <input type="password" maxlength="20" name="pwd1" placeholder="Ingrese contraseña" id="pwd1">
-                                                                    <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese entre 6 y 20 caracteres para la contraseña</b> 
-                                                                </label>
-                                                                <div class="note note-error">Este campo es requerido.</div>                                                                    
-                                                            </label>
-                                                        </section>
-                                                    </div>
-                                                    <div class="row">
-                                                        <section class="col col-6">                                                        
-                                                            <label class="input state-error">
-                                                                <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                                    <input type="password" maxlength="20" name="pwd2" placeholder="Confirme contraseña" id="pwd2">
-                                                                    <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Escriba la misma contraseña de arriba</b> 
-                                                                </label>
-                                                                <div class="note note-error">Este campo es requerido.</div>                                                                    
-                                                            </label>
-                                                        </section>                                                   
-                                                    </div>
-                                                </c:if>
-                                            </fieldset>                                        
+                                                            <div class="note note-error">Este campo es requerido.</div>
+                                                        </c:if>
+                                                    </section>                                                   
+                                                </div>  
+                                            </fieldset>                                                                                                                                     
 
                                             <footer>
                                                 <input type="hidden" name="add" value="ok"/>
-                                                <button name="btnAdd" class="btn btn-primary" type="submit">
-                                                    <span><font size="1">AGREGAR</font></span>
-                                                </button>
+                                                <button name="btnUpdate" class="btn btn-primary" type="submit">
+                                                    <span><font size="1">ACTUALIZAR</font></span>
+                                                </button>                                                
                                             </footer>
                                         </form>
 
@@ -426,7 +384,7 @@
 
         <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
 
-        <![endif]-->      
+        <![endif]-->       
 
         <!-- MAIN APP JS FILE -->
         <script src="js/app.js"></script>
@@ -435,7 +393,7 @@
         <script src="js/plugin/jquery-form/jquery-form.min.js"></script>
 
         <!-- disabledButton -->
-        <script src="js/disabledButton.js"></script>
+        <script src="js/disabledButton.js"></script>        
 
         <script type="text/javascript">
 
@@ -445,43 +403,29 @@
 
                 pageSetUp();
 
-                var $checkoutForm = $('#formAdd').validate({
+                var $checkoutForm = $('#formUpdate').validate({
                     // Rules for form validation
                     rules: {
-                        username: {
+                        uf: {
                             required: true
                         },
-                        email: {
-                            required: true,
-                            email: true
+                        dolar: {
+                            required: true                           
                         },
-                        pwd1: {
-                            required: true,
-                            minlength: 6,
-                            maxlength: 20
-                        },
-                        pwd2: {
-                            required: true,
-                            minlength: 6,
-                            maxlength: 20,
-                            equalTo: '#pwd1'
+                        euro: {
+                            required: true
                         }
                     },
                     // Messages for form validation
                     messages: {
-                        username: {
-                            required: 'Por favor ingrese username'
+                        uf: {
+                            required: 'Por favor ingrese el valor de la UF'
                         },
-                        email: {
-                            required: 'Por favor ingrese email',
-                            email: 'Por favor ingrese un email VÁLIDO'
+                        dolar: {
+                            required: 'Por favor ingrese el valor del Dólar'
                         },
-                        pwd1: {
-                            required: 'Por favor ingrese contraseña'
-                        },
-                        pwd2: {
-                            required: 'Por favor ingrese contraseña una vez más',
-                            equalTo: 'Por favor ingrese la misma contraseña de arriba'
+                        euro: {
+                            required: 'Por favor ingrese el valor del Euro'
                         }
                     },
                     // Do not change code below
@@ -501,7 +445,7 @@
                         timeout: 5000
                     });
                     e.preventDefault();
-                });
+                })
             </c:if>
 
             <c:if test="${msgList != null}">
@@ -514,8 +458,9 @@
                             timeout: 5000
                         });
                         e.preventDefault();
-                    });
+                    })
             </c:if>
+
 
                     // START AND FINISH DATE
                     $('#startdate').datepicker({
@@ -538,7 +483,7 @@
 
 
 
-                });
+                })
 
         </script>
 
@@ -557,7 +502,7 @@
                 s.parentNode.insertBefore(ga, s);
             })();
 
-        </script>               
+        </script>
 
     </body>
 

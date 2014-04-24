@@ -54,6 +54,7 @@ public class IndicadorEconomicoDAO {
                 reg.setUf(result.getFloat("uf"));
                 reg.setDolar(result.getFloat("usd"));
                 reg.setEuro(result.getFloat("eur"));
+                reg.setPublicTime(result.getString("create_time"));
 
                 /* agregar a la lista */
                 list.add(reg);
@@ -80,6 +81,56 @@ public class IndicadorEconomicoDAO {
             }
         }
         return list;
+    }
+    
+     public IndicadorEconomicoDiarioBean findByIdDiario(int id) {
+         
+        PreparedStatement sentence = null;
+        ResultSet result = null;
+
+        IndicadorEconomicoDiarioBean reg = null;
+
+        try {
+            String sql = "select * from indicador_diario where id_indicador = ?";
+
+            sentence = conexion.prepareStatement(sql);
+            
+            sentence.setInt(1, id);
+
+            result = sentence.executeQuery();
+
+            while (result.next()) {
+                /* instaciar objeto */
+                reg = new IndicadorEconomicoDiarioBean();
+                /* obtener resultset */
+                reg.setId(result.getInt("id_indicador"));
+                reg.setUf(result.getFloat("uf"));
+                reg.setDolar(result.getFloat("usd"));
+                reg.setEuro(result.getFloat("eur"));
+                reg.setPublicTime(result.getString("create_time"));
+            }
+
+        } catch (MySQLSyntaxErrorException ex) {
+            System.out.println("Error de sintaxis en IndicadorEconomicoDAO, findByIdDiario() : " + ex);
+            throw new RuntimeException("MySQL Syntax Exception en IndicadorEconomicoDAO, findByIdDiario() : " + ex);
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+            System.out.println("MySQL Excepción de integridad en IndicadorEconomicoDAO, findByIdDiario() : " + ex);
+            throw new RuntimeException("MySQL Excepción de integridad en IndicadorEconomicoDAO, findByIdDiario() : " + ex);
+        } catch (SQLException ex) {
+            System.out.println("MySQL Excepción inesperada en IndicadorEconomicoDAO, findByIdDiario() : " + ex);
+            throw new RuntimeException("MySQL Excepción inesperada enIndicadorEconomicoDAO, findByIdDiario() : " + ex);
+        } finally {
+            /* liberar los recursos */
+            try {
+                result.close();
+            } catch (Exception noGestionar) {
+            }
+            try {
+                sentence.close();
+            } catch (Exception noGestionar) {
+            }
+        }
+        return reg;
     }
 
     public Collection<IndicadorEconomicoDiarioBean> getIED14() {
@@ -434,5 +485,5 @@ public class IndicadorEconomicoDAO {
             }
         }
         return list;
-    }
+    }   
 }

@@ -184,13 +184,10 @@
                     <div class="row">                        
                         <div class="col-sm-12">
                             <div class="well">
-                                <h1>Indicador Económico<span class="semi-bold"> diario, semanal y mensual</span> <small></small></h1>
+                                <h1>Indicadores Económicos<span class="semi-bold"> del Día, de la Semana y del Mes</span> <small></small></h1>
                                 <p>Información estadística actualizada y detallada sobre el valor del Dolar, Euro, UF, UTM y otros indicadores.</p>                                
-                                <h2>Restricción vehicular<h2> 
-                                        <ul>
-                                            <li><h2><font size="4">para hoy : 1-3-5-7-9</font></h2></li>
-                                            <li><h2><font size="4">para mañana : 1-3-5-7-9</font></h2></li>
-                                        </ul>
+                                <h2>Restricción vehicular <span class="semi-bold">Para hoy :</span> 1-3-5-7-9 / <span class="semi-bold">Para mañana :</span> 2-4-6-8-0<h2> 
+                                        
                                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                                             <div class="well well-sm well-light">
                                                 <h4 class="txt-color-purple">UF Hoy <span class="semi-bold">$<c:out value="${UFhoy}"/></span> <a href="javascript:void(0);" class="pull-right txt-color-blueLight"><i class="fa fa-refresh"></i></a></h4>
