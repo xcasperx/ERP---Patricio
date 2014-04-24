@@ -113,8 +113,21 @@ public class IndicadorEconomicoGetServlet extends HttpServlet {
                         }
                     }
 
-                    /* obtener indicador diario (uf, dolar, euro) - grafico de 14 barras */
+                    //////////////
+                    // GRAFICOS
+                    //////////////
+
+                    /* obtener indicador diario (uf, dolar, euro) */
                     try {
+                        /* grafico euro vs dolar de 365 elementos */
+                        Collection<IndicadorEconomicoDiarioBean> ufEuroDolarList = ieDAO.getIED365Days();
+                        request.setAttribute("ufEuroDolarList", ufEuroDolarList);
+
+                        /* grafico uf de 365 elementos */
+                        Collection<IndicadorEconomicoDiarioBean> ufList = ieDAO.getIED365DaysUnixTime();
+                        request.setAttribute("ufList", ufList);
+
+                        /* gráfico de 14 elementos */
                         Collection<IndicadorEconomicoDiarioBean> iedList = ieDAO.getIED14();
                         request.setAttribute("iedList", iedList);
 
@@ -130,8 +143,13 @@ public class IndicadorEconomicoGetServlet extends HttpServlet {
                         ex.getCause();
                     }
 
-                    /* obtener indicador semanal (93, 95, 97, diesel) - grafico 14 barras */
+                    /* obtener indicador semanal (93, 95, 97, diesel) */
                     try {
+                        /* grafico de combustibles de 365 elementos */
+                        Collection<IndicadorEconomicoSemanalBean> combList = ieDAO.getIES365Days();
+                        request.setAttribute("combList", combList);
+
+                        /* grafico de 14 elementos */
                         Collection<IndicadorEconomicoSemanalBean> iesList = ieDAO.getIES14();
                         request.setAttribute("iesList", iesList);
 
@@ -149,9 +167,10 @@ public class IndicadorEconomicoGetServlet extends HttpServlet {
                         ex.getCause();
                     }
 
-                    /* obtener indicador mensual (UTM, IPC) - grafico 14 barras */
+                    /* obtener indicador mensual (UTM, IPC) */
                     try {
-                        Collection<IndicadorEconomicoMensualBean> iemList = ieDAO.getIEM14();
+                        /* grafico de 12 elementos */
+                        Collection<IndicadorEconomicoMensualBean> iemList = ieDAO.getIEM12();
                         request.setAttribute("iemList", iemList);
 
                         for (IndicadorEconomicoMensualBean aux : iemList) {
@@ -163,6 +182,17 @@ public class IndicadorEconomicoGetServlet extends HttpServlet {
                     } catch (Exception ex) {
                         ex.getCause();
                     }
+
+                    /* obtener ipc anual */
+                    try {
+                        Collection<IndicadorEconomicoMensualBean> ipcList = ieDAO.getIPC12();
+                        request.setAttribute("ipcList", ipcList);
+                    } catch (Exception ex) {
+                        ex.getCause();
+                    }
+                    
+                    /* marcar pestaña de menu */
+                    request.setAttribute("indGrafActive", "active");
 
                     /* despachar a la vista */
                     request.getRequestDispatcher("/indicadorEconomico/indicadorEconomico.jsp").forward(request, response);

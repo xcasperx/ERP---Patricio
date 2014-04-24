@@ -19,10 +19,70 @@ public class Format {
         return formattedDate;
     }
 
+    public static String dateDD(String d) throws ParseException {
+
+        java.util.Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+        String formattedDate = new SimpleDateFormat("dd").format(date);
+
+        return formattedDate;
+    }
+
+    public static String dateMonth(String d) throws ParseException {
+
+        java.util.Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+        String formattedDate = new SimpleDateFormat("MM").format(date);
+
+        int month = Integer.parseInt(formattedDate);
+        String monthString;
+        switch (month) {
+            case 1:
+                monthString = "Enero";
+                break;
+            case 2:
+                monthString = "Febrero";
+                break;
+            case 3:
+                monthString = "Marzo";
+                break;
+            case 4:
+                monthString = "Abril";
+                break;
+            case 5:
+                monthString = "Mayo";
+                break;
+            case 6:
+                monthString = "Junio";
+                break;
+            case 7:
+                monthString = "Julio";
+                break;
+            case 8:
+                monthString = "Agosto";
+                break;
+            case 9:
+                monthString = "Septiembre";
+                break;
+            case 10:
+                monthString = "Octubre";
+                break;
+            case 11:
+                monthString = "Noviembre";
+                break;
+            case 12:
+                monthString = "Diciembre";
+                break;
+            default:
+                monthString = "Mes inválido";
+                break;
+        }
+
+        return monthString;
+    }
+
     public static String dateYYYYMMDD(String d) throws ParseException {
 
         java.util.Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
-        String formattedDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").format(date);
+        String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
 
         return formattedDate;
     }

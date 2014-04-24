@@ -49,14 +49,21 @@
             <li>
                 <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Estadísticas (*)</span></a>
                 <ul>
-                    <li><a href="flot.html">Flot Chart</a></li>
-                    <li><a href="morris.html">Morris Charts</a></li>
+                    <li><a href="flot.html">Compras / Ventas</a></li>
+                    <li><a href="morris.html">Ingresos / Egresos</a></li>
                     <li><a href="inline-charts.html">Inline Charts</a></li>
                 </ul>
             </li>
 
             <li>
-                <a href="IndicadorEconomicoGetServlet"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Indicador Económico</span></a>                
+                <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Indicador Económico</span></a>
+                <ul>
+                    <li <c:if test="${indGrafActive != null}">class="active"</c:if>><a href="IndicadorEconomicoGetServlet">Gráficos</a></li>
+                    <li><a href="#">Mantenedor Diario</a></li>
+                    <li><a href="#">Mantenedor Semanal</a></li>
+                    <li><a href="#">Mantenedor Mensual</a></li>
+                </ul>
+                
             </li>
 
             <li <c:if test="${userActive != null}">class="active"</c:if>>
@@ -94,6 +101,16 @@
             
             <li>
                 <a href="#"><i class="fa fa-lg fa-fw fa-shopping-cart"></i> <span class="menu-item-parent">Tienda</span></a>
+                <ul>
+                    <li><a href="#">Asignaciones</a></li>
+                    <li><a href="#">Secciones</a></li>
+                    <li><a href="#">Productos en sección</a></li>
+                    <li><a href="#">Ordenes de sección</a>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#"><i class="fa fa-lg fa-fw fa-shopping-cart"></i> <span class="menu-item-parent">Tienda Online</span></a>
                 <ul>
                     <li><a href="#">Asignaciones</a></li>
                     <li><a href="#">Secciones</a></li>
