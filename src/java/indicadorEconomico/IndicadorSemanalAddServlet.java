@@ -6,6 +6,7 @@ package indicadorEconomico;
 
 import Helpers.Format;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -20,8 +21,8 @@ import javax.sql.DataSource;
  *
  * @author patricio
  */
-@WebServlet(name = "IndicadorDiarioAddServlet", urlPatterns = {"/IndicadorDiarioAddServlet"})
-public class IndicadorDiarioAddServlet extends HttpServlet {
+@WebServlet(name = "IndicadorSemanalAddServlet", urlPatterns = {"/IndicadorSemanalAddServlet"})
+public class IndicadorSemanalAddServlet extends HttpServlet {
 
     @Resource(name = "jdbc/ERP")
     private DataSource ds;
@@ -86,53 +87,72 @@ public class IndicadorDiarioAddServlet extends HttpServlet {
                     String seuro = request.getParameter("euro");
                     String sdolar = request.getParameter("dolar");
 
+                    String bencina93 = request.getParameter("bencina93");
+                    String bencina95 = request.getParameter("bencina95");
+                    String bencina97 = request.getParameter("bencina97");
+                    String diesel = request.getParameter("diesel");
+
                     /* establecer variables de sesion */
-                    session.setAttribute("redirectAdd", "indicadorDiario");
-                    session.setAttribute("uf", suf);
-                    session.setAttribute("euro", seuro);
-                    session.setAttribute("dolar", sdolar);
+                    session.setAttribute("redirectAdd", "indicadorSemanal");
+                    session.setAttribute("bencina93", bencina93);
+                    session.setAttribute("bencina95", bencina95);
+                    session.setAttribute("bencina97", bencina97);
+                    session.setAttribute("diesel", diesel);
 
                     /* instanciar indicador */
-                    IndicadorEconomicoDiarioBean indicador = new IndicadorEconomicoDiarioBean();
+                    IndicadorEconomicoSemanalBean indicador = new IndicadorEconomicoSemanalBean();
 
                     /* flag de error */
                     boolean error = false;
 
-                    /* comprobar UF */
-                    if (suf == null || suf.trim().equals("")) {
-                        session.setAttribute("msgErrorUF", "Debe ingresar el valor de la UF.");
+                    /* comprobar bencina 93 */
+                    if (bencina93 == null || bencina93.trim().equals("")) {
+                        session.setAttribute("msgErrorBencina93", "Debe ingresar el precio de la bencina 93.");
                         error = true;
                     } else {
                         try {
-                            indicador.setUf(Float.parseFloat(suf));
+                            indicador.setBencina93(Float.parseFloat(bencina93));
                         } catch (NumberFormatException n) {
-                            session.setAttribute("msgErrorUF", "El valor de la UF debe ser numérico.");
+                            session.setAttribute("msgErrorBencina93", "El precio de la bencina 93 debe ser numérico.");
                             error = true;
                         }
                     }
 
-                    /* comprobar euro */
-                    if (seuro == null || seuro.trim().equals("")) {
-                        session.setAttribute("msgErrorEuro", "Debe ingresar el valor del Euro.");
+                    /* comprobar bencina 95 */
+                    if (bencina95 == null || bencina95.trim().equals("")) {
+                        session.setAttribute("msgErrorBencina95", "Debe ingresar el precio de la bencina 95.");
                         error = true;
                     } else {
                         try {
-                            indicador.setEuro(Float.parseFloat(seuro));
+                            indicador.setBencina95(Float.parseFloat(bencina95));
                         } catch (NumberFormatException n) {
-                            session.setAttribute("msgErrorEuro", "El valor del Euro debe ser numérico.");
+                            session.setAttribute("msgErrorBencina95", "El precio de la bencina 95 debe ser numérico.");
                             error = true;
                         }
                     }
 
-                    /* comprobar dolar */
-                    if (sdolar == null || sdolar.trim().equals("")) {
-                        session.setAttribute("msgErrorDolar", "Debe ingresar el valor del Dólar.");
+                    /* comprobar bencina 97 */
+                    if (bencina97 == null || bencina97.trim().equals("")) {
+                        session.setAttribute("msgErrorBencina97", "Debe ingresar el precio de la bencina 97.");
                         error = true;
                     } else {
                         try {
-                            indicador.setDolar(Float.parseFloat(sdolar));
+                            indicador.setBencina97(Float.parseFloat(bencina97));
                         } catch (NumberFormatException n) {
-                            session.setAttribute("msgErrorDolar", "El valor del Dólar debe ser numérico.");
+                            session.setAttribute("msgErrorBencina97", "El precio de la bencina 97 debe ser numérico.");
+                            error = true;
+                        }
+                    }
+
+                    /* comprobar diesel */
+                    if (diesel == null || diesel.trim().equals("")) {
+                        session.setAttribute("msgErrorDiesel", "Debe ingresar el precio del Diesel.");
+                        error = true;
+                    } else {
+                        try {
+                            indicador.setDiesel(Float.parseFloat(diesel));
+                        } catch (NumberFormatException n) {
+                            session.setAttribute("msgErrorDiesel", "El precio del Diesel debe ser numérico.");
                             error = true;
                         }
                     }
@@ -143,15 +163,15 @@ public class IndicadorDiarioAddServlet extends HttpServlet {
 
                     /* comprobar fecha duplicada - Atencion: un indicador no puede ser ingresado dos veces el mismo dia */
                     try {
-                        String dateDup = ieDAO.indicadorDiarioGetLastDate();
-                                            
+                        String dateDup = ieDAO.indicadorSemanalGetLastDate();
+
                         /* comparar ultima fecha con fecha actual */
-                        if (Format.currentDateYYMMDDDD().equals(Format.dateYYYYMMDD(dateDup))) {                            
+                        if (Format.currentDateYYMMDDDD().equals(Format.dateYYYYMMDD(dateDup))) {
                             session.setAttribute("msgErrorAdd", "El indicador para hoy ya fue ingresado.");
                             error = true;
                         }
                     } catch (Exception ex) {
-                        session.setAttribute("msgErrorAdd", "Ha ocurrido un problema y no puede comprobar las fechas. Error:" + ex.getLocalizedMessage());                        
+                        session.setAttribute("msgErrorAdd", "Ha ocurrido un problema y no puede comprobar las fechas. Error:" + ex.getLocalizedMessage());
                         error = true;
                         ex.getCause();
                     }
@@ -159,7 +179,7 @@ public class IndicadorDiarioAddServlet extends HttpServlet {
                     /* actualizar registro */
                     if (!error) {
                         try {
-                            ieDAO.indicadorDiarioInsert(indicador);
+                            ieDAO.indicadorSemanalInsert(indicador);
                             session.setAttribute("msgOk", "Registro ingresado exitosamente.");
                         } catch (Exception ex) {
                             session.setAttribute("msgErrorAdd", "Ha ocurrido un problema y no puede ingresar el nuevo registro. Error:" + ex.getLocalizedMessage());
@@ -168,7 +188,7 @@ public class IndicadorDiarioAddServlet extends HttpServlet {
                     }
 
                     /* send redirect */
-                    response.sendRedirect("/ERP/IndicadorDiarioGetAddServlet");
+                    response.sendRedirect("/ERP/IndicadorSemanalGetAddServlet");
                 }
             } catch (Exception sessionException) {
                 /* enviar a la vista de login */

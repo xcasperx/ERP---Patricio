@@ -60,7 +60,7 @@
                 <ul>
                     <li <c:if test="${indGrafActive != null}">class="active"</c:if>><a href="IndicadorEconomicoGetServlet">Gráficos</a></li>
                     <li <c:if test="${indicadorDiarioActive != null}">class="active"</c:if>><a href="IndicadorDiarioMainServlet">Mantenedor Diario</a></li>
-                    <li><a href="#">Mantenedor Semanal</a></li>
+                    <li <c:if test="${indicadorSemanalActive != null}">class="active"</c:if>><a href="IndicadorSemanalMainServlet">Mantenedor Semanal</a></li>
                     <li><a href="#">Mantenedor Mensual</a></li>
                 </ul>
                 

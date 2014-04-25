@@ -147,6 +147,7 @@ public class IndicadorDiarioUpdateServlet extends HttpServlet {
                             indicador.setDolar(Float.parseFloat(sdolar));
                         } catch (NumberFormatException n) {
                             session.setAttribute("msgErrorDolar", "El valor del Dólar debe ser numérico.");
+                            error = true;
                         }
                     }
 

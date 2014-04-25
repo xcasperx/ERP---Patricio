@@ -6,6 +6,7 @@
 package indicadorEconomico;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.Collection;
 import javax.annotation.Resource;
@@ -21,8 +22,8 @@ import javax.sql.DataSource;
  *
  * @author patricio
  */
-@WebServlet(name="IndicadorDiarioMainServlet", urlPatterns={"/IndicadorDiarioMainServlet"})
-public class IndicadorDiarioMainServlet extends HttpServlet {
+@WebServlet(name="IndicadorSemanalMainServlet", urlPatterns={"/IndicadorSemanalMainServlet"})
+public class IndicadorSemanalMainServlet extends HttpServlet {
     
     @Resource(name = "jdbc/ERP")
     private DataSource ds;
@@ -36,7 +37,7 @@ public class IndicadorDiarioMainServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       
+
         request.setCharacterEncoding("UTF-8");
 
         Connection conexion = null;
@@ -66,11 +67,11 @@ public class IndicadorDiarioMainServlet extends HttpServlet {
                 // COMPROBAR PERMISOS DE USUARIO
                 ///////////////////////////////////
 
-                if (userTypeX != 1) {
+                if (userTypeX > 2) {
                     /* acceso prohibido */
                     request.getRequestDispatcher("/ForbiddenServlet").forward(request, response);
                 } else {
-                    /* ACCESO SÓLO SUPERUSUARIO */
+                    /* ACCESO: Superusuario - Administrador */
 
                     /* establecer variables de usuario en sesion */
                     request.setAttribute("idUserX", idUserX);
@@ -97,7 +98,7 @@ public class IndicadorDiarioMainServlet extends HttpServlet {
 
                     /* comprobar redirect desde DeleteServlet */
                     if (redirect == null || redirect.trim().equals("")) {
-                    } else if (redirect.equals("indicadorDiario")) {
+                    } else if (redirect.equals("indicadorSemanal")) {
 
                         /* comprobar eliminacion */
                         if (msgDel == null || msgDel.trim().equals("")) {
@@ -120,7 +121,7 @@ public class IndicadorDiarioMainServlet extends HttpServlet {
 
                     /* obtener lista de Indicadores Diarios */
                     try {
-                        Collection<IndicadorEconomicoDiarioBean> list = ieDAO.indicadorDiarioGetAll();
+                        Collection<IndicadorEconomicoSemanalBean> list = ieDAO.indicadorSemanalGetAll();
                         request.setAttribute("list", list);
 
                     } catch (Exception ex) {
@@ -128,10 +129,10 @@ public class IndicadorDiarioMainServlet extends HttpServlet {
                     }
 
                     /* marcar pestaña de menu */
-                    request.setAttribute("indicadorDiarioActive", "active");
+                    request.setAttribute("indicadorSemanalActive", "active");
 
                     /* despachar a la vista */
-                    request.getRequestDispatcher("/indicadorEconomico/indicadorDiarioMain.jsp").forward(request, response);
+                    request.getRequestDispatcher("/indicadorEconomico/indicadorSemanalMain.jsp").forward(request, response);
                 }
             } catch (Exception ex) {
                 System.out.println("no ha iniciado session");

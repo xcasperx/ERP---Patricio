@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> Latte ERP | Inciar Sesión </title>
+        <title> Latte ERP | Iniciar Sesión </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -117,8 +117,9 @@
                                         <label class="label">Contraseña</label>
                                         <label class="input"> <i class="icon-append fa fa-lock"></i>
                                             <input type="password" name="password">
-                                            <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Por favor ingrese su contraseña</b> </label>
+                                            <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Por favor ingrese su contraseña</b> </label>                                        
                                         <div class="note">
+                                            <p>&nbsp;</p>
                                             <a href="forgotpassword.html">Olvidó contraseña?</a>
                                         </div>
                                     </section>

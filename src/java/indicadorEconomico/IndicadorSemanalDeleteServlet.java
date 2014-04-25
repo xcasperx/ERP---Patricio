@@ -7,6 +7,7 @@ package indicadorEconomico;
 import Helpers.Message;
 import Helpers.MessageList;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,8 +24,8 @@ import javax.sql.DataSource;
  *
  * @author patricio
  */
-@WebServlet(name = "IndicadorDiarioDeleteServlet", urlPatterns = {"/IndicadorDiarioDeleteServlet"})
-public class IndicadorDiarioDeleteServlet extends HttpServlet {
+@WebServlet(name = "IndicadorSemanalDeleteServlet", urlPatterns = {"/IndicadorSemanalDeleteServlet"})
+public class IndicadorSemanalDeleteServlet extends HttpServlet {
 
     @Resource(name = "jdbc/ERP")
     private DataSource ds;
@@ -87,7 +88,7 @@ public class IndicadorDiarioDeleteServlet extends HttpServlet {
                     String btnDelCol = request.getParameter("btnDelCol");
 
                     /* establecer atributos de session */
-                    session.setAttribute("redirectDel", "indicadorDiario");
+                    session.setAttribute("redirectDel", "indicadorSemanal");
 
                     //////////////////////////
                     // ELIMINAR POR REGISTRO
@@ -96,7 +97,7 @@ public class IndicadorDiarioDeleteServlet extends HttpServlet {
                     if (btnDelRow != null) {
                         try {
                             int id = Integer.parseInt(request.getParameter("id"));
-                            ieDAO.indicadorDiarioDelete(id);
+                            ieDAO.indicadorSemanalDelete(id);
                             session.setAttribute("msgDel", "Un registro ha sido eliminado.");
                         } catch (Exception ex) {
                             ex.getCause();
@@ -108,18 +109,18 @@ public class IndicadorDiarioDeleteServlet extends HttpServlet {
                     // ELIMINAR VARIOS REGISTROS
                     ///////////////////////////////                    
 
-                    if (btnDelCol != null) {                                                
+                    if (btnDelCol != null) {
                         /* instanciar lista de mensajes */
                         Collection<Message> msgList = new ArrayList<Message>();
 
                         int i = 0;
                         int cont = 0;
                         String[] outerArray = request.getParameterValues("chk");
-                                                
+
                         try {
                             while (outerArray[i] != null) {
                                 try {
-                                    ieDAO.indicadorDiarioDelete(Integer.parseInt(outerArray[i]));
+                                    ieDAO.indicadorSemanalDelete(Integer.parseInt(outerArray[i]));
                                     cont++;
                                 } catch (Exception ex) {
                                     msgList.add(MessageList.addMessage("No se pudo eliminar el registro con ID: " + outerArray[i]));
@@ -129,8 +130,8 @@ public class IndicadorDiarioDeleteServlet extends HttpServlet {
                             }
                         } catch (Exception ex) {
                         }
-                        
-                        System.out.println("cont " + cont); 
+
+                        System.out.println("cont " + cont);
 
                         if (cont == 1) {
                             session.setAttribute("msgDel", "Un registro ha sido eliminado.");
@@ -145,7 +146,7 @@ public class IndicadorDiarioDeleteServlet extends HttpServlet {
                     }
 
                     /* send redirect */
-                    response.sendRedirect("IndicadorDiarioMainServlet");
+                    response.sendRedirect("IndicadorSemanalMainServlet");
                 }
             } catch (Exception sessionException) {
                 System.out.println("no ha iniciado session");
