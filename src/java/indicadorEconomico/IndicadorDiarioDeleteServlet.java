@@ -128,7 +128,7 @@ public class IndicadorDiarioDeleteServlet extends HttpServlet {
                                 i++;
                             }
                         } catch (Exception ex) {
-                        }                                               
+                        }
 
                         if (cont == 1) {
                             session.setAttribute("msgDel", "Un registro ha sido eliminado.");
