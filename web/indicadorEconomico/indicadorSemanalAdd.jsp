@@ -233,270 +233,270 @@
                                                         <label class="label">Bencina 95</label>
                                                         <c:if test="${msgErrorBencina95 == null}"><label class="input"></c:if> 
                                                             <c:if test="${msgErrorBencina95 != null}"><label class="input state-error"></c:if>
-                                                                    <label class="input"> <i class="icon-prepend fa fa-tint"></i>
-                                                                        <input type="text" maxlength="7" name="bencina95" placeholder="Ingrese Bencina 95" value="<c:out value="${bencina95}" />">
-                                                                    <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese precio de la bencina 95</b>
-                                                                </label>
-                                                                <div class="note note-error">Este campo es requerido.</div>                                                                                                                                                                                
-                                                                </section>                                                   
-                                                                </div>
-                                                                <div class="row">
-                                                                    <section class="col col-6">                                                        
-                                                                        <label class="label">Bencina 97</label>
-                                                                        <c:if test="${msgErrorBencina97 == null}"><label class="input"></c:if> 
-                                                                            <c:if test="${msgErrorBencina97 != null}"><label class="input state-error"></c:if>
-                                                                                    <label class="input"> <i class="icon-prepend fa fa-tint"></i>
-                                                                                        <input type="text" maxlength="7" name="bencina97" placeholder="Ingrese Bencina 97" value="<c:out value="${bencina97}" />">
-                                                                                    <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el precio de la bencina 97</b>
-                                                                                </label>
-                                                                                <div class="note note-error">Este campo es requerido.</div>                                                                                                                                                                                
-                                                                                </section>                                                   
-                                                                                </div>
-                                                                                <div class="row">  
-                                                                                    <section class="col col-6">
-                                                                                        <label class="label">Diesel</label>
-                                                                                        <c:if test="${msgErrorDiesel == null}"><label class="input"></c:if> 
-                                                                                            <c:if test="${msgErrorDiesel != null}"><label class="input state-error"></c:if>
-                                                                                                    <i class="icon-prepend fa fa-tint"></i>
-                                                                                                    <input type="text" maxlength="7" name="diesel" placeholder="Ingrese Diesel" value="<c:out value="${diesel}" />">
-                                                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el precio del Diesel</b>
-                                                                                            </label>
-                                                                                            <div class="note note-error">Este campo es requerido.</div>                                                        
-                                                                                    </section>                                                  
-                                                                                </div>
+                                                                    <i class="icon-prepend fa fa-tint"></i>
+                                                                    <input type="text" maxlength="7" name="bencina95" placeholder="Ingrese Bencina 95" value="<c:out value="${bencina95}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese precio de la bencina 95</b>
+                                                            </label>
+                                                            <div class="note note-error">Este campo es requerido.</div>                                                                                                                                                                                
+                                                    </section>                                                   
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-6">                                                        
+                                                        <label class="label">Bencina 97</label>
+                                                        <c:if test="${msgErrorBencina97 == null}"><label class="input"></c:if> 
+                                                            <c:if test="${msgErrorBencina97 != null}"><label class="input state-error"></c:if>
+                                                                    <i class="icon-prepend fa fa-tint"></i>
+                                                                    <input type="text" maxlength="7" name="bencina97" placeholder="Ingrese Bencina 97" value="<c:out value="${bencina97}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el precio de la bencina 97</b>
+                                                            </label>
+                                                            <div class="note note-error">Este campo es requerido.</div>                                                                                                                                                                                
+                                                    </section>                                                   
+                                                </div>
+                                                <div class="row">  
+                                                    <section class="col col-6">
+                                                        <label class="label">Diesel</label>
+                                                        <c:if test="${msgErrorDiesel == null}"><label class="input"></c:if> 
+                                                            <c:if test="${msgErrorDiesel != null}"><label class="input state-error"></c:if>
+                                                                    <i class="icon-prepend fa fa-tint"></i>
+                                                                    <input type="text" maxlength="7" name="diesel" placeholder="Ingrese Diesel" value="<c:out value="${diesel}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el precio del Diesel</b>
+                                                            </label>
+                                                            <div class="note note-error">Este campo es requerido.</div>                                                        
+                                                    </section>                                                  
+                                                </div>
 
-                                                                                <div class="row">
-                                                                                    <section class="col col-6">
-                                                                                        <span class="label label-danger"><small class="slideInRight"><font color="white" size="1"><strong>&nbsp;&nbsp; Indicaciones:</strong> Separe decimales con punto (.)</font></small></span>
-                                                                                    </section>
-                                                                                </div>
-                                                                                </fieldset>
+                                                <div class="row">
+                                                    <section class="col col-6">
+                                                        <span class="label label-danger"><small class="slideInRight"><font color="white" size="1"><strong>&nbsp;&nbsp; Indicaciones:</strong> Separe decimales con punto (.)</font></small></span>
+                                                    </section>
+                                                </div>
+                                            </fieldset>
 
-                                                                                <footer>                                                
-                                                                                    <button class="btn btn-primary" type="submit">
-                                                                                        <span><font size="1">ACTUALIZAR</font></span>
-                                                                                    </button>                                                
-                                                                                </footer>
-                                                                                </form>
+                                            <footer>                                                
+                                                <button class="btn btn-primary" type="submit">
+                                                    <span><font size="1">ACTUALIZAR</font></span>
+                                                </button>                                                
+                                            </footer>
+                                        </form>
 
-                                                                                </div>
-                                                                                <!-- end widget content -->
+                                    </div>
+                                    <!-- end widget content -->
 
-                                                                                </div>
-                                                                                <!-- end widget div -->
+                                </div>
+                                <!-- end widget div -->
 
-                                                                                </div>
-                                                                                <!-- end widget -->                         
+                            </div>
+                            <!-- end widget -->                         
 
-                                                                                </article>
-                                                                                <!-- END COL -->                       		
+                        </article>
+                        <!-- END COL -->                       		
 
-                                                                                </div>
-                                                                                <!-- END ROW -->
+                    </div>
+                    <!-- END ROW -->
 
-                                                                                </section>
-                                                                                <!-- end widget grid -->
+                </section>
+                <!-- end widget grid -->
 
-                                                                                </div>
-                                                                                <!-- END MAIN CONTENT -->
+            </div>
+            <!-- END MAIN CONTENT -->
 
-                                                                                </div>
-                                                                                <!-- END MAIN PANEL -->
+        </div>
+        <!-- END MAIN PANEL -->
 
-                                                                                <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
-                                                                                Note: These tiles are completely responsive,
-                                                                                you can add as many as you like
-                                                                                -->
-                                                                                <c:import var="shortcut" url="/shortcut.jsp" />
-                                                                                <c:out value="${shortcut}" escapeXml="false" />
-                                                                                <!-- END SHORTCUT AREA -->
+        <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+        Note: These tiles are completely responsive,
+        you can add as many as you like
+        -->
+        <c:import var="shortcut" url="/shortcut.jsp" />
+        <c:out value="${shortcut}" escapeXml="false" />
+        <!-- END SHORTCUT AREA -->
 
-                                                                                <!--================================================== -->
+        <!--================================================== -->
 
-                                                                                <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-                                                                                <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
+        <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+        <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
 
-                                                                                <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-                                                                                <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-                                                                                <script>
-                                                                                    if (!window.jQuery) {
-                                                                                        document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
-                                                                                    }
-                                                                                </script>
+        <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script>
+            if (!window.jQuery) {
+                document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+            }
+        </script>
 
-                                                                                <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-                                                                                <script>
-                                                                                    if (!window.jQuery.ui) {
-                                                                                        document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-                                                                                    }
-                                                                                </script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script>
+            if (!window.jQuery.ui) {
+                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+            }
+        </script>
 
-                                                                                <!-- JS TOUCH : include this plugin for mobile drag / drop touch events
-                                                                                <script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
+        <!-- JS TOUCH : include this plugin for mobile drag / drop touch events
+        <script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
 
-                                                                                <!-- BOOTSTRAP JS -->
-                                                                                <script src="js/bootstrap/bootstrap.min.js"></script>
+        <!-- BOOTSTRAP JS -->
+        <script src="js/bootstrap/bootstrap.min.js"></script>
 
-                                                                                <!-- CUSTOM NOTIFICATION -->
-                                                                                <script src="js/notification/SmartNotification.min.js"></script>
+        <!-- CUSTOM NOTIFICATION -->
+        <script src="js/notification/SmartNotification.min.js"></script>
 
-                                                                                <!-- JARVIS WIDGETS -->
-                                                                                <script src="js/smartwidgets/jarvis.widget.min.js"></script>
+        <!-- JARVIS WIDGETS -->
+        <script src="js/smartwidgets/jarvis.widget.min.js"></script>
 
-                                                                                <!-- EASY PIE CHARTS -->
-                                                                                <script src="js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+        <!-- EASY PIE CHARTS -->
+        <script src="js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
 
-                                                                                <!-- SPARKLINES -->
-                                                                                <script src="js/plugin/sparkline/jquery.sparkline.min.js"></script>
+        <!-- SPARKLINES -->
+        <script src="js/plugin/sparkline/jquery.sparkline.min.js"></script>
 
-                                                                                <!-- JQUERY VALIDATE -->
-                                                                                <script src="js/plugin/jquery-validate/jquery.validate.min.js"></script>
+        <!-- JQUERY VALIDATE -->
+        <script src="js/plugin/jquery-validate/jquery.validate.min.js"></script>
 
-                                                                                <!-- JQUERY MASKED INPUT -->
-                                                                                <script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+        <!-- JQUERY MASKED INPUT -->
+        <script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>
 
-                                                                                <!-- JQUERY SELECT2 INPUT -->
-                                                                                <script src="js/plugin/select2/select2.min.js"></script>
+        <!-- JQUERY SELECT2 INPUT -->
+        <script src="js/plugin/select2/select2.min.js"></script>
 
-                                                                                <!-- JQUERY UI + Bootstrap Slider -->
-                                                                                <script src="js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+        <!-- JQUERY UI + Bootstrap Slider -->
+        <script src="js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
 
-                                                                                <!-- browser msie issue fix -->
-                                                                                <script src="js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+        <!-- browser msie issue fix -->
+        <script src="js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 
-                                                                                <!-- FastClick: For mobile devices -->
-                                                                                <script src="js/plugin/fastclick/fastclick.js"></script>
+        <!-- FastClick: For mobile devices -->
+        <script src="js/plugin/fastclick/fastclick.js"></script>
 
-                                                                                <!--[if IE 7]>
-                                                                        
-                                                                                <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-                                                                        
-                                                                                <![endif]-->       
+        <!--[if IE 7]>
 
-                                                                                <!-- MAIN APP JS FILE -->
-                                                                                <script src="js/app.js"></script>
+        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
 
-                                                                                <!-- PAGE RELATED PLUGIN(S) -->
-                                                                                <script src="js/plugin/jquery-form/jquery-form.min.js"></script>
+        <![endif]-->       
 
-                                                                                <!-- disabledButton -->
-                                                                                <script src="js/disabledButton.js"></script>        
+        <!-- MAIN APP JS FILE -->
+        <script src="js/app.js"></script>
 
-                                                                                <script type="text/javascript">
+        <!-- PAGE RELATED PLUGIN(S) -->
+        <script src="js/plugin/jquery-form/jquery-form.min.js"></script>
 
-                                                                                    // DO NOT REMOVE : GLOBAL FUNCTIONS!
+        <!-- disabledButton -->
+        <script src="js/disabledButton.js"></script>        
 
-                                                                                    $(document).ready(function() {
+        <script type="text/javascript">
 
-                                                                                        pageSetUp();
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
-                                                                                        var $checkoutForm = $('#form').validate({
-                                                                                            // Rules for form validation
-                                                                                            rules: {
-                                                                                                bencina93: {
-                                                                                                    required: true
-                                                                                                },
-                                                                                                bencina95: {
-                                                                                                    required: true
-                                                                                                },
-                                                                                                bencina97: {
-                                                                                                    required: true
-                                                                                                },
-                                                                                                diesel: {
-                                                                                                    required: true
-                                                                                                }
-                                                                                            },
-                                                                                            // Messages for form validation
-                                                                                            messages: {
-                                                                                                bencina93: {
-                                                                                                    required: 'Por favor ingrese el precio de la bencina 93'
-                                                                                                },
-                                                                                                bencina95: {
-                                                                                                    required: 'Por favor ingrese el precio de la bencina 95'
-                                                                                                },
-                                                                                                bencina97: {
-                                                                                                    required: 'Por favor ingrese el precio de la bencina 97'
-                                                                                                },
-                                                                                                diesel: {
-                                                                                                    required: 'Por favor ingrese el precio del diesel'
-                                                                                                }
-                                                                                            },
-                                                                                            // Do not change code below
-                                                                                            errorPlacement: function(error, element) {
-                                                                                                error.insertAfter(element.parent());
-                                                                                            }
-                                                                                        });
+            $(document).ready(function() {
 
-                                                                                        // Mensajes emergentes
-                                                                                    <c:if test="${msgOk != null}">
-                                                                                        $("#correcto").ready(function(e) {
-                                                                                            $.smallBox({
-                                                                                                title: "Correcto!",
-                                                                                                content: "<i class='glyphicon glyphicon-floppy-disk'></i> <i> Registro guardado...</i>",
-                                                                                                color: "#659265",
-                                                                                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                                                                                                timeout: 5000
-                                                                                            });
-                                                                                            e.preventDefault();
-                                                                                        })
-                                                                                    </c:if>
+                pageSetUp();
 
-                                                                                    <c:if test="${msgList != null}">
-                                                                                            $("#errores").ready(function(e) {
-                                                                                                $.smallBox({
-                                                                                                    title: "Error!",
-                                                                                                    content: "<i class='glyphicon glyphicon-floppy-remove'></i> <i>No se pudo guardar el registro...</i>",
-                                                                                                    color: "#C46A69",
-                                                                                                    iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                                                                                                    timeout: 5000
-                                                                                                });
-                                                                                                e.preventDefault();
-                                                                                            })
-                                                                                    </c:if>
+                var $checkoutForm = $('#form').validate({
+                    // Rules for form validation
+                    rules: {
+                        bencina93: {
+                            required: true
+                        },
+                        bencina95: {
+                            required: true
+                        },
+                        bencina97: {
+                            required: true
+                        },
+                        diesel: {
+                            required: true
+                        }
+                    },
+                    // Messages for form validation
+                    messages: {
+                        bencina93: {
+                            required: 'Por favor ingrese el precio de la bencina 93'
+                        },
+                        bencina95: {
+                            required: 'Por favor ingrese el precio de la bencina 95'
+                        },
+                        bencina97: {
+                            required: 'Por favor ingrese el precio de la bencina 97'
+                        },
+                        diesel: {
+                            required: 'Por favor ingrese el precio del diesel'
+                        }
+                    },
+                    // Do not change code below
+                    errorPlacement: function(error, element) {
+                        error.insertAfter(element.parent());
+                    }
+                });
 
+                // Mensajes emergentes
+            <c:if test="${msgOk != null}">
+                $("#correcto").ready(function(e) {
+                    $.smallBox({
+                        title: "Correcto!",
+                        content: "<i class='glyphicon glyphicon-floppy-disk'></i> <i> Registro guardado...</i>",
+                        color: "#659265",
+                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                        timeout: 5000
+                    });
+                    e.preventDefault();
+                })
+            </c:if>
 
-                                                                                            // START AND FINISH DATE
-                                                                                            $('#startdate').datepicker({
-                                                                                                dateFormat: 'dd.mm.yy',
-                                                                                                prevText: '<i class="fa fa-chevron-left"></i>',
-                                                                                                nextText: '<i class="fa fa-chevron-right"></i>',
-                                                                                                onSelect: function(selectedDate) {
-                                                                                                    $('#finishdate').datepicker('option', 'minDate', selectedDate);
-                                                                                                }
-                                                                                            });
-
-                                                                                            $('#finishdate').datepicker({
-                                                                                                dateFormat: 'dd.mm.yy',
-                                                                                                prevText: '<i class="fa fa-chevron-left"></i>',
-                                                                                                nextText: '<i class="fa fa-chevron-right"></i>',
-                                                                                                onSelect: function(selectedDate) {
-                                                                                                    $('#startdate').datepicker('option', 'maxDate', selectedDate);
-                                                                                                }
-                                                                                            });
+            <c:if test="${msgList != null}">
+                    $("#errores").ready(function(e) {
+                        $.smallBox({
+                            title: "Error!",
+                            content: "<i class='glyphicon glyphicon-floppy-remove'></i> <i>No se pudo guardar el registro...</i>",
+                            color: "#C46A69",
+                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                            timeout: 5000
+                        });
+                        e.preventDefault();
+                    })
+            </c:if>
 
 
+                    // START AND FINISH DATE
+                    $('#startdate').datepicker({
+                        dateFormat: 'dd.mm.yy',
+                        prevText: '<i class="fa fa-chevron-left"></i>',
+                        nextText: '<i class="fa fa-chevron-right"></i>',
+                        onSelect: function(selectedDate) {
+                            $('#finishdate').datepicker('option', 'minDate', selectedDate);
+                        }
+                    });
 
-                                                                                        })
+                    $('#finishdate').datepicker({
+                        dateFormat: 'dd.mm.yy',
+                        prevText: '<i class="fa fa-chevron-left"></i>',
+                        nextText: '<i class="fa fa-chevron-right"></i>',
+                        onSelect: function(selectedDate) {
+                            $('#startdate').datepicker('option', 'maxDate', selectedDate);
+                        }
+                    });
 
-                                                                                </script>
 
-                                                                                <!-- Your GOOGLE ANALYTICS CODE Below -->
-                                                                                <script type="text/javascript">
-                                                                                    var _gaq = _gaq || [];
-                                                                                    _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-                                                                                    _gaq.push(['_trackPageview']);
 
-                                                                                    (function() {
-                                                                                        var ga = document.createElement('script');
-                                                                                        ga.type = 'text/javascript';
-                                                                                        ga.async = true;
-                                                                                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                                                                                        var s = document.getElementsByTagName('script')[0];
-                                                                                        s.parentNode.insertBefore(ga, s);
-                                                                                    })();
+                })
 
-                                                                                </script>
+        </script>
 
-                                                                                </body>
+        <!-- Your GOOGLE ANALYTICS CODE Below -->
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+            _gaq.push(['_trackPageview']);
 
-                                                                                </html>
+            (function() {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
+
+    </body>
+
+</html>

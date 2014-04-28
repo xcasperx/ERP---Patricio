@@ -54,7 +54,7 @@
             <!--<span id="logo"></span>-->
 
             <div id="logo-group">
-                <span id="logo"> <img src="img/logo.png" alt="SmartAdmin"> </span>
+                <span id="logo"> <img src="img/logo.png" alt="Latte"> </span>
 
                 <!-- END AJAX-DROPDOWN -->
             </div>
@@ -69,12 +69,12 @@
             <div id="content" class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
-                        <h1 class="txt-color-red login-header-big">SmartAdmin</h1>
+                        <h1 class="txt-color-red login-header-big">Latte Business R1 - ERP/CRM/SRM</h1>
                         <div class="hero">
                             <div class="pull-left login-desc-box-l">
-                                <h4 class="paragraph-header">Esta bien ser Inteligente. Experimente la simplicidad de ERP Bisuite, donde quiera que vaya!</h4>
+                                <h4 class="paragraph-header">Esta bien ser Inteligente. Experimente la simplicidad de Latte, donde quiera que vaya!</h4>
                                 <div class="login-app-icons">
-                                    <a href="javascript:void(0);" class="btn btn-danger btn-sm">Panel administrativo</a>
+                                    <a href="javascript:void(0);" class="btn btn-danger btn-sm">Pruebe la Demo</a>
                                     <a href="javascript:void(0);" class="btn btn-danger btn-sm">Saber más</a>
                                 </div>
                             </div>
@@ -83,15 +83,15 @@
 
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                <h5 class="about-heading">Acerca de ERP - Está usted al día?</h5>
+                                <h5 class="about-heading">Los procesos de negocio - Está usted al día?</h5>
                                 <p>
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.
+                                    Vaya un poco más lejos, implementar los nuevos sistemas de gestión y planificación de recursos empresariales aumentará la eficiencia y la productividad para una rápida toma de decisiones.
                                 </p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                <h5 class="about-heading">Not just your average template!</h5>
+                                <h5 class="about-heading">Trabaje desde la nube!</h5>
                                 <p>
-                                    Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi voluptatem accusantium!
+                                    Diriga sus negocios desde un smartphone, tablet o pc. Incrementar el trabajo colaborativo hará más ligero los procesos y facilitará las tareas hasta en las situaciones más complicadas.
                                 </p>
                             </div>
                         </div>
@@ -106,17 +106,17 @@
 
                                 <fieldset>
                                     <section>
-                                        <label class="label">Username</label>
+                                        <label class="label">Nombre de Usuario</label>
                                         <label class="input"> <i class="icon-append fa fa-user"></i>
-                                            <input type="text" name="username">
-                                            <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Por favor ingrese username o email</b>
+                                            <input type="text" name="username" maxlength="45">
+                                            <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Por favor ingrese nombre de usuario o email</b>
                                         </label>
                                     </section>
 
                                     <section>
                                         <label class="label">Contraseña</label>
                                         <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                            <input type="password" name="password">
+                                            <input type="password" name="password" maxlength="20">
                                             <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Por favor ingrese su contraseña</b> </label>                                        
                                         <div class="note">
                                             <p>&nbsp;</p>
@@ -225,7 +225,7 @@
                     // Rules for form validation
                     rules: {
                         username: {
-                            required: true,                            
+                            required: true                            
                         },
                         password: {
                             required: true,
@@ -236,10 +236,10 @@
                     // Messages for form validation
                     messages: {
                         username: {
-                            required: 'Por favor, ingrese username',                            
+                            required: 'Por favor, ingrese nombre de usuario o email'                         
                         },
                         password: {
-                            required: 'Por favor, ingrese password'
+                            required: 'Por favor, ingrese contraseña'
                         }
                     },
                     // Do not change code below

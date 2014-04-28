@@ -263,9 +263,9 @@
                                                             <td><c:out value="${list.bencina95}" /></td>
                                                             <td><c:out value="${list.bencina97}" /></td>
                                                             <td><c:out value="${list.diesel}" /></td>
-                                                            <td><c:out value="${usernameX}" /></td>
+                                                            <td><c:out value="${list.username}" /></td>
                                                             <td><c:out value="${list.publicTime}" /></td>
-                                                            <td><c:out value="${list.publicTime}" /></td>
+                                                            <td><c:out value="${list.updateTime}" /></td>
                                                             <td width=280>
                                                                 <div align="right">
                                                                     <a href="IndicadorSemanalGetServlet?id=<c:out value="${list.id}"/>">

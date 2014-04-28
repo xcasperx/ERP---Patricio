@@ -443,7 +443,7 @@
                         timeout: 5000
                     });
                     e.preventDefault();
-                })
+                });
             </c:if>
 
             <c:if test="${msgList != null}">
@@ -456,7 +456,7 @@
                             timeout: 5000
                         });
                         e.preventDefault();
-                    })
+                    });
             </c:if>
 
 

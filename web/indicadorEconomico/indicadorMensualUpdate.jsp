@@ -1,5 +1,5 @@
 <%-- 
-    Document   : indicadorSemanalUpdate
+    Document   : indicadorMensualUpdate
     Created on : 24-04-2014, 18:57:01 AM
     Author     : patricio
 --%>
@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> Latte ERP | Indicador Semanal</title>
+        <title> Latte ERP | Indicador Mensual</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -137,10 +137,10 @@
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">                    
                     <li>
-                        <a href="IndicadorSemanalMainServlet"><i class="text-primary fa fa-table"></i> DataTable Indicador Semanal</a>
+                        <a href="IndicadorMensualMainServlet"><i class="text-primary fa fa-table"></i> DataTable Indicador Mensual</a>
                     </li>      
                     <li>
-                        <i class="fa fa-edit"></i>Actualizar Indicador Semanal
+                        <i class="fa fa-edit"></i>Actualizar Indicador Mensual
                     </li>
                 </ol>
                 <!-- end breadcrumb -->
@@ -170,7 +170,7 @@
                             Mantenedor 
                             <span>
                                 <i class="fa fa-bar-chart-o fa-fw"></i> 
-                                Indicador Semanal
+                                Indicador Mensual
                             </span>
                         </h2>
                     </div>
@@ -196,7 +196,7 @@
                             <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-togglebutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Actualizar Indicador Semanal </h2>				
+                                    <h2>Actualizar Indicador Mensual </h2>				
 
                                 </header>
 
@@ -213,12 +213,12 @@
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">                                        
 
-                                        <form action="IndicadorSemanalUpdateServlet" method="POST" name="formUpdate" id="formUpdate" class="smart-form" novalidate="novalidate">
+                                        <form action="IndicadorMensualUpdateServlet" method="POST" name="formUpdate" id="formUpdate" class="smart-form" novalidate="novalidate">
 
                                             <fieldset>                                                
                                                 <div class="row">                                                                                                        
                                                     <section class="col col-6">
-                                                        <small class="slideInRight"><font size="2"><strong>ID Indicador Semanal #<c:out value="${id}"/></strong></font></small>
+                                                        <small class="slideInRight"><font size="2"><strong>ID Indicador Mensual #<c:out value="${id}"/></strong></font></small>
                                                         <label class="input state-disabled">
                                                             <input type="hidden" name="id" value="<c:out value="${id}" />"/>
                                                         </label>                                                                                                                        
@@ -226,51 +226,27 @@
                                                 </div>
                                                 <div class="row">  
                                                     <section class="col col-6">
-                                                        <label class="label">Bencina 93</label>
-                                                        <c:if test="${msgErrorBencina93 == null}"><label class="input"></c:if> 
-                                                            <c:if test="${msgErrorBencina93 != null}"><label class="input state-error"></c:if>
-                                                                    <i class="icon-prepend fa fa-tint"></i>
-                                                                    <input type="text" maxlength="7" name="bencina93" placeholder="Ingrese Bencina 93" value="<c:out value="${bencina93}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el precio de la bencina 93</b>
+                                                        <label class="label">IPC</label>
+                                                        <c:if test="${msgErrorIPC == null}"><label class="input"></c:if> 
+                                                            <c:if test="${msgErrorIPC != null}"><label class="input state-error"></c:if>
+                                                                    <i class="icon-prepend fa fa-bar-chart-o"></i>
+                                                                    <input type="text" maxlength="5" name="ipc" placeholder="Ingrese IPC" value="<c:out value="${ipc}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el porcentaje del IPC</b>
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>                                                        
                                                     </section>                                                  
                                                 </div>
                                                 <div class="row">
                                                     <section class="col col-6">                                                        
-                                                        <label class="label">Bencina 95</label>
-                                                        <c:if test="${msgErrorBencina95 == null}"><label class="input"></c:if> 
-                                                            <c:if test="${msgErrorBencina95 != null}"><label class="input state-error"></c:if>
-                                                                    <i class="icon-prepend fa fa-tint"></i>
-                                                                    <input type="text" maxlength="7" name="bencina95" placeholder="Ingrese Bencina 95" value="<c:out value="${bencina95}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el precio de la bencina 95</b>
+                                                        <label class="label">UTM</label>
+                                                        <c:if test="${msgErrorUTM == null}"><label class="input"></c:if> 
+                                                            <c:if test="${msgErrorUTM != null}"><label class="input state-error"></c:if>
+                                                                    <i class="icon-prepend fa fa-usd"></i>
+                                                                    <input type="text" maxlength="8" name="utm" placeholder="Ingrese UTM" value="<c:out value="${utm}" />">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el precio de la UTM</b>
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>                                                                                                                                                                                
                                                     </section>                                                   
-                                                </div>
-                                                <div class="row">
-                                                    <section class="col col-6">                                                        
-                                                        <label class="label">Bencina 97</label>
-                                                        <c:if test="${msgErrorBencina97 == null}"><label class="input"></c:if> 
-                                                            <c:if test="${msgErrorBencina97 != null}"><label class="input state-error"></c:if>
-                                                                    <i class="icon-prepend fa fa-tint"></i>
-                                                                    <input type="text" maxlength="7" name="bencina97" placeholder="Ingrese Bencina 97" value="<c:out value="${bencina97}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el precio de la bencina 97</b>
-                                                            </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>                                                                                                                                                                                
-                                                    </section>                                                   
-                                                </div>
-                                                <div class="row">  
-                                                    <section class="col col-6">
-                                                        <label class="label">Diesel</label>
-                                                        <c:if test="${msgErrorDiesel == null}"><label class="input"></c:if> 
-                                                            <c:if test="${msgErrorDiesel != null}"><label class="input state-error"></c:if>
-                                                                    <i class="icon-prepend fa fa-tint"></i>
-                                                                    <input type="text" maxlength="7" name="diesel" placeholder="Ingrese Diesel" value="<c:out value="${diesel}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el precio del Diesel</b>
-                                                            </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>                                                        
-                                                    </section>                                                  
                                                 </div>
                                                 <div class="row">                                                                                                             
                                                     <section class="col col-6">  
@@ -284,12 +260,12 @@
                                                                     </div>
                                                                     <p class="note note-error">
                                                                         Formato de Fecha **/**/**** </br> (Este campo es requerido)
-                                                                    </p>                                                                        
+                                                                    </p>
                                                                 </label>
                                                             </label>
                                                         </div>
                                                     </section>                                                   
-                                                </div>                
+                                                </div>
                                                 <div class="row">
                                                     <section class="col col-6">
                                                         <span class="label label-danger"><small class="slideInRight"><font color="white" size="1"><strong>&nbsp;&nbsp; Indicaciones:</strong> Separe decimales con punto (.)</font></small></span>
@@ -418,38 +394,26 @@
                 var $checkoutForm = $('#formUpdate').validate({
                     // Rules for form validation
                     rules: {
-                        bencina93: {
+                        ipc: {
                             required: true
                         },
-                        bencina95: {
+                        utm: {
                             required: true
                         },
-                        bencina97: {
-                            required: true
-                        },
-                        diesel: {
-                            required: true
-                        }, 
                         publicTime: {
-                            required : true
+                            required: true
                         }
                     },
                     // Messages for form validation
                     messages: {
-                        bencina93: {
-                            required: 'Por favor ingrese el precio de la bencina 93'
+                        ipc: {
+                            required: 'Por favor ingrese el porcentaje del IPC'
                         },
-                        bencina95: {
-                            required: 'Por favor ingrese el precio de la bencina 95'
-                        },
-                        bencina97: {
-                            required: 'Por favor ingrese el precio de la bencina 97'
-                        },
-                        diesel: {
-                            required: 'Por favor ingrese el precio del diesel'
+                        utm: {
+                            required: 'Por favor ingrese el valor de la UTM'
                         },
                         publicTime: {
-                            required : 'Por favor ingrese la fecha de publicación'
+                            required: 'Por favor ingrese la fecha de publicación'
                         }
                     },
                     // Do not change code below

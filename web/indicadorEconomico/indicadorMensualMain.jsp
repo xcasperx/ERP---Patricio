@@ -1,6 +1,6 @@
 <%-- 
-    Document   : indicadorDiarioMain
-    Created on : 24-04-2014, 12:00:10 AM
+    Document   : indicadorMensualMain
+    Created on : 25-04-2014, 09:00:10 AM
     Author     : patricio
 --%>
 
@@ -12,7 +12,7 @@
     <head>       
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->       
-        <title> Latte ERP | Indicador Diario </title>
+        <title> Latte ERP | Indicador Mensual </title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -138,7 +138,7 @@
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
                     <li>                        
-                        <a href="IndicadorDiarioMainServlet"><i class="text-primary fa fa-table"></i> DataTable Indicador Diario </a>
+                        <a href="IndicadorMensualMainServlet"><i class="text-primary fa fa-table"></i> DataTable Indicador Mensual </a>
                     </li>                                 
                 </ol>
                 <!-- end breadcrumb -->
@@ -168,7 +168,7 @@
                             Mantenedor 
                             <span>
                                 <i class="fa fa-bar-chart-o fa-fw "></i> 
-                                Indicador Diario
+                                Indicador Mensual
                             </span>
                         </h2>
                     </div>
@@ -184,8 +184,8 @@
                     <div class="row">                       
 
                         <!-- NEW WIDGET START -->
-                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                              
-                            <div class="btn-toolbar">                                    
+                        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="btn-toolbar">
                                 <object align="right">
                                     <div class="btn-group">
                                         <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" rel="tooltip" data-placement="top" data-original-title="Guardar como archivo">
@@ -197,13 +197,13 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="btn-group">                                                      
-                                        <button class="btn btn-default btn-sm" name="btnAdd" type="button" onclick="location.href = 'IndicadorDiarioGetAddServlet';" rel="tooltip" data-placement="top" data-original-title="Nuevo indicador">
+                                    <div class="btn-group">
+                                        <button class="btn btn-default btn-sm" name="btnAdd" type="button" onclick="location.href = 'IndicadorMensualGetAddServlet';" rel="tooltip" data-placement="top" data-original-title="Nuevo indicador">
                                             <i class="glyphicon glyphicon-plus-sign"></i>
                                             <span><font size="1"><strong>AGREGAR</strong></font></span>
                                         </button>
                                     </div>
-                                </object>                                   
+                                </object>
                             </div>
                             </br>
                             <!-- Widget ID (each widget will need unique ID)-->
@@ -229,7 +229,7 @@
                                         <div class="widget-body-toolbar">
 
                                         </div>
-                                        <form action="IndicadorDiarioDeleteServlet" method="post" name="form">
+                                        <form action="IndicadorMensualDeleteServlet" method="post" name="form">
                                             <table id="datatable_col_reorder" class="table table-striped table-hover">
                                                 <thead>
                                                     <tr>
@@ -238,16 +238,15 @@
                                                                 &nbsp;&nbsp;
                                                                 <i class="glyphicon glyphicon-trash"> </i>
                                                                 &nbsp;&nbsp;
-                                                            </button>                                                            
+                                                            </button>
                                                         </th>
                                                         <th>ID</th>
-                                                        <th>UF</th>
-                                                        <th>Dólar</th>
-                                                        <th>Euro</th>
+                                                        <th>IPC</th>
+                                                        <th>UTM</th>
                                                         <th>Publicador</th>
-                                                        <th>Fec. Public.</th>
-                                                        <th>On update</th>
-                                                        <th width=260><div align="center">Acciones</div></th>
+                                                        <th>Fec. Publicación</th>
+                                                        <th>On Update</th>
+                                                        <th width=240><div align="center">Acciones</div></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -258,15 +257,14 @@
                                                                 <input type="hidden" value="x">
                                                             </td>
                                                             <td><c:out value="${list.id}" /></td>
-                                                            <td><c:out value="${list.uf}" /></td>
-                                                            <td><c:out value="${list.dolar}" /></td>
-                                                            <td><c:out value="${list.euro}" /></td>
+                                                            <td><c:out value="${list.ipc}" /></td>
+                                                            <td><c:out value="${list.utm}" /></td>
                                                             <td><c:out value="${list.username}" /></td>
                                                             <td><c:out value="${list.publicTime}" /></td>
                                                             <td><c:out value="${list.updateTime}" /></td>
-                                                            <td width=260>
+                                                            <td width=240>
                                                                 <div align="right">
-                                                                    <a href="IndicadorDiarioGetServlet?id=<c:out value="${list.id}"/>">
+                                                                    <a href="IndicadorMensualGetServlet?id=<c:out value="${list.id}"/>">
                                                                         <button class="btn btn-labeled btn-primary" name="btnUpOne" type="button">
                                                                             <span class="btn-label"><i class="glyphicon glyphicon-edit"></i></span>
                                                                             <span><font size="1">VER / ACTUALIZAR</font></span>
@@ -412,7 +410,7 @@
                                                     }, function(ButtonPressed) {
                                                         if (ButtonPressed === "Sí") {
 
-                                                            var url = 'IndicadorDiarioDeleteServlet?btnDelRow&id=' + $('#idDelRow<c:out value="${list.id}"/>').attr("value");
+                                                            var url = 'IndicadorMensualDeleteServlet?btnDelRow&id=' + $('#idDelRow<c:out value="${list.id}"/>').attr("value");
                                                             $(location).attr('href', url);
                                                         }
 

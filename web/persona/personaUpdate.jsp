@@ -1,6 +1,6 @@
 <%-- 
-    Document   : indicadorSemanalUpdate
-    Created on : 24-04-2014, 18:57:01 AM
+    Document   : indicadorDiarioUpdate
+    Created on : 24-04-2014, 11:31:01 AM
     Author     : patricio
 --%>
 
@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> Latte ERP | Indicador Semanal</title>
+        <title> Latte ERP | Persona</title>
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -137,10 +137,10 @@
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">                    
                     <li>
-                        <a href="IndicadorSemanalMainServlet"><i class="text-primary fa fa-table"></i> DataTable Indicador Semanal</a>
+                        <a href="IndicadorDiarioMainServlet"><i class="text-primary fa fa-table"></i> DataTable Persona</a>
                     </li>      
                     <li>
-                        <i class="fa fa-edit"></i>Actualizar Indicador Semanal
+                        <i class="fa fa-edit"></i>Actualizar Persona
                     </li>
                 </ol>
                 <!-- end breadcrumb -->
@@ -170,7 +170,7 @@
                             Mantenedor 
                             <span>
                                 <i class="fa fa-bar-chart-o fa-fw"></i> 
-                                Indicador Semanal
+                                Persona
                             </span>
                         </h2>
                     </div>
@@ -196,7 +196,7 @@
                             <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-togglebutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Actualizar Indicador Semanal </h2>				
+                                    <h2>Actualizar Persona </h2>				
 
                                 </header>
 
@@ -213,73 +213,96 @@
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">                                        
 
-                                        <form action="IndicadorSemanalUpdateServlet" method="POST" name="formUpdate" id="formUpdate" class="smart-form" novalidate="novalidate">
+                                        <form action="IndicadorDiarioUpdateServlet" method="POST" name="formUpdate" id="formUpdate" class="smart-form" novalidate="novalidate">
 
-                                            <fieldset>                                                
-                                                <div class="row">                                                                                                        
+                                            <fieldset>
+                                                <section>
+                                                    <div class="inline-group">
+                                                        <label class="radio">
+                                                            <input type="radio" name="radio-inline" checked="">
+                                                            <i></i>Persona Natural</label>
+                                                        <label class="radio">
+                                                            <input type="radio" name="radio-inline">
+                                                            <i></i>Persona Jurídica</label>                                                        
+                                                    </div>
+                                                </section>
+                                                <div class="row">                                                    
                                                     <section class="col col-6">
-                                                        <small class="slideInRight"><font size="2"><strong>ID Indicador Semanal #<c:out value="${id}"/></strong></font></small>
-                                                        <label class="input state-disabled">
-                                                            <input type="hidden" name="id" value="<c:out value="${id}" />"/>
-                                                        </label>                                                                                                                        
+                                                        <label class="label">RUT</label>
+                                                        <c:if test="${msgErrorRUT == null}">
+                                                            <label class="input"> 
+                                                            </c:if>
+                                                            <c:if test="${msgErrorRUT != null}">
+                                                                <label class="input state-error">
+                                                                </c:if>
+                                                                <i class="icon-prepend fa fa-user"></i>
+                                                                <input type="text" maxlength="12" name="rut" placeholder="Ingrese RUT" value="<c:out value="${rut}"/>">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese RUT</b>
+                                                            </label>
+                                                            <div class="note note-error">Este campo es requerido.</div>
+                                                    </section>                                                  
+                                                </div>                                             
+                                                <div class="row">
+                                                    <section class="col col-6">
+                                                        <span class="label label-danger"><small class="slideInRight"><font color="white" size="1"><strong>&nbsp;&nbsp; Formato Rut:</strong> 12345678-9</font></small></span>
                                                     </section>
                                                 </div>
-                                                <div class="row">  
+                                            </fieldset>
+                                            <fieldset>
+                                                <div class="row">                                                    
                                                     <section class="col col-6">
-                                                        <label class="label">Bencina 93</label>
-                                                        <c:if test="${msgErrorBencina93 == null}"><label class="input"></c:if> 
-                                                            <c:if test="${msgErrorBencina93 != null}"><label class="input state-error"></c:if>
-                                                                    <i class="icon-prepend fa fa-tint"></i>
-                                                                    <input type="text" maxlength="7" name="bencina93" placeholder="Ingrese Bencina 93" value="<c:out value="${bencina93}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el precio de la bencina 93</b>
+                                                        <label class="label">Nombre o Razón social</label>
+                                                        <c:if test="${msgErrorNombre == null}">
+                                                            <label class="input"> 
+                                                            </c:if>
+                                                            <c:if test="${msgErrorNombre != null}">
+                                                                <label class="input state-error">
+                                                                </c:if>
+                                                                <i class="icon-prepend fa fa-font"></i>
+                                                                <input type="text" maxlength="100" name="nombre" placeholder="Ingrese nombre o razón social" value="<c:out value="${nombre}"/>">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese nombre o razón social</b>
                                                             </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>                                                        
+                                                            <div class="note note-error">Este campo es requerido.</div>
+                                                    </section>                                                                                                                                                     
+                                                    <section class="col col-6">
+                                                        <label class="label">Apellido</label>
+                                                        <c:if test="${msgErrorApellido == null}">
+                                                            <label class="input"> 
+                                                            </c:if>
+                                                            <c:if test="${msgErrorApellido != null}">
+                                                                <label class="input state-error">
+                                                                </c:if>
+                                                                <i class="icon-prepend fa fa-font"></i>
+                                                                <input type="text" maxlength="45" name="apellido" placeholder="Ingrese apeliido" value="<c:out value="${apellido}"/>">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese apellido</b>
+                                                            </label>
+                                                            <div class="note note-error">Este campo es requerido.</div>
                                                     </section>                                                  
                                                 </div>
-                                                <div class="row">
-                                                    <section class="col col-6">                                                        
-                                                        <label class="label">Bencina 95</label>
-                                                        <c:if test="${msgErrorBencina95 == null}"><label class="input"></c:if> 
-                                                            <c:if test="${msgErrorBencina95 != null}"><label class="input state-error"></c:if>
-                                                                    <i class="icon-prepend fa fa-tint"></i>
-                                                                    <input type="text" maxlength="7" name="bencina95" placeholder="Ingrese Bencina 95" value="<c:out value="${bencina95}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el precio de la bencina 95</b>
+                                                <div class="row">                                                    
+                                                    <section class="col col-sm-12">
+                                                        <label class="label">Giro</label>
+                                                        <c:if test="${msgErrorGiro == null}">
+                                                            <label class="input"> 
+                                                            </c:if>
+                                                            <c:if test="${msgErrorGiro != null}">
+                                                                <label class="input state-error">
+                                                                </c:if>
+                                                                <i class="icon-prepend fa fa-usd"></i>
+                                                                <input type="text" maxlength="255" name="giro" placeholder="Ingrese giro o rubro" value="<c:out value="${giro}"/>">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese giro o rubro</b>
                                                             </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>                                                                                                                                                                                
-                                                    </section>                                                   
-                                                </div>
-                                                <div class="row">
-                                                    <section class="col col-6">                                                        
-                                                        <label class="label">Bencina 97</label>
-                                                        <c:if test="${msgErrorBencina97 == null}"><label class="input"></c:if> 
-                                                            <c:if test="${msgErrorBencina97 != null}"><label class="input state-error"></c:if>
-                                                                    <i class="icon-prepend fa fa-tint"></i>
-                                                                    <input type="text" maxlength="7" name="bencina97" placeholder="Ingrese Bencina 97" value="<c:out value="${bencina97}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el precio de la bencina 97</b>
-                                                            </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>                                                                                                                                                                                
-                                                    </section>                                                   
-                                                </div>
-                                                <div class="row">  
-                                                    <section class="col col-6">
-                                                        <label class="label">Diesel</label>
-                                                        <c:if test="${msgErrorDiesel == null}"><label class="input"></c:if> 
-                                                            <c:if test="${msgErrorDiesel != null}"><label class="input state-error"></c:if>
-                                                                    <i class="icon-prepend fa fa-tint"></i>
-                                                                    <input type="text" maxlength="7" name="diesel" placeholder="Ingrese Diesel" value="<c:out value="${diesel}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el precio del Diesel</b>
-                                                            </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>                                                        
+                                                            <div class="note note-error">Este campo es requerido.</div>
                                                     </section>                                                  
                                                 </div>
                                                 <div class="row">                                                                                                             
                                                     <section class="col col-6">  
                                                         <div class="form-group">
-                                                            <c:if test="${msgErrorPublicTime == null}"><label class="input"></c:if>
-                                                                <c:if test="${msgErrorPublicTime != null}"><label class="input state-error"></c:if>
-                                                                        <label class="label">Fecha de publicación</label>
+                                                            <c:if test="${msgErrorFechaNac == null}"><label class="input"></c:if>
+                                                                <c:if test="${msgErrorFechaNac != null}"><label class="input state-error"></c:if>
+                                                                        <label class="label">Fecha de Nacimiento</label>
                                                                         <div class="input-group">
-                                                                            <input type="text" name="publicTime" class="form-control" data-mask="99/99/9999" data-mask-placeholder="-" value="<c:out value="${publicTime}"/>">
+                                                                            <input type="text" name="publicTime" class="form-control" data-mask="99/99/9999" data-mask-placeholder="-" value="<c:out value="${fechaNac}"/>">
                                                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                                     </div>
                                                                     <p class="note note-error">
@@ -289,12 +312,65 @@
                                                             </label>
                                                         </div>
                                                     </section>                                                   
-                                                </div>                
+                                                </div>
                                                 <div class="row">
                                                     <section class="col col-6">
-                                                        <span class="label label-danger"><small class="slideInRight"><font color="white" size="1"><strong>&nbsp;&nbsp; Indicaciones:</strong> Separe decimales con punto (.)</font></small></span>
+                                                        <label class="label">Dirección</label>
+                                                        <c:if test="${msgErrorDireccion == null}">
+                                                            <label class="input"> 
+                                                            </c:if>
+                                                            <c:if test="${msgErrorDireccion != null}">
+                                                                <label class="input state-error">
+                                                                </c:if>
+                                                                <i class="icon-prepend fa fa-map-marker"></i>
+                                                                <input type="text" maxlength="255" name="direccion" placeholder="Ingrese dirección" value="<c:out value="${direccion}"/>">
+                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese dirección</b>
+                                                            </label>
+                                                            <div class="note note-error">Este campo es requerido.</div>
+                                                    </section>
+                                                    <section class="col col-6">
+                                                        <label class="label">Ciudad</label>
+                                                        <label class="select">
+                                                            <select>
+                                                                <option value="0">Choose name</option>
+                                                                <option value="1">Alexandra</option>
+                                                                <option value="2">Alice</option>
+                                                                <option value="3">Anastasia</option>
+                                                                <option value="4">Avelina</option>
+                                                            </select> <i></i> </label>
+                                                    </section> 
+                                                </div>
+                                                <div class="row">
+                                                    <section class="col col-6">                                                        
+                                                        <label>Phone masking</label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" data-mask=" (999) 999-9999" data-mask-placeholder="X">
+                                                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                        </div>
+                                                        <p class="note">
+                                                            Data format (XXX) XXX-XXXX
+                                                        </p>                                                        
+                                                    </section>                                               
+                                                    <section class="col col-6">                                                        
+                                                        <label>Celular</label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" data-mask=" (999) 999-9999" data-mask-placeholder="X">
+                                                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                        </div>
+                                                        <p class="note">
+                                                            Data format (XXX) XXX-XXXX
+                                                        </p>                                                        
                                                     </section>
                                                 </div>
+                                                <div class="row">
+                                                    <section class="col col-6">
+                                                        <label>Email</label>
+                                                        <label class="input"> 
+                                                            <i class="icon-prepend fa fa-envelope-o"></i>
+                                                            <input type="email" name="email" placeholder="E-mail">
+                                                        </label>
+                                                    </section>                                                   
+                                                </div>                
                                             </fieldset>
 
                                             <footer>                                                
@@ -418,38 +494,32 @@
                 var $checkoutForm = $('#formUpdate').validate({
                     // Rules for form validation
                     rules: {
-                        bencina93: {
+                        uf: {
                             required: true
                         },
-                        bencina95: {
+                        dolar: {
                             required: true
                         },
-                        bencina97: {
+                        euro: {
                             required: true
                         },
-                        diesel: {
-                            required: true
-                        }, 
                         publicTime: {
-                            required : true
+                            required: true
                         }
                     },
                     // Messages for form validation
                     messages: {
-                        bencina93: {
-                            required: 'Por favor ingrese el precio de la bencina 93'
+                        uf: {
+                            required: 'Por favor ingrese el valor de la UF'
                         },
-                        bencina95: {
-                            required: 'Por favor ingrese el precio de la bencina 95'
+                        dolar: {
+                            required: 'Por favor ingrese el valor del Dólar'
                         },
-                        bencina97: {
-                            required: 'Por favor ingrese el precio de la bencina 97'
-                        },
-                        diesel: {
-                            required: 'Por favor ingrese el precio del diesel'
+                        euro: {
+                            required: 'Por favor ingrese el valor del Euro'
                         },
                         publicTime: {
-                            required : 'Por favor ingrese la fecha de publicación'
+                            required: 'Por favor ingrese una fecha VÁLIDA'
                         }
                     },
                     // Do not change code below

@@ -224,106 +224,100 @@
                                                                 <input type="hidden" name="id" value="<c:out value="${id}" />"/>
                                                             </label>                                                                                                                        
                                                         </section>
-                                                        <c:if test="${msgErrorUF == null}">
-                                                            <label class="label">UF</label>
-                                                            <label class="input"> <i class="icon-prepend fa fa-usd"></i>
-                                                                <input type="text" maxlength="8" name="uf" placeholder="Ingrese UF" value="<c:out value="${uf}" />">
+                                                        <label class="label">UF</label>
+                                                        <c:if test="${msgErrorUF == null}"><label class="input"></c:if>
+                                                            <c:if test="${msgErrorUF != null}"><label class="input state-error"></c:if>
+                                                                    <i class="icon-prepend fa fa-usd"></i>
+                                                                    <input type="text" maxlength="8" name="uf" placeholder="Ingrese UF" value="<c:out value="${uf}" />">
                                                                 <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el valor de la UF</b>
                                                             </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>
-                                                        </c:if>
-                                                        <c:if test="${msgErrorUF != null}">
-                                                            <label class="label">UF</label>
-                                                            <label class="input state-error"> <i class="icon-prepend fa fa-usd"></i>
-                                                                <input type="text" maxlength="8" name="uf" placeholder="Ingrese UF" value="<c:out value="${uf}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese el valor de la UF</b>
-                                                            </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>
-                                                        </c:if>
+                                                            <div class="note note-error">Este campo es requerido.</div>                                                                                                                
                                                     </section>                                                  
                                                 </div>
                                                 <div class="row">
-                                                    <section class="col col-6">
-                                                        <c:if test="${msgErrorEuro == null}">
-                                                            <label class="label">Euro</label>
-                                                            <label class="input"> <i class="icon-prepend fa fa-euro"></i>
-                                                                <input type="text" maxlength="7" name="euro" placeholder="Ingrese Euro" value="<c:out value="${euro}" />">
+                                                    <section class="col col-6">                                                        
+                                                        <label class="label">Euro</label>
+                                                        <c:if test="${msgErrorEuro == null}"><label class="input"></c:if>
+                                                            <c:if test="${msgErrorEuro != null}"><label class="input state-error"></c:if>
+                                                                    <i class="icon-prepend fa fa-euro"></i>
+                                                                    <input type="text" maxlength="7" name="euro" placeholder="Ingrese Euro" value="<c:out value="${euro}" />">
                                                                 <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese valor del Euro en pesos</b>
                                                             </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>
-                                                        </c:if>
-                                                        <c:if test="${msgErrorEuro != null}">
-                                                            <label class="label">Euro</label>
-                                                            <label class="input state-error"> <i class="icon-prepend fa fa-euro"></i>
-                                                                <input type="text" maxlength="7" name="euro" placeholder="Ingrese Euro" value="<c:out value="${euro}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese valor del Euro en pesos</b>
-                                                            </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>
-                                                        </c:if>
+                                                            <div class="note note-error">Este campo es requerido.</div>                                                        
                                                     </section>                                                   
                                                 </div>
                                                 <div class="row">
                                                     <section class="col col-6">
-                                                        <c:if test="${msgErrorDolar == null}">
-                                                            <label class="label">Dólar</label>
-                                                            <label class="input"> <i class="icon-prepend fa fa-money"></i>
-                                                                <input type="text" maxlength="7" name="dolar" placeholder="Ingrese Dólar" value="<c:out value="${dolar}" />">
+                                                        <label class="label">Dólar</label>
+                                                        <c:if test="${msgErrorDolar == null}"><label class="input"></c:if>
+                                                            <c:if test="${msgErrorDolar != null}"><label class="input state-error"></c:if>
+                                                                    <i class="icon-prepend fa fa-money"></i>
+                                                                    <input type="text" maxlength="7" name="dolar" placeholder="Ingrese Dólar" value="<c:out value="${dolar}" />">
                                                                 <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese valor del Dólar en pesos</b>
                                                             </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>
-                                                        </c:if>
-                                                        <c:if test="${msgErrorDolar != null}">
-                                                            <label class="label">Dólar</label>
-                                                            <label class="input state-error"> <i class="icon-prepend fa fa-money"></i>
-                                                                <input type="text" maxlength="7" name="dolar" placeholder="Ingrese Dólar" value="<c:out value="${dolar}" />">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese valor del Dólar en pesos</b>
-                                                            </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>
-                                                        </c:if>
+                                                            <div class="note note-error">Este campo es requerido.</div>                                                                                                                
                                                     </section>                                                   
                                                 </div>
-                                                <div class="row">
-                                                    <section class="col col-6">
-                                                        <span class="label label-danger"><small class="slideInRight"><font color="white" size="1"><strong>&nbsp;&nbsp; Indicaciones:</strong> Separe decimales con punto (.)</font></small></span>
-                                                    </section>
-                                                </div>
-                                            </fieldset>
+                                                <div class="row">                                                                                                             
+                                                    <section class="col col-6">  
+                                                        <div class="form-group">
+                                                            <c:if test="${msgErrorPublicTime == null}"><label class="input"></c:if>
+                                                                <c:if test="${msgErrorPublicTime != null}"><label class="input state-error"></c:if>
+                                                                        <label class="label">Fecha de publicación</label>
+                                                                        <div class="input-group">
+                                                                            <input type="text" name="publicTime" class="form-control" data-mask="99/99/9999" data-mask-placeholder="-" value="<c:out value="${publicTime}"/>">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                        </div>
+                                                                        <p class="note note-error">
+                                                                            Formato de Fecha **/**/**** </br> (Este campo es requerido)
+                                                                        </p>                                                                        
+                                                                    </label>
+                                                                </label>
+                                                            </div>
+                                                        </section>                                                   
+                                                    </div>
+                                                    <div class="row">
+                                                        <section class="col col-6">
+                                                            <span class="label label-danger"><small class="slideInRight"><font color="white" size="1"><strong>&nbsp;&nbsp; Indicaciones:</strong> Separe decimales con punto (.)</font></small></span>
+                                                        </section>
+                                                    </div>
+                                                </fieldset>
 
-                                            <footer>                                                
-                                                <button class="btn btn-primary" type="submit">
-                                                    <span><font size="1">ACTUALIZAR</font></span>
-                                                </button>                                                
-                                            </footer>
-                                        </form>
+                                                <footer>                                                
+                                                    <button class="btn btn-primary" type="submit">
+                                                        <span><font size="1">ACTUALIZAR</font></span>
+                                                    </button>                                                
+                                                </footer>
+                                            </form>
+
+                                        </div>
+                                        <!-- end widget content -->
 
                                     </div>
-                                    <!-- end widget content -->
+                                    <!-- end widget div -->
 
                                 </div>
-                                <!-- end widget div -->
+                                <!-- end widget -->                         
 
-                            </div>
-                            <!-- end widget -->                         
+                            </article>
+                            <!-- END COL -->                       		
 
-                        </article>
-                        <!-- END COL -->                       		
+                        </div>
+                        <!-- END ROW -->
 
-                    </div>
-                    <!-- END ROW -->
+                    </section>
+                    <!-- end widget grid -->
 
-                </section>
-                <!-- end widget grid -->
+                </div>
+                <!-- END MAIN CONTENT -->
 
             </div>
-            <!-- END MAIN CONTENT -->
+            <!-- END MAIN PANEL -->
 
-        </div>
-        <!-- END MAIN PANEL -->
-
-        <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
-        Note: These tiles are completely responsive,
-        you can add as many as you like
-        -->
+            <!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+            Note: These tiles are completely responsive,
+            you can add as many as you like
+            -->
         <c:import var="shortcut" url="/shortcut.jsp" />
         <c:out value="${shortcut}" escapeXml="false" />
         <!-- END SHORTCUT AREA -->
@@ -418,6 +412,9 @@
                         },
                         euro: {
                             required: true
+                        },
+                        publicTime: {
+                            required: true
                         }
                     },
                     // Messages for form validation
@@ -430,6 +427,9 @@
                         },
                         euro: {
                             required: 'Por favor ingrese el valor del Euro'
+                        },
+                        publicTime: {
+                            required: 'Por favor ingrese una fecha VÁLIDA'
                         }
                     },
                     // Do not change code below

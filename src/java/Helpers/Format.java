@@ -146,8 +146,16 @@ public class Format {
 
     public static String dateDDMMYYYY(String d) throws ParseException {
 
-        java.util.Date date = new SimpleDateFormat("yyy-MM-dd").parse(d);
+        java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(d);
         String formattedDate = new SimpleDateFormat("dd-MM-yyyy").format(date);
+
+        return formattedDate;
+    }
+    
+    public static String date2DDMMYYYY(String d) throws ParseException {
+
+        java.util.Date date = new SimpleDateFormat("dd/MM/yyyy").parse(d);
+        String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
 
         return formattedDate;
     }
