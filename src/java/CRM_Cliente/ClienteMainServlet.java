@@ -28,7 +28,7 @@ import javax.sql.DataSource;
 @WebServlet(name = "ClienteMainServlet", urlPatterns = {"/ClienteMainServlet"})
 public class ClienteMainServlet extends HttpServlet {
 
-    @Resource(name = "jdbc/ERP")
+    @Resource(name = "jdbc/ERP-cliente")
     private DataSource ds;
 
     /**
@@ -54,7 +54,7 @@ public class ClienteMainServlet extends HttpServlet {
         try {
             conexion = ds.getConnection();
 
-            PersonaDAO  personaDAO = new PersonaDAO();
+            PersonaDAO personaDAO = new PersonaDAO();
             personaDAO.setConexion(conexion);
 
             ////////////////////////

@@ -62,71 +62,84 @@
                     <li <c:if test="${indicadorDiarioActive != null}">class="active"</c:if>><a href="IndicadorDiarioMainServlet">Mantenedor Diario</a></li>
                     <li <c:if test="${indicadorSemanalActive != null}">class="active"</c:if>><a href="IndicadorSemanalMainServlet">Mantenedor Semanal</a></li>
                     <li <c:if test="${indicadorMensualActive != null}">class="active"</c:if>><><a href="IndicadorMensualMainServlet">Mantenedor Mensual</a></li>
-                </ul>                
-            </li>
+                    </ul>                
+                </li>
 
-            <li <c:if test="${userActive != null}">class="active"</c:if>>
-                <a href="UserMainServlet"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Usuarios</span></a>
-            </li>
+                <li <c:if test="${userActive != null}">class="active"</c:if>>
+                    <a href="UserMainServlet"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Usuarios</span></a>
+                </li>
 
-            <li>
-                <a href="#"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">Recursos Humanos</span></a>
-                <ul>
-                    <li><a href="#">Personal</a>
-                        <ul>
-                            <li><a href="#">Honorarios</a></li>
-                            <li><a href="#">Contratados</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Registro de Asistencia</a></li>
-                    <li><a href="#">Liquidación de Sueldos</a></li>
-                </ul>
-            </li>
+                <li <c:if test="${ciudadActive != null}">class="active"</c:if>>
+                    <a href="CiudadMainServlet"><i class="fa fa-lg fa-fw fa-map-marker"></i> <span class="menu-item-parent">Ciudades</span></a>
+                </li>
 
-            <li>
-                <a href="#"><i class="fa fa-lg fa-fw fa-list-ol"></i> <span class="menu-item-parent">Inventario</span></a>
-                <ul>
-                    <li><a href="#">Asignaciones</a></li>
-                    <li><a href="#">Bodegas</a></li>
-                    <li><a href="#">Productos en Bodega</a></li>
-                    <li><a href="#">Ordenes de Bodega</a>
-                        <ul>                            
-                            <li><a href="#">Ingresos</a></li>                            
-                            <li><a href="#">Egresos</a></li>
-                        </ul>
-                    </li>                    
-                </ul>
-            </li>
-            
-            <li>
-                <a href="#"><i class="fa fa-lg fa-fw fa-shopping-cart"></i> <span class="menu-item-parent">Tienda</span></a>
-                <ul>
-                    <li><a href="#">Asignaciones</a></li>
-                    <li><a href="#">Secciones</a></li>
-                    <li><a href="#">Productos en sección</a></li>
-                    <li><a href="#">Ordenes de sección</a>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="#"><i class="fa fa-lg fa-fw fa-shopping-cart"></i> <span class="menu-item-parent">Tienda Online</span></a>
-                <ul>
-                    <li><a href="#">Asignaciones</a></li>
-                    <li><a href="#">Secciones</a></li>
-                    <li><a href="#">Productos en sección</a></li>
-                    <li><a href="#">Ordenes de sección</a>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="#"><i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">Producción</span></a>
-                <ul>
-                    <li><a href="#">Asignaciones</a></li>
-                    <li><a href="#">Proceso General</a></li>
-                    <li><a href="#">Plantas</a></li>
-                    <li><a href="#">Procesos en Plantas</a></li>
-                    <li><a href="#">Productos en planta</a></li>
-                    <li><a href="#">Ordenes de producción</a>
+                <li>
+                    <a href="#"><i class="fa fa-lg fa-fw fa-hdd"></i> <span class="menu-item-parent">ERP</span></a>
+                    <ul>                        
+                        <li><a href="#"><i class="fa fa-group"></i> <span class="menu-item-parent">Recursos Humanos</span></a>
+                            <ul>
+                                <li><a href="PersonalMainServlet">Personal</a></li>
+                                <li><a href="#">Asistencia</a></li>
+                                <li><a href="#">Remuneraciones</a></li>
+                            </ul>  
+                        </li>
+                        <li><a href="#"><i class="fa fa-list-ol"></i> <span class="menu-item-parent">Inventario</span></a>  
+                            <ul>
+                                <li><a href="#">Asignaciones</a></li>
+                                <li><a href="#">Bodegas</a></li>
+                                <li><a href="#">Productos Bodega</a></li>
+                                <li><a href="#">Ordenes Bodega</a>
+                                    <ul>                            
+                                        <li><a href="#">Ingresos</a></li>                            
+                                        <li><a href="#">Egresos</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-lg fa-fw fa-shopping-cart"></i> <span class="menu-item-parent">Tienda</span></a>
+                            <ul>
+                                <li><a href="#">Asignaciones</a></li>
+                                <li><a href="#">Secciones</a></li>
+                                <li><a href="#">Productos en sección</a></li>
+                                <li><a href="#">Ordenes de sección</a>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-lg fa-fw fa-shopping-cart"></i> <span class="menu-item-parent">Tienda Online</span></a>
+                            <ul>
+                                <li><a href="#">Asignaciones</a></li>
+                                <li><a href="#">Secciones</a></li>
+                                <li><a href="#">Productos en sección</a></li>
+                                <li><a href="#">Ordenes de sección</a>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">Producción</span></a>
+                            <ul>
+                                <li><a href="#">Asignaciones</a></li>
+                                <li><a href="#">Proceso General</a></li>
+                                <li><a href="#">Plantas</a></li>
+                                <li><a href="#">Procesos en Plantas</a></li>
+                                <li><a href="#">Productos en planta</a></li>
+                                <li><a href="#">Ordenes de producción</a>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">CRM</span></a>
+                    <ul>
+                        <li <c:if test="${clienteActive != null}">class="active"</c:if>><a href="ClienteMainServlet">Clientes</a></li>                                   
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">SRM</span></a>
+                    <ul>
+                        <li <c:if test="${proveedorActive != null}">class="active"</c:if>><a href="ProveedorMainServlet">Proveedores</a></li>                                   
                 </ul>
             </li>
 

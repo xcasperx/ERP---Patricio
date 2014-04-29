@@ -51,15 +51,15 @@ public class PersonaDAO {
                 /* obtener resultset */
                 reg.setRut(result.getInt("rut"));
                 reg.setDv(result.getString("dv"));                
-                reg.setNombre(result.getString("pe.nombre"));
+                reg.setNombre(result.getString("nombre"));
                 reg.setApellido(result.getString("apellido"));
                 reg.setGiro(result.getString("giro"));
                 reg.setDireccion(result.getString("direccion"));
                 reg.setIdCiudad(result.getInt("id_ciudad"));
-                reg.setNombreCiudad(result.getString("ci.nombre"));
+                reg.setNombreCiudad(result.getString("nombre_ciudad"));
                 reg.setFecNac(result.getString("fecha_nacimiento"));
                 reg.setTelFijo(result.getInt("telefono"));
-                reg.setTelMovil(result.getInt("celular"));
+                //reg.setTelMovil(result.getInt("celular"));
                 reg.setEmail(result.getString("email"));
                 reg.setTipoPersona(result.getInt("tipo_persona"));
                 reg.setCalidadPersona(result.getInt("calidad_persona"));
@@ -88,5 +88,9 @@ public class PersonaDAO {
             }
         }
         return list;
+    }
+
+    public void insert(int tipoPersona) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

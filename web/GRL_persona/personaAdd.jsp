@@ -13,52 +13,54 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> Latte ERP | Persona</title>
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <title> Latte ERP | 
+            <c:if test="${clienteActive != null}">Clientes</c:if>
+            </title>
+            <meta name="description" content="">
+            <meta name="author" content="">
 
-        <!-- Use the correct meta names below for your web application
-                 Ref: http://davidbcalhoun.com/2010/viewport-metatag 
-                 
-        <meta name="HandheldFriendly" content="True">
-        <meta name="MobileOptimized" content="320">-->
+            <!-- Use the correct meta names below for your web application
+                     Ref: http://davidbcalhoun.com/2010/viewport-metatag 
+                     
+            <meta name="HandheldFriendly" content="True">
+            <meta name="MobileOptimized" content="320">-->
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        <!-- Basic Styles -->
-        <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+            <!-- Basic Styles -->
+            <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+            <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
 
-        <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.css">
+            <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+            <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.css">
+            <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.css">
 
-        <!-- SmartAdmin RTL Support is under construction
-        <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.css"> -->
+            <!-- SmartAdmin RTL Support is under construction
+            <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.css"> -->
 
-        <!-- We recommend you use "your_style.css" to override SmartAdmin
-             specific styles this will also ensure you retrain your customization with each SmartAdmin update.
-        <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
+            <!-- We recommend you use "your_style.css" to override SmartAdmin
+                 specific styles this will also ensure you retrain your customization with each SmartAdmin update.
+            <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
 
-        <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-        <link rel="stylesheet" type="text/css" media="screen" href="css/demo.css">
+            <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+            <link rel="stylesheet" type="text/css" media="screen" href="css/demo.css">
 
-        <!-- FAVICONS -->
-        <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
-        <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+            <!-- FAVICONS -->
+            <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+            <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
 
-        <!-- GOOGLE FONT -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
-    </head>
+            <!-- GOOGLE FONT -->
+            <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+        </head>
 
-    <body class="">
-        <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
+        <body class="">
+            <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
 
-        <!-- HEADER -->
-        <header id="header">
-            <div id="logo-group">
+            <!-- HEADER -->
+            <header id="header">
+                <div id="logo-group">
 
-                <!-- PLACE YOUR LOGO HERE -->                
+                    <!-- PLACE YOUR LOGO HERE -->                
                 <c:import var="logo" url="/logo.jsp" />
                 <c:out value="${logo}" escapeXml="false" />
                 <!-- END LOGO PLACEHOLDER -->
@@ -137,10 +139,15 @@
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">                    
                     <li>
-                        <a href="IndicadorDiarioMainServlet"><i class="text-primary fa fa-table"></i> DataTable Indicador Diario</a>
+                        <c:if test="${clienteActive != null}">
+                            <a href="ClienteMainServlet"><i class="text-primary fa fa-table"></i> DataTable Clientes</a>
+                        </c:if>
                     </li>      
                     <li>
-                        <i class="fa fa-edit"></i>Agregar Persona
+                        <i class="fa fa-edit"></i>
+                        <c:if test="${clienteActive != null}">
+                            Agregar Cliente
+                        </c:if>
                     </li>
                 </ol>
                 <!-- end breadcrumb -->
@@ -169,8 +176,10 @@
                             <i class="fa fa-table fa-fw"></i> 
                             Mantenedor 
                             <span>
-                                <i class="fa fa-user fa-fw"></i> 
-                                Persona
+                                <i class="fa fa-user fa-fw"></i>                                 
+                                <c:if test="${clienteActive != null}">
+                                    Clientes
+                                </c:if>
                             </span>
                         </h2>
                     </div>
@@ -196,7 +205,7 @@
                             <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-togglebutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
                                 <header>
                                     <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                                    <h2>Nueva Persona </h2>
+                                    <h2>Datos de Persona </h2>
                                 </header>
                                 <!-- widget div-->
                                 <div>
@@ -210,22 +219,23 @@
                                     <!-- widget content -->
                                     <div class="widget-body no-padding">                                        
 
-                                        <form action="IndicadorDiarioAddServlet" method="POST" name="form" id="form" class="smart-form" novalidate="novalidate">
-
-                                            <fieldset>
-                                                <section>
-                                                    <div class="inline-group">
-                                                        <label class="radio">
-                                                            <input type="radio" name="radio-inline" checked="">
-                                                            <i></i>Persona Natural</label>
-                                                        <label class="radio">
-                                                            <input type="radio" name="radio-inline">
-                                                            <i></i>Persona Jurídica</label>                                                        
-                                                    </div>
-                                                </section>
-                                                <div class="row">                                                    
-                                                    <section class="col col-6">
-                                                        <label class="label">RUT</label>
+                                        <form action="<c:if test="${clienteActive != null}">ClienteAddServlet</c:if>" 
+                                              method="POST" name="form" id="form" class="smart-form" novalidate="novalidate">
+                                            <c:if test="${clienteActive != null}"><input type="hidden" name="tipoPersona" value="1"></c:if>
+                                                <fieldset>
+                                                    <section>
+                                                        <div class="inline-group">
+                                                            <label class="radio">
+                                                                <input type="radio" name="radio-inline" id="r1" value="1" checked="" onclick="changeDisplay();">
+                                                                <i></i>Persona Natural</label>
+                                                            <label class="radio">
+                                                                <input type="radio" name="radio-inline" id="r2" value="2" onclick="changeDisplay();">
+                                                                <i></i>Persona Jurídica</label>                                                        
+                                                        </div>
+                                                    </section>
+                                                    <div class="row">                                                    
+                                                        <section class="col col-6">
+                                                            <label class="label">RUT</label>
                                                         <c:if test="${msgErrorRUT == null}">
                                                             <label class="input"> 
                                                             </c:if>
@@ -260,21 +270,23 @@
                                                                 <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese nombre o razón social</b>
                                                             </label>
                                                             <div class="note note-error">Este campo es requerido.</div>
-                                                    </section>                                                                                                                                                     
-                                                    <section class="col col-6">
-                                                        <label class="label">Apellido</label>
-                                                        <c:if test="${msgErrorApellido == null}">
-                                                            <label class="input"> 
-                                                            </c:if>
-                                                            <c:if test="${msgErrorApellido != null}">
-                                                                <label class="input state-error">
+                                                    </section>
+                                                    <div id="apellido">
+                                                        <section class="col col-6">
+                                                            <label class="label">Apellido</label>
+                                                            <c:if test="${msgErrorApellido == null}">
+                                                                <label class="input"> 
                                                                 </c:if>
-                                                                <i class="icon-prepend fa fa-font"></i>
-                                                                <input type="text" maxlength="45" name="apellido" placeholder="Ingrese apeliido" value="<c:out value="${apellido}"/>">
-                                                                <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese apellido</b>
-                                                            </label>
-                                                            <div class="note note-error">Este campo es requerido.</div>
-                                                    </section>                                                  
+                                                                <c:if test="${msgErrorApellido != null}">
+                                                                    <label class="input state-error">
+                                                                    </c:if>
+                                                                    <i class="icon-prepend fa fa-font"></i>
+                                                                    <input type="text" maxlength="45" name="apellido" placeholder="Ingrese apeliido" value="<c:out value="${apellido}"/>">
+                                                                    <b class="tooltip tooltip-top-right"><i class='text-yellowLight fa fa-warning'></i> Ingrese apellido</b>
+                                                                </label>
+                                                                <div class="note note-error">Este campo es requerido.</div>
+                                                        </section>
+                                                    </div>
                                                 </div>
                                                 <div class="row">                                                    
                                                     <section class="col col-sm-12">
@@ -292,23 +304,25 @@
                                                             <div class="note note-error">Este campo es requerido.</div>
                                                     </section>                                                  
                                                 </div>
-                                                <div class="row">                                                                                                             
-                                                    <section class="col col-6">  
-                                                        <div class="form-group">
-                                                            <c:if test="${msgErrorFechaNac == null}"><label class="input"></c:if>
-                                                                <c:if test="${msgErrorFechaNac != null}"><label class="input state-error"></c:if>
-                                                                        <label class="label">Fecha de Nacimiento</label>
-                                                                        <div class="input-group">
-                                                                            <input type="text" name="publicTime" class="form-control" data-mask="99/99/9999" data-mask-placeholder="-" value="<c:out value="${fechaNac}"/>">
-                                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                                    </div>
-                                                                    <p class="note note-error">
-                                                                        Formato de Fecha **/**/**** </br> (Este campo es requerido)
-                                                                    </p>                                                                        
+                                                <div id="fecNac">
+                                                    <div class="row">                                                                                                             
+                                                        <section class="col col-6">  
+                                                            <div class="form-group">
+                                                                <c:if test="${msgErrorFecNac == null}"><label class="input"></c:if>
+                                                                    <c:if test="${msgErrorFecNac != null}"><label class="input state-error"></c:if>
+                                                                            <label class="label">Fecha de Nacimiento</label>
+                                                                            <div class="input-group">
+                                                                                <input type="text" name="publicTime" class="form-control" data-mask="99/99/9999" data-mask-placeholder="-" value="<c:out value="${fecNac}"/>">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                        </div>
+                                                                        <p class="note note-error">
+                                                                            Este campo es requerido </br> Formato de Fecha **/**/**** 
+                                                                        </p>
+                                                                    </label>
                                                                 </label>
-                                                            </label>
-                                                        </div>
-                                                    </section>                                                   
+                                                            </div>
+                                                        </section>                                                   
+                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <section class="col col-6">
@@ -329,34 +343,31 @@
                                                     <section class="col col-6">
                                                         <label class="label">Ciudad</label>
                                                         <label class="select">
-                                                            <select>
-                                                                <option value="0">Choose name</option>
-                                                                <option value="1">Alexandra</option>
-                                                                <option value="2">Alice</option>
-                                                                <option value="3">Anastasia</option>
-                                                                <option value="4">Avelina</option>
-                                                            </select> <i></i> </label>
-                                                    </section> 
-                                                </div>
-                                                <div class="row">
-                                                    <section class="col col-6">                                                        
-                                                        <label>Phone masking</label>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" data-mask=" (999) 999-9999" data-mask-placeholder="X">
+                                                            <select name="idCiudad">                                                                
+                                                                <option value="1" <c:if test="${idCiudad == 1}"> selected </c:if> >Valparaíso</option>
+                                                                <option value="2" <c:if test="${idCiudad == 2}"> selected </c:if>>Viña Del Mar</option>                                                                                                                                
+                                                                </select> <i></i> </label>
+                                                        </section> 
+                                                    </div>
+                                                    <div class="row">
+                                                        <section class="col col-6">                                                        
+                                                            <label>Teléfono red fija</label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="telFijo" class="form-control" data-mask=" (999) 9-999999" data-mask-placeholder="X" value="<c:out value="${telFijo}"/>">
                                                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                                                         </div>
                                                         <p class="note">
-                                                            Data format (XXX) XXX-XXXX
+                                                            Este campo es requerido. </br>                                                            
                                                         </p>                                                        
                                                     </section>                                               
                                                     <section class="col col-6">                                                        
                                                         <label>Celular</label>
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" data-mask=" (999) 999-9999" data-mask-placeholder="X">
+                                                            <input type="text" name="telMovil" class="form-control" data-mask=" (999) 9999-9999" data-mask-placeholder="X" value="<c:out value="${telMovil}"/>">
                                                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                                                         </div>
                                                         <p class="note">
-                                                            Data format (XXX) XXX-XXXX
+                                                            Este campo es opcional. </br>                                                            
                                                         </p>                                                        
                                                     </section>
                                                 </div>
@@ -365,8 +376,11 @@
                                                         <label>Email</label>
                                                         <label class="input"> 
                                                             <i class="icon-prepend fa fa-envelope-o"></i>
-                                                            <input type="email" name="email" placeholder="E-mail">
+                                                            <input type="email" name="email" placeholder="E-mail" value="<c:out value="${email}"/>">
                                                         </label>
+                                                        <p class="note">
+                                                            Este campo es opcional.                                                            
+                                                        </p> 
                                                     </section>                                                   
                                                 </div>                
                                             </fieldset>                                                                                                                                     
@@ -418,16 +432,16 @@
         <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script>
-            if (!window.jQuery) {
-                document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
-            }
+                                                                    if (!window.jQuery) {
+                                                                        document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+                                                                    }
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script>
-            if (!window.jQuery.ui) {
-                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-            }
+                                                                    if (!window.jQuery.ui) {
+                                                                        document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+                                                                    }
         </script>
 
         <!-- JS TOUCH : include this plugin for mobile drag / drop touch events
@@ -479,7 +493,24 @@
         <script src="js/plugin/jquery-form/jquery-form.min.js"></script>
 
         <!-- disabledButton -->
-        <script src="js/disabledButton.js"></script>        
+        <script src="js/disabledButton.js"></script> 
+
+        <script type="text/javascript">
+                                                                    function changeDisplay() {
+                                                                        r1 = document.getElementById("r1");
+                                                                        r2 = document.getElementById("r2");
+                                                                        apellido = document.getElementById("apellido");
+                                                                        fecNac = document.getElementById("fecNac");
+
+                                                                        if (r2.checked == false) {
+                                                                            apellido.style.display = 'block';
+                                                                            fecNac.style.display = 'block';
+                                                                        } else {
+                                                                            apellido.style.display = 'none';
+                                                                            fecNac.style.display = 'none';
+                                                                        }
+                                                                    }
+        </script>
 
         <script type="text/javascript">
 
